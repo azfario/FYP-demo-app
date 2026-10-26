@@ -13,6 +13,7 @@ Date: 26 October 2026 (Asia/Kuala_Lumpur).
 - CPU Docker images built and the backend became healthy after including Rasterio's required Linux `libexpat1` library.
 - All 15 samples passed through the actual Nginx/frontend and CPU backend containers: preview, prediction, thumbnail, ZIP download, and georeferenced TIFF validation.
 - Linux CPU Docker reproduced the independent original-notebook reference without networking. Full preprocessed input hash matched exactly; maximum centre-crop logit difference was approximately 0.0000172, within the specified floating-point tolerance.
+- A clean checkout containing only committed files built and started with Docker Compose. Its frontend, CPU model readiness, bundled documentation asset, and an actual full-image prediction passed on temporary port 8082. Only the test containers/network were then removed; the main demo remains running on port 8081.
 - API mask values are 0/1/255 and preserve the source grid. Display stretches do not modify input tensors.
 - The real prediction images in `docs/example-*.png` came from the CPU Docker endpoint. The example overlay was visually inspected; the no-data region is displayed as grey and the water overlay is geographically aligned.
 
