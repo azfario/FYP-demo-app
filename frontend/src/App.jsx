@@ -7,10 +7,19 @@ const labels = { rgb: 'Optical', radar: 'Radar', mask: 'Mask', overlay: 'Overlay
 const formatPercent = value => `${(value * 100).toFixed(2)}%`;
 
 function saveUrl(url, filename) {
+  let objectUrl;
+  if (url.startsWith('data:')) {
+    const [header, content] = url.split(',', 2);
+    const bytes = Uint8Array.from(atob(content), char => char.charCodeAt(0));
+    objectUrl = URL.createObjectURL(new Blob([bytes], { type: header.slice(5).split(';')[0] }));
+  }
   const link = document.createElement('a');
-  link.href = url;
+  link.href = objectUrl || url;
   link.download = filename;
+  document.body.appendChild(link);
   link.click();
+  link.remove();
+  if (objectUrl) setTimeout(() => URL.revokeObjectURL(objectUrl), 10000);
 }
 
 function geotiffDownload(base64, name) {
@@ -34,8 +43,6 @@ function Spinner() { return <span className="spinner" aria-hidden="true" />; }
 export default function App() {
   const [info, setInfo] = useState(null);
   const [serviceError, setServiceError] = useState('');
-  const [samples, setSamples] = useState([]);
-  const [sampleError, setSampleError] = useState('');
   const [pair, setPair] = useState(null);
   const [preview, setPreview] = useState(null);
   const [result, setResult] = useState(null);
@@ -61,14 +68,8 @@ export default function App() {
     }
   }
 
-  async function refreshSamples() {
-    setSampleError('');
-    try { setSamples((await api.get('/samples')).data); }
-    catch (err) { setSampleError(errorMessage(err)); }
-  }
-
   useEffect(() => {
-    refreshService(); refreshSamples();
+    refreshService();
     return () => controller.current?.abort();
   }, []);
 
@@ -134,75 +135,57 @@ export default function App() {
   }
 
   const source = result?.images || preview;
-  const status = { empty: 'Waiting for a satellite pair', validating: 'Checking bands and alignment…', ready: 'Pair checked. Ready to segment.', processing: 'Segmenting the full image…', success: 'Full-image segmentation complete', error: 'Your attention is needed' }[phase];
+  const status = { empty: 'No folder selected.', validating: 'Validating images…', ready: 'Ready to segment.', processing: 'Segmenting…', success: 'Segmentation complete.', error: 'Check the selected files.' }[phase];
 
   return <>
     <a className="skip-link" href="#workspace">Skip to workspace</a>
     <header className="site-header">
-      <a href="#workspace" className="wordmark">Flood segmentation<span>D4 research demo</span></a>
-      <nav aria-label="Main navigation">
-        <a href="#workspace">Workspace</a><a href="#samples">Samples</a><a href="#model">Model</a>
-      </nav>
-      <span className="device-label">{info ? `${info.device.toUpperCase()} available` : serviceError ? 'Service offline' : 'Connecting…'}</span>
+      <h1>Flood Segmentation</h1>
+      <span className="device-label">{info ? `D4 · ${info.device.toUpperCase()}` : serviceError ? 'Service offline' : 'Connecting…'}</span>
     </header>
 
-    <main>
-      <section id="workspace" className="workspace-section scroll-mt-24" aria-labelledby="page-title">
-        <div className="intro">
-          <div><p className="eyeline">Sentinel-1 + Sentinel-2</p><h1 id="page-title">Two satellite views.<br />One flood map.</h1></div>
-          <p className="intro-copy">Look at the landscape, then look closer. Upload a matching satellite pair to map predicted water across the full image.</p>
-        </div>
-
-        {serviceError && <div className="notice error-notice" role="alert"><p>{serviceError}</p><button className="button secondary" onClick={refreshService}>Reconnect to model</button></div>}
-
-        <div className="workspace-grid">
+    <main id="workspace" tabIndex={-1}>
+      <div className="workspace-grid">
+        <div className="sidebar">
           <aside className="upload-panel" aria-labelledby="upload-title">
-            <div className="step-label">Your starting point</div>
-            <h2 id="upload-title">Bring a satellite pair.</h2>
-            <p className="muted">Choose a folder with two matching GeoTIFFs. One radar image. One optical image. The same place.</p>
-            <div className="folder-example" aria-label="Example folder structure">
-              <strong>bolivia 1 /</strong>
-              <span>Bolivia_103757_S1Hand.tif</span>
-              <span>Bolivia_103757_S2Hand.tif</span>
-            </div>
+            <h2 id="upload-title">Upload images</h2>
+            <p className="instruction">Select a folder containing matching Sentinel-1 and Sentinel-2 GeoTIFFs.</p>
+            {serviceError && <div className="error-notice" role="alert"><p>{serviceError}</p><button className="button secondary" onClick={refreshService}>Retry connection</button></div>}
             <input ref={fileInput} id="folder-input" className="file-input" type="file" webkitdirectory="" directory="" multiple onChange={chooseFolder} aria-label="Choose a folder containing matching Sentinel-1 and Sentinel-2 TIFFs" tabIndex={-1} />
             <button className="button choose-button" onClick={() => fileInput.current.click()} disabled={busy}>{pair ? 'Choose another folder' : 'Choose a folder'}<span aria-hidden="true">+</span></button>
             <p className="input-hint">512 × 512 GeoTIFFs · Up to 16 MiB each</p>
 
-            {pair && <div className="pair-details"><strong>{pair.folder}</strong><div><span>Radar · 2 bands</span><span className="filename">{pair.s1.name}</span></div><div><span>Optical · 13 bands</span><span className="filename">{pair.s2.name}</span></div></div>}
+            {pair && <div className="pair-details"><strong>{pair.folder}</strong><span className="filename">{pair.s1.name}</span><span className="filename">{pair.s2.name}</span></div>}
             <p className={`status-line ${phase === 'success' ? 'success-text' : ''}`} role="status" aria-live="polite">{busy && <Spinner />}{status}</p>
             {error && <div className="inline-error" role="alert">{error}</div>}
-            <button className="button primary segment-button" disabled={!preview || busy || !info} onClick={segment}>{phase === 'processing' ? 'Mapping water…' : result ? 'Run segmentation again' : 'Segment this image'}</button>
-            {pair && <button className="text-button clear-button" onClick={clearPair} disabled={busy}>Clear this pair</button>}
-            <div className="sample-hint"><p>Need an image to begin?</p><a href="#samples">Choose from 15 Bolivia samples</a><span>Download a pair, unzip it, then select its folder.</span></div>
+            <button className="button primary segment-button" disabled={!preview || busy || !info} onClick={segment}>{phase === 'processing' ? 'Segmenting…' : result ? 'Segment again' : 'Segment image'}</button>
+            {pair && <button className="text-button clear-button" onClick={clearPair} disabled={busy} aria-label="Clear selected images">Clear</button>}
           </aside>
 
+          <section className="performance-panel" aria-labelledby="performance-title">
+            <h2 id="performance-title">Model performance</h2>
+            <p className="model-name">D4 · DeepLabV3+ / MobileNetV2</p>
+            {info ? <table><caption className="sr-only">Historical D4 centre-crop IoU and Dice scores</caption><thead><tr><th scope="col">Dataset</th><th scope="col">IoU</th><th scope="col">Dice</th></tr></thead><tbody>{info.metrics.map(metric => <tr key={metric.dataset}><th scope="row">{metric.dataset}</th><td>{formatPercent(metric.iou)}</td><td>{formatPercent(metric.dice)}</td></tr>)}</tbody></table> : <p className="metrics-status">{serviceError ? 'Model metrics unavailable.' : 'Loading metrics…'}</p>}
+            <p className="accuracy-note">Historical 256 × 256 centre-crop scores, not whole-image accuracy. Water predictions can include permanent water.</p>
+          </section>
+        </div>
+
           <section className="results-panel" aria-labelledby="viewer-title" aria-busy={busy}>
-            <div className="viewer-heading"><div><p className="eyeline">The landscape</p><h2 id="viewer-title" ref={resultHeading} tabIndex={-1}>{pair ? pair.tileId.replace('_', ' / ') : 'Your image, in focus.'}</h2></div>{preview && <span className="image-size">512 × 512 px</span>}</div>
+            <div className="viewer-heading"><h2 id="viewer-title" ref={resultHeading} tabIndex={-1}>Results</h2>{preview && <span className="image-size">{preview.width} × {preview.height} px</span>}</div>
+            {pair && <p className="tile-name">{pair.tileId}</p>}
             <div className="view-tabs" role="group" aria-label="Image view">{Object.entries(labels).map(([key, label]) => <button key={key} className={view === key ? 'view-tab active' : 'view-tab'} aria-pressed={view === key} disabled={!source || (!result && (key === 'mask' || key === 'overlay'))} onClick={() => setView(key)}>{label}</button>)}</div>
             <div className={`image-stage ${!source ? 'empty-stage' : ''}`}>
               {source ? <>
                 <img className="main-image" src={view === 'overlay' ? source.rgb : source[view]} alt={`${labels[view]} view of ${pair.tileId}`} width="512" height="512" />
                 {view === 'overlay' && <img className="overlay-image" src={source.overlay_layer} style={{ opacity: opacity / 100 }} alt="" aria-hidden="true" width="512" height="512" />}
-              </> : <div className="empty-copy"><span className="empty-number" aria-hidden="true">S1 + S2</span><h3>A place for the full picture.</h3><p>Your satellite preview will appear here once you choose a valid pair.</p><span>Original imagery, mask, and overlay in one workspace.</span></div>}
-              {busy && <div className="processing-cover"><Spinner /><span>{phase === 'validating' ? 'Preparing your images' : 'Reading four patches'}</span></div>}
+              </> : <p className="empty-copy">Upload a satellite pair to preview.</p>}
+              {busy && <div className="processing-cover"><Spinner /><span>{phase === 'validating' ? 'Preparing preview…' : 'Processing image…'}</span></div>}
             </div>
-            <div className="viewer-caption"><span>{view === 'rgb' ? 'Sentinel-2 · natural-colour preview' : view === 'radar' ? 'Sentinel-1 · VV radar preview' : view === 'mask' ? 'White: predicted water · Black: background · Grey: no data' : 'Blue: predicted water · Displayed over Sentinel-2'}</span><span>{result ? 'Full tile · 4 patches' : 'No prediction yet'}</span></div>
-            {result && <div className="result-controls"><div className="opacity-control"><label htmlFor="opacity">Overlay opacity</label><input id="opacity" type="range" min="0" max="100" value={opacity} onChange={e => setOpacity(Number(e.target.value))} /><output htmlFor="opacity">{opacity}%</output></div><div className="timing"><span>Measured inference</span><strong>{result.inference_ms.toFixed(0)} ms <span>/ {result.device.toUpperCase()}</span></strong></div></div>}
+            {source && <div className="viewer-caption"><span>{view === 'rgb' ? 'Sentinel-2 · RGB' : view === 'radar' ? 'Sentinel-1 · VV radar' : view === 'mask' ? 'White: water · Black: background · Grey: no data' : 'Blue: predicted water'}</span>{result && <span>{result.inference_ms.toFixed(0)} ms · {result.device.toUpperCase()}</span>}</div>}
+            {result && view === 'overlay' && <div className="opacity-control"><label htmlFor="opacity">Overlay opacity</label><input id="opacity" type="range" min="0" max="100" value={opacity} onChange={e => setOpacity(Number(e.target.value))} /><output htmlFor="opacity">{opacity}%</output></div>}
             {result && <div className="download-actions" aria-label="Download results"><button className="button secondary" onClick={() => saveUrl(result.images.mask, `${result.tile_id}_mask.png`)}>Mask PNG</button><button className="button secondary" disabled={exporting} onClick={downloadOverlay}>{exporting ? 'Preparing…' : 'Overlay PNG'}</button><button className="button secondary" onClick={() => geotiffDownload(result.mask_geotiff_base64, `${result.tile_id}_mask.tif`)}>Mask GeoTIFF</button></div>}
-            <p className="viewer-note">{result ? 'Predicted water is a flood indicator, not a distinction between floodwater and permanent water. Patch boundaries may affect the result.' : 'Previews use display-only contrast adjustments. D4 receives the original 15 bands with its saved preprocessing.'}</p>
           </section>
-        </div>
-      </section>
-
-      <section id="samples" className="samples-section scroll-mt-24" aria-labelledby="samples-title">
-        <div className="section-heading"><div><p className="eyeline">From Sen1Floods11</p><h2 id="samples-title">Start somewhere real.</h2></div><p>Fifteen views of Bolivia. Each download contains the matching radar and optical TIFFs in one folder.</p></div>
-        {sampleError ? <div className="notice error-notice" role="alert"><p>{sampleError}</p><button className="button secondary" onClick={refreshSamples}>Reload samples</button></div> : samples.length ? <div className="sample-grid">{samples.map(sample => <a className="sample-card" key={sample.id} href={sample.download_url} download aria-label={`Download ${sample.folder}, ${sample.tile_id}, matching S1 and S2 TIFFs`}><img src={sample.thumbnail_url} width="256" height="256" loading="lazy" alt={`Sentinel-2 optical preview of ${sample.tile_id}`} onError={event => { event.currentTarget.style.visibility = 'hidden'; event.currentTarget.nextElementSibling.textContent = 'Preview unavailable'; }} /><span className="sample-label">Bolivia {sample.id}</span><span className="sample-download">Download pair <span aria-hidden="true">↓</span></span></a>)}</div> : <p role="status" className="muted">Loading sample images…</p>}
-        <p className="sample-footnote">Bolivia is the model’s held-out test region. These samples are for demonstration, not a new independent evaluation.</p>
-      </section>
-
-      <section id="model" className="model-section scroll-mt-24" aria-labelledby="model-title"><div className="model-intro"><p className="eyeline">Behind the prediction</p><h2 id="model-title">A trained model.<br />An honest view of its results.</h2><p>DeepLabV3+ with a MobileNetV2 backbone. The D4 checkpoint is loaded as trained, with no retraining in this app.</p><a className="body-link" href="/docs" target="_blank" rel="noreferrer">Open API documentation</a></div><div className="model-facts">{info ? <><dl className="facts-grid"><div><dt>Checkpoint</dt><dd>D4 · seed {info.seed}</dd></div><div><dt>Parameters</dt><dd>{info.parameter_count.toLocaleString()}</dd></div><div><dt>Input</dt><dd>2 radar + 13 optical bands</dd></div><div><dt>Running on</dt><dd>{info.device.toUpperCase()}</dd></div></dl><div className="metrics-heading"><h3>Historical centre-crop evaluation</h3><p>256 × 256 pixels. These scores do not measure the full-image predictions shown above.</p></div><table><caption className="sr-only">Historical D4 seed 2026 centre-crop scores</caption><thead><tr><th scope="col">Dataset</th><th scope="col">IoU</th><th scope="col">Dice</th></tr></thead><tbody>{info.metrics.map(metric => <tr key={metric.dataset}><th scope="row">{metric.dataset}</th><td>{formatPercent(metric.iou)}</td><td>{formatPercent(metric.dice)}</td></tr>)}</tbody></table><p className="metric-source">Source: {info.source}</p></> : <p className="muted">{serviceError ? 'Model details will appear when the inference service is available.' : 'Loading model details…'}</p>}</div></section>
+      </div>
     </main>
-    <footer><span>Flood segmentation · FYP research demo</span><a href="https://github.com/cloudtostreet/Sen1Floods11" target="_blank" rel="noreferrer">Imagery: Sen1Floods11</a><span>Runs locally. Uploaded images are not retained.</span></footer>
   </>;
 }

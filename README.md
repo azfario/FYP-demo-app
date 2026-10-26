@@ -2,6 +2,8 @@
 
 A local web workspace for predicting water in paired Sentinel-1 and Sentinel-2 satellite imagery. The application loads the existing FYP D4 DeepLabV3+ / MobileNetV2 checkpoint. It does not train a model.
 
+![Simplified satellite-background workspace](docs/screenshots/desktop-empty.jpg)
+
 ## Run with Docker
 
 Install and start Docker Desktop (Linux containers on Windows). The initial build downloads dependencies; Python and Node.js do not need to be installed on the host.
@@ -27,8 +29,8 @@ Only the frontend port is exposed, bound to `127.0.0.1:8080`. Nginx forwards API
 ## Upload a folder
 
 1. Choose **Choose a folder** and select `sample/bolivia 1`, or any other numbered tile folder.
-2. Wait for the optical preview and the message **Pair checked. Ready to segment.**
-3. Choose **Segment this image**.
+2. Wait for the optical preview and the message **Ready to segment.**
+3. Choose **Segment image**.
 4. Switch between Optical, Radar, Mask, and Overlay. Adjust overlay opacity and download a PNG or georeferenced mask TIFF.
 
 Each folder contains exactly one matching pair, for example:
@@ -39,7 +41,7 @@ sample/bolivia 1/
   Bolivia_103757_S2Hand.tif
 ```
 
-Select a single `bolivia N` folder, not the entire `sample` directory. The in-app gallery downloads each pair as a ZIP. Extract that ZIP first, then choose the extracted folder. Common operating-system metadata files are ignored.
+Select a single `bolivia N` folder, not the entire `sample` directory. Samples are provided in the repository; the interface has no sample gallery. Common operating-system metadata files are ignored. Developer sample ZIP endpoints remain available through the API.
 
 All **15 folders contain 30 original TIFFs**. `sample/manifest.json` maps the numbered folders to the original Bolivia test-list order. Original filenames are preserved. Labels are not included or required for prediction.
 
@@ -157,7 +159,7 @@ Vite proxies the API to port 8000. The tests verify original-notebook preprocess
 
 React / Vite / Tailwind / Axios frontend; FastAPI / PyTorch / Rasterio / NumPy / Pillow / OpenCV backend; Nginx; Docker Compose. No database, accounts, or cloud hosting.
 
-The UI follows the supplied Pinterest design reference with self-hosted Inter, warm neutral surfaces, one red primary action, rounded image panels, and real satellite imagery. See `docs/DESIGN_NOTES.md` for decisions and `docs/VERIFICATION.md` for verified behaviour and remaining limits.
+The simplified UI uses the owner's satellite-and-star-field background direction, self-hosted Inter, opaque cream panels, one red primary action, and a compact model-performance table. The generated background and all runtime assets are bundled locally. See `docs/DESIGN_NOTES.md` for decisions and image-generation provenance, and `docs/VERIFICATION.md` for testing and the completed antislop Delivery Gate.
 
 ### Actual prediction example
 
@@ -167,7 +169,7 @@ Bolivia_103757, rendered by the CPU Docker backend. Grey areas have no usable pa
 | --- | --- |
 | ![Optical preview](docs/example-rgb.png) | ![D4 overlay](docs/example-overlay.png) |
 
-These are prediction images, not screenshots of the web interface. UI screenshot capture and the remaining browser checks are tracked in the verification notes.
+These are prediction images. Real interface screenshots are available in [desktop results](docs/screenshots/desktop-results.jpg), [tablet results](docs/screenshots/tablet-results.jpg), and [mobile results](docs/screenshots/mobile-results.jpg).
 
 ## Dataset attribution
 

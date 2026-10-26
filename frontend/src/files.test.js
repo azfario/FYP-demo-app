@@ -30,5 +30,6 @@ describe('folder upload boundary', () => {
   it('shows API validation and service failures as useful messages', () => {
     expect(errorMessage({ response: { data: { detail: 'Wrong bands' } } })).toBe('Wrong bands');
     expect(errorMessage({ code: 'ERR_NETWORK' })).toContain('backend container');
+    expect(errorMessage({ response: { status: 502, data: '<html>Bad Gateway</html>' } })).toContain('inference service is unavailable');
   });
 });

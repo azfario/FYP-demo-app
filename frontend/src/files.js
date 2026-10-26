@@ -1,6 +1,6 @@
 export function pairFromFolder(fileList) {
   const files = Array.from(fileList).filter(file => !/^(\.DS_Store|Thumbs\.db|desktop\.ini|\._.*)$/i.test(file.name));
-  if (files.length !== 2) throw new Error('Choose one tile folder containing exactly two TIFFs: its Sentinel-1 image and matching Sentinel-2 image. Select “bolivia 1”, not the parent “sample” folder.');
+  if (files.length !== 2) throw new Error('Select one folder containing exactly two TIFFs: matching Sentinel-1 and Sentinel-2 images. Do not select a parent folder containing several pairs.');
   const s1 = files.find(file => /_S1Hand\.tiff?$/i.test(file.name));
   const s2 = files.find(file => /_S2Hand\.tiff?$/i.test(file.name));
   if (!s1 || !s2) throw new Error('This folder needs one _S1Hand.tif and one _S2Hand.tif file from Sen1Floods11.');
@@ -17,6 +17,6 @@ export function errorMessage(error) {
   const detail = error.response?.data?.detail;
   if (typeof detail === 'string') return detail;
   if (Array.isArray(detail)) return 'Both S1 and S2 TIFF files are required. Choose the tile folder again.';
-  if (error.code === 'ERR_NETWORK') return 'The inference service is unavailable. Check that the backend container is running, then retry.';
+  if (error.code === 'ERR_NETWORK' || [502, 503, 504].includes(error.response?.status)) return 'The inference service is unavailable. Check that the backend container is running, then retry.';
   return error.message || 'Something went wrong. Please retry.';
 }
