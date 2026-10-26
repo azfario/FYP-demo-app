@@ -1,0 +1,33 @@
+{
+  "name": "DeepLabV3+ / MobileNetV2",
+  "experiment": "D4",
+  "seed": 2026,
+  "parameter_count": 4390257,
+  "input_channels": 15,
+  "patch_size": 256,
+  "supported_size": 512,
+  "threshold": 0.5,
+  "checkpoint_sha256": "548fc048aa3afea2ea03f01bc1995b41a991214707c9dc24b8766cbff0282a38",
+  "normalization_sha256": "1fe667ebef166858122eaf13b7a78b616fa24d5f69cb29a2a3227d9ecdb9850b",
+  "code_sha256": "7d7075d43b1521a5cacbcc0c9279485e4e3a614c230179fb1e0f51cffe6d6892",
+  "best_epoch": 27,
+  "metrics": [
+    {
+      "dataset": "Validation",
+      "iou": 0.8229876392401235,
+      "dice": 0.9028998568341031
+    },
+    {
+      "dataset": "Hand Test",
+      "iou": 0.7669120749380292,
+      "dice": 0.8680817634515594
+    },
+    {
+      "dataset": "Bolivia Test",
+      "iou": 0.7922081530878184,
+      "dice": 0.8840581957211977
+    }
+  ],
+  "evaluation_protocol": "Historical centre-crop evaluation (256 x 256), not whole-image app accuracy.",
+  "source": "FYP D4 seed 2026, attempt_001; selected by validation IoU."
+}

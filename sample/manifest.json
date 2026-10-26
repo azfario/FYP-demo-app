@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "folder": "bolivia 1",
+    "tile_id": "Bolivia_103757",
+    "s1": "Bolivia_103757_S1Hand.tif",
+    "s2": "Bolivia_103757_S2Hand.tif"
+  },
+  {
+    "id": 2,
+    "folder": "bolivia 2",
+    "tile_id": "Bolivia_129334",
+    "s1": "Bolivia_129334_S1Hand.tif",
+    "s2": "Bolivia_129334_S2Hand.tif"
+  },
+  {
+    "id": 3,
+    "folder": "bolivia 3",
+    "tile_id": "Bolivia_195474",
+    "s1": "Bolivia_195474_S1Hand.tif",
+    "s2": "Bolivia_195474_S2Hand.tif"
+  },
+  {
+    "id": 4,
+    "folder": "bolivia 4",
+    "tile_id": "Bolivia_23014",
+    "s1": "Bolivia_23014_S1Hand.tif",
+    "s2": "Bolivia_23014_S2Hand.tif"
+  },
+  {
+    "id": 5,
+    "folder": "bolivia 5",
+    "tile_id": "Bolivia_233925",
+    "s1": "Bolivia_233925_S1Hand.tif",
+    "s2": "Bolivia_233925_S2Hand.tif"
+  },
+  {
+    "id": 6,
+    "folder": "bolivia 6",
+    "tile_id": "Bolivia_242570",
+    "s1": "Bolivia_242570_S1Hand.tif",
+    "s2": "Bolivia_242570_S2Hand.tif"
+  },
+  {
+    "id": 7,
+    "folder": "bolivia 7",
+    "tile_id": "Bolivia_290290",
+    "s1": "Bolivia_290290_S1Hand.tif",
+    "s2": "Bolivia_290290_S2Hand.tif"
+  },
+  {
+    "id": 8,
+    "folder": "bolivia 8",
+    "tile_id": "Bolivia_294583",
+    "s1": "Bolivia_294583_S1Hand.tif",
+    "s2": "Bolivia_294583_S2Hand.tif"
+  },
+  {
+    "id": 9,
+    "folder": "bolivia 9",
+    "tile_id": "Bolivia_312675",
+    "s1": "Bolivia_312675_S1Hand.tif",
+    "s2": "Bolivia_312675_S2Hand.tif"
+  },
+  {
+    "id": 10,
+    "folder": "bolivia 10",
+    "tile_id": "Bolivia_314919",
+    "s1": "Bolivia_314919_S1Hand.tif",
+    "s2": "Bolivia_314919_S2Hand.tif"
+  },
+  {
+    "id": 11,
+    "folder": "bolivia 11",
+    "tile_id": "Bolivia_360519",
+    "s1": "Bolivia_360519_S1Hand.tif",
+    "s2": "Bolivia_360519_S2Hand.tif"
+  },
+  {
+    "id": 12,
+    "folder": "bolivia 12",
+    "tile_id": "Bolivia_379434",
+    "s1": "Bolivia_379434_S1Hand.tif",
+    "s2": "Bolivia_379434_S2Hand.tif"
+  },
+  {
+    "id": 13,
+    "folder": "bolivia 13",
+    "tile_id": "Bolivia_432776",
+    "s1": "Bolivia_432776_S1Hand.tif",
+    "s2": "Bolivia_432776_S2Hand.tif"
+  },
+  {
+    "id": 14,
+    "folder": "bolivia 14",
+    "tile_id": "Bolivia_60373",
+    "s1": "Bolivia_60373_S1Hand.tif",
+    "s2": "Bolivia_60373_S2Hand.tif"
+  },
+  {
+    "id": 15,
+    "folder": "bolivia 15",
+    "tile_id": "Bolivia_76104",
+    "s1": "Bolivia_76104_S1Hand.tif",
+    "s2": "Bolivia_76104_S2Hand.tif"
+  }
+]

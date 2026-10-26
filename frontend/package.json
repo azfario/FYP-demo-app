@@ -1,0 +1,24 @@
+{
+  "name": "fyp-demo-app",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fontsource/inter": "5.3.0",
+    "@tailwindcss/vite": "4.3.3",
+    "@vitejs/plugin-react": "6.1.2",
+    "axios": "1.20.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "swagger-ui-dist": "5.34.0",
+    "tailwindcss": "4.3.3",
+    "vite": "8.3.5",
+    "vitest": "5.0.5"
+  }
+}

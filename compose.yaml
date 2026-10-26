@@ -1,0 +1,22 @@
+services:
+  backend:
+    image: fyp-demo-app-backend:cpu
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      args:
+        TORCH_INDEX_URL: https://download.pytorch.org/whl/cpu
+    environment:
+      TORCH_THREADS: "4"
+    restart: unless-stopped
+  frontend:
+    image: fyp-demo-app-frontend:local
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "127.0.0.1:${FYP_APP_PORT:-8080}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

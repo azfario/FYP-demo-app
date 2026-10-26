@@ -1,0 +1,13 @@
+services:
+  backend:
+    image: fyp-demo-app-backend:gpu
+    build:
+      args:
+        TORCH_INDEX_URL: https://download.pytorch.org/whl/cu118
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

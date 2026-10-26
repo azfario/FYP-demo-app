@@ -1,0 +1,11 @@
+* text=auto eol=lf
+*.tif -text
+*.tiff -text
+*.pth -text
+*.npz -text
+*.png -text
+*.jpg -text
+# The training checkpoint records the hash of these exact JSON bytes.
+models/s2_normalization_stats.json -text whitespace=cr-at-eol
+# Retain the unmodified upstream license notice, including its whitespace.
+backend/static/docs/swagger-ui-bundle.js.LICENSE.txt -whitespace
