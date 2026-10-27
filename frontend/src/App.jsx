@@ -68,7 +68,7 @@ export default function App() {
 
   return <>
     <a className="skip-link" href="#workspace">Skip to workspace</a>
-    <header className="site-header"><h1>Flood Segmentation</h1><span className="device-label">{info ? `D4 · ${info.device.toUpperCase()}` : serviceError ? 'Service offline' : 'Connecting…'}</span></header>
+    <header className="site-header"><h1>Flood Segmentation</h1><span className="device-label">{info ? `DeepLab · ${info.device.toUpperCase()}` : serviceError ? 'Service offline' : 'Connecting…'}</span></header>
     <main id="workspace" tabIndex={-1}>
       <div className="mode-tabs view-tabs" role="tablist" aria-label="Workspace" onKeyDown={navigateTabs}>{Object.entries(modes).map(([key, label]) => <button key={key} id={`tab-${key}`} type="button" role="tab" aria-selected={mode === key} aria-controls={`panel-${key}`} tabIndex={mode === key ? 0 : -1} disabled={busy} className={`view-tab ${mode === key ? 'active' : ''}`} onClick={() => setMode(key)}>{label}</button>)}</div>
       {Object.keys(modes).map(key => <div key={key} id={`panel-${key}`} role="tabpanel" aria-labelledby={`tab-${key}`} hidden={mode !== key}><Workspace mode={key} info={info} serviceError={serviceError} refreshService={refreshService} onBusyChange={reportBusy} /></div>)}
@@ -182,20 +182,13 @@ function Workspace({ mode, info, serviceError, refreshService, onBusyChange }) {
           </aside>
 
           <section className="hud-panel performance-panel" aria-labelledby={`${mode}-performance-title`}>
-            <h2 id={`${mode}-performance-title`}>Model performance</h2>
-            <p className="model-name">D4 · DeepLabV3+ / MobileNetV2</p>
-            {info ? <table><caption className="sr-only">Historical D4 centre-crop IoU and Dice scores</caption><thead><tr><th scope="col">Dataset</th><th scope="col">IoU</th><th scope="col">Dice</th></tr></thead><tbody>{info.metrics.map(metric => <tr key={metric.dataset}><th scope="row">{metric.dataset}</th><td>{formatPercent(metric.iou)}</td><td>{formatPercent(metric.dice)}</td></tr>)}</tbody></table> : <p className="metrics-status">{serviceError ? 'Model metrics unavailable.' : 'Loading metrics…'}</p>}
-            <p className="accuracy-note">Historical 256 × 256 centre-crop scores, not whole-image accuracy. Water predictions can include permanent water.</p>
-            <div className="compute-section" aria-labelledby={`${mode}-compute-title`}>
-              <h3 id={`${mode}-compute-title`}>Computational performance</h3>
+            <h2 id={`${mode}-performance-title`}>Model computational performance</h2>
               <dl className="compute-metrics">
                 <div><dt>Parameters</dt><dd>{info ? info.parameter_count.toLocaleString('en-US') : 'Unavailable'}</dd></div>
                 <div><dt>Device</dt><dd>{info ? info.device.toUpperCase() : 'Unavailable'}</dd></div>
                 <div><dt>Inference</dt><dd>{result ? `${result.inference_ms.toFixed(1)} ms` : 'Awaiting run'}</dd></div>
                 <div><dt>Processing</dt><dd>{result ? `${result.processing_ms.toFixed(1)} ms` : 'Awaiting run'}</dd></div>
               </dl>
-              <p className="compute-note">{result ? `${result.width} × ${result.height} px · ${result.patch_count} patches. ` : 'Per 512 × 512 image, four patches. '}Inference measures the model step; processing includes server preparation and export. Network time is excluded.</p>
-            </div>
           </section>
         </div>
 
@@ -206,7 +199,7 @@ function Workspace({ mode, info, serviceError, refreshService, onBusyChange }) {
             <div className="viewer-body">
             {source && view === 'compare' ? <div className="comparison-grid">
               <figure><figcaption>Ground truth</figcaption><div className="image-stage"><img className="comparison-image" src={source.ground_truth} alt={`Ground truth for ${pair.tileId}`} width="512" height="512" /></div></figure>
-              <figure><figcaption>D4 prediction</figcaption><div className={`image-stage ${!result ? 'empty-stage' : ''}`}>{result ? <img className="comparison-image" src={source.comparison_prediction} alt={`D4 prediction for ${pair.tileId}`} width="512" height="512" /> : <p className="empty-copy">Click Segment image to show the prediction.</p>}</div></figure>
+              <figure><figcaption>DeepLab prediction</figcaption><div className={`image-stage ${!result ? 'empty-stage' : ''}`}>{result ? <img className="comparison-image" src={source.comparison_prediction} alt={`DeepLab prediction for ${pair.tileId}`} width="512" height="512" /> : <p className="empty-copy">Click Segment image to show the prediction.</p>}</div></figure>
             </div> : <div className={`image-stage ${!source ? 'empty-stage' : ''}`}>
               {source ? <>
                 <img className="main-image" src={view === 'overlay' ? source.rgb : source[view]} alt={`${labels[view]} view of ${pair.tileId}`} width="512" height="512" />

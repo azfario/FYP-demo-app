@@ -68,6 +68,10 @@ async function run() {
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(base, { waitUntil: 'networkidle' });
     await visiblePanel(page).getByText('4,390,257', { exact: true }).waitFor();
+    assert.equal(await visiblePanel(page).getByRole('heading', { name: 'Model computational performance', exact: true }).isVisible(), true);
+    assert.equal(await visiblePanel(page).locator('.performance-panel table, .compute-note, .model-name').count(), 0);
+    assert.doesNotMatch(await page.locator('body').innerText(), /\bD4\b/);
+    assert.equal(await page.title(), 'Flood segmentation · DeepLab');
     assert.equal(await page.getByRole('tab', { name: 'Segmentation', exact: true }).getAttribute('aria-selected'), 'true');
     assert.equal(await visiblePanel(page).getByRole('button', { name: 'Segment image', exact: true }).isDisabled(), true);
     await page.keyboard.press('Tab');
@@ -93,7 +97,7 @@ async function run() {
       await page.screenshot({ path: path.join(screenshots, filename), fullPage: true });
     }
     await page.setViewportSize({ width: 1280, height: 1200 });
-    mark('Original workflow', 'pair upload, 512px prediction, no evaluation response, downloads and existing historical metrics');
+    mark('Original workflow', 'pair upload, 512px prediction, no evaluation response, downloads and computational metrics only');
 
     await page.getByRole('tab', { name: 'Segmentation', exact: true }).focus();
     await page.keyboard.press('ArrowRight');
@@ -118,6 +122,8 @@ async function run() {
     await visiblePanel(page).getByText('Segmentation complete.', { exact: true }).waitFor();
     await page.unroute('**/api/hand-test/predict');
     assert.equal(await visiblePanel(page).locator('.comparison-image').count(), 2);
+    assert.equal(await visiblePanel(page).getByText('DeepLab prediction', { exact: true }).isVisible(), true);
+    assert.equal(await visiblePanel(page).locator('.performance-panel table, .compute-note, .model-name').count(), 0);
     const expected = ['iou', 'dice', 'pixel_accuracy'].map(key => `${(measured.evaluation[key] * 100).toFixed(2)}%`);
     assert.deepEqual(await visiblePanel(page).locator('.evaluation-metrics dd').allTextContents(), expected);
     assert.equal(await page.locator(':focus').getAttribute('id'), 'hand-test-viewer-title');

@@ -197,7 +197,7 @@ Set `UI_BASE_URL` to change the browser test address. `PLAYWRIGHT_CHROMIUM_EXECU
 
 React / Vite / Tailwind / Axios frontend; FastAPI / PyTorch / Rasterio / NumPy / Pillow / OpenCV backend; Nginx; Docker Compose. No database, accounts, or cloud hosting.
 
-The UI keeps the original satellite-and-star-field background, with dark transparent panels, self-hosted Inter, neon green controls and a compact model-performance table. Computational performance shows the model parameter count, actual device, measured inference latency and server processing time for each prediction. Timings cover the full image's four patches and exclude network time; no runtime figures are invented before prediction. The background and all runtime assets are bundled locally. See `docs/DESIGN_NOTES.md` for decisions and image-generation provenance, and `docs/VERIFICATION.md` for testing and the antislop Delivery Gate.
+The UI keeps the original satellite-and-star-field background, with dark transparent panels, self-hosted Inter and neon green controls. The sidebar contains only **Model computational performance**: parameter count, device, measured inference latency and server processing time. Its historical accuracy table and explanatory text have been removed. Visible model labels use **DeepLab**; the D4 research identity remains in backend metadata and provenance. Hand Test comparison scores remain below the masks. Timings cover the full image's four patches and exclude network time; no runtime figures are invented before prediction. The background and all runtime assets are bundled locally. See `docs/DESIGN_NOTES.md` for decisions and image-generation provenance, and `docs/VERIFICATION.md` for testing and the antislop Delivery Gate.
 
 ### Actual prediction example
 
