@@ -1,30 +1,37 @@
 # UI direction and decisions
 
-Reading this as: a compact flood-segmentation workspace for portfolio reviewers, with the owner's satellite-and-star-field background direction and opaque light controls, dial ENERGY 2 / RHYTHM 1 / MOTION 1.
+Reading this as: a compact flood-segmentation workspace for portfolio reviewers, with the owner's space-control-panel direction, dark transparent surfaces and neon green hierarchy, dial ENERGY 2 / RHYTHM 1 / MOTION 1.
 
 Antislop mode: during, selected by the owner in this conversation. The core filter is applied without installing optional companion skills or changing global agent instructions.
 
-The owner's later space-image reference replaces the earlier plain background and marketing composition. Inter, the rounded component vocabulary, and the red primary action remain from the original component direction. The sample gallery and promotional copy are removed from the interface; repository samples and APIs remain available.
+The owner's latest brief replaces the cream panels and red action with dark green glass and neon green controls. The existing background image is retained byte-for-byte. The sample gallery remains absent; repository samples and APIs remain available. No backend, model, preprocessing, upload, or export behavior changes are included.
 
 | Decision | Purpose |
 | --- | --- |
 | Generated satellite background | Follow the owner's explicit reference: one satellite silhouette, a natural star field, and amber/navy Milky Way colours. |
-| Static image and 60% black overlay | Preserve the reference's mood while keeping white header text readable, even over the brightest stars. |
-| Opaque cream panels and dark text | Separate operational controls and scientific imagery from the decorative background without glass effects. |
-| `#e60023` on the segmentation action | Identify the one action that runs the model, rather than distributing emphasis across the page. |
+| Static image and 60% black overlay | Preserve the original scene while keeping header text readable over bright stars. |
+| Dark green panels at 76% opacity | Keep the requested space image visible while protecting text contrast across the photograph. |
+| `#7cffb2` headings and `#39ff88` primary action | Follow the owner's neon green direction and give segmentation the strongest control emphasis. |
 | Self-hosted Inter | Use the reference's permitted open-source substitute for proprietary Pin Sans, with no runtime font network request. |
 | One compact heading and two workspace columns | Give upload and results priority, with minimal prose and no separate marketing section. |
 | 20 to 24px padding and gutters | Group controls, metrics and imagery without the former marketing-page spacing. |
-| 16px standard and 32px large corners | Preserve the reference's shape vocabulary without making every control a pill. |
-| Flat image cards, no decorative shadows | Let actual image contrast supply depth. |
+| 12px controls and 24px panels | Give the dashboard a more compact frame without bulky pill shapes. |
+| Blur on upload and results only | Express the requested glass treatment on the two active work areas; performance remains translucent without another blur layer. |
+| Restrained title glow and primary hover glow | Establish space identity and action feedback without glowing every border, value and control. |
+| One tinted shadow on results | Elevate the scientific image as the main workspace. |
 | Natural square satellite previews | Preserve geography and raster proportions in every view. |
 | Compact performance table | Retain sourced Validation, Hand Test and Bolivia Test IoU/Dice values, plus the centre-crop limitation. |
+| Computational metrics below accuracy | Show exact API parameter count and device, then measured inference and server processing times only after a real prediction. No estimated FPS, VRAM or FLOPs. |
 | Blue overlay and explicit legend | Distinguish model output from natural-colour imagery; this is a data colour, not a second primary UI action. |
 | Minimal motion | Indicate real processing and control state without distracting from image comparison. |
-| One fixed appearance | Follow the owner's explicit combination of space background and opaque light panels, without an unnecessary theme toggle. |
+| One fixed dark appearance | Follow the owner's explicit space-dashboard brief without adding a theme toggle. |
 | Text-only product identity | Use the project's name without inventing an unrequested logo or mascot. |
 
 The plus glyph opens folder selection. Controls retain their real functions, with keyboard focus, processing, success and error states. No sample navigation, signup, testimonials, fictional statistics, FAQ, or placeholder destinations are included. Historical metrics come from the selected checkpoint's recorded evaluation.
+
+Runtime measurements are for the full 512 × 512 image processed as four 256 × 256 patches. Inference includes patch preparation, device transfer, model forward passes, sigmoid and copying probabilities to CPU. Thresholding follows this timer. Processing additionally covers validation, server preparation and export; neither includes network or browser rendering time. Timing values reset with the existing result lifecycle when clearing, changing folders or starting another prediction. The interface shows `Awaiting run` before a result and `Unavailable` for model facts if the service cannot be reached. Reduced-transparency preference uses an opaque dark surface, and reduced-motion preference disables animation.
+
+Background SHA256 before redesign: `369dbce74276e08360f97298259ebb9fb9ad3f30b410a022b5b6aee105fac577`.
 
 ## Background provenance
 
