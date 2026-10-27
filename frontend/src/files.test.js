@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { pairFromFolder, errorMessage } from './files.js';
+import { pairFromFolder, tripletFromFolder, errorMessage } from './files.js';
 
 const image = (sensor, tile = 'Bolivia_103757', extra = {}) => ({ name: `${tile}_${sensor}Hand.tif`, size: 3000, webkitRelativePath: `bolivia 1/${tile}_${sensor}Hand.tif`, ...extra });
 describe('folder upload boundary', () => {
@@ -31,5 +31,30 @@ describe('folder upload boundary', () => {
     expect(errorMessage({ response: { data: { detail: 'Wrong bands' } } })).toBe('Wrong bands');
     expect(errorMessage({ code: 'ERR_NETWORK' })).toContain('backend container');
     expect(errorMessage({ response: { status: 502, data: '<html>Bad Gateway</html>' } })).toContain('inference service is unavailable');
+  });
+});
+
+describe('hand test folder boundary', () => {
+  const label = (extra = {}) => ({ name: 'Bolivia_103757_LabelHand.tif', size: 300, webkitRelativePath: 'bolivia 1/Bolivia_103757_LabelHand.tif', ...extra });
+  it('recognizes one triplet independent of file order and ignores OS metadata', () => {
+    const result = tripletFromFolder([label(), image('S2'), { name: '.DS_Store' }, image('S1')]);
+    expect(result.groundTruth.name).toContain('LabelHand');
+    expect(result.s1.name).toContain('S1Hand');
+  });
+  it('rejects a missing label, duplicate sensor, extra file or parent folder', () => {
+    expect(() => tripletFromFolder([image('S1'), image('S2')])).toThrow('three TIFFs');
+    expect(() => tripletFromFolder([image('S1'), image('S2'), image('S1')])).toThrow('LabelHand');
+    expect(() => tripletFromFolder([image('S1'), image('S2'), label(), label()])).toThrow('parent');
+  });
+  it('rejects a different tile or subfolder for ground truth', () => {
+    expect(() => tripletFromFolder([image('S1'), image('S2'), label({ name: 'Other_LabelHand.tif' })])).toThrow('different tiles');
+    expect(() => tripletFromFolder([image('S1'), image('S2'), label({ webkitRelativePath: 'other/label.tif' })])).toThrow('same tile folder');
+  });
+  it('rejects empty and oversized labels', () => {
+    expect(() => tripletFromFolder([image('S1'), image('S2'), label({ size: 0 })])).toThrow('empty');
+    expect(() => tripletFromFolder([image('S1'), image('S2'), label({ size: 17 * 1024 * 1024 })])).toThrow('16 MiB');
+  });
+  it('keeps the original tab restricted to two TIFFs', () => {
+    expect(() => pairFromFolder([image('S1'), image('S2'), label()])).toThrow('two TIFFs');
   });
 });

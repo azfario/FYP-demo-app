@@ -4,7 +4,7 @@ Reading this as: a compact flood-segmentation workspace for portfolio reviewers,
 
 Antislop mode: during, selected by the owner in this conversation. The core filter is applied without installing optional companion skills or changing global agent instructions.
 
-The owner's latest brief replaces the cream panels and red action with dark green glass and neon green controls. The existing background image is retained byte-for-byte. The sample gallery remains absent; repository samples and APIs remain available. No backend, model, preprocessing, upload, or export behavior changes are included.
+The space-dashboard brief replaces cream panels and the red action with dark green glass and neon green controls. The Hand Test addition keeps that direction and the existing background image byte-for-byte. The sample gallery remains absent; repository samples and APIs remain available. The original segmentation workflow and model remain unchanged; separate comparison endpoints accept an additional reference mask.
 
 | Decision | Purpose |
 | --- | --- |
@@ -26,6 +26,12 @@ The owner's latest brief replaces the cream panels and red action with dark gree
 | Minimal motion | Indicate real processing and control state without distracting from image comparison. |
 | One fixed dark appearance | Follow the owner's explicit space-dashboard brief without adding a theme toggle. |
 | Text-only product identity | Use the project's name without inventing an unrequested logo or mascot. |
+| Two workspace tabs | Keep reference-assisted evaluation separate from ordinary two-file inference, while retaining independent results. |
+| Equal square comparison masks | Let reviewers inspect the same geographic extent at equal scale; stack on mobile for readability. |
+| White/black/grey comparison legend | Use identical water, background and exclusion colours in both masks without inventing a decorative data palette. |
+| Per-image scores immediately below masks | Tie each numerical claim to the actual uploaded reference and prediction, distinct from historical centre-crop scores. |
+| Five wrapping view controls | Preserve the original imagery views while adding Compare without squeezing mobile touch targets. |
+| Comparison images use nearest-neighbour display | Keep binary label boundaries sharp without changing raster pixels or model inference. |
 
 The plus glyph opens folder selection. Controls retain their real functions, with keyboard focus, processing, success and error states. No sample navigation, signup, testimonials, fictional statistics, FAQ, or placeholder destinations are included. Historical metrics come from the selected checkpoint's recorded evaluation.
 

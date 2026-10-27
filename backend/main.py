@@ -14,6 +14,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 
 from .inference import ROOT, Predictor
+from .evaluation import comparison_images, evaluate_mask, read_reference
 from .preprocessing import InputError, MAX_FILE_BYTES, read_pair
 from .visualization import geotiff_base64, png_bytes, png_url, previews, result_images
 
@@ -52,14 +53,16 @@ class BodyLimit:
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http":
             return await self.app(scope, receive, send)
-        limit = 2 * MAX_FILE_BYTES + 65536
+        hand_test = scope["path"] in ("/api/hand-test/preview", "/api/hand-test/predict")
+        limit = (3 if hand_test else 2) * MAX_FILE_BYTES + 65536
+        limit_error = "The triplet exceeds the 48 MiB upload limit." if hand_test else "The pair exceeds the 32 MiB upload limit."
         headers = dict(scope["headers"])
         try:
             too_large = int(headers.get(b"content-length", b"0")) > limit
         except ValueError:
             return await JSONResponse({"detail": "Invalid Content-Length."}, status_code=400)(scope, receive, send)
         if too_large:
-            return await JSONResponse({"detail": "The pair exceeds the 32 MiB upload limit."}, status_code=413)(scope, receive, send)
+            return await JSONResponse({"detail": limit_error}, status_code=413)(scope, receive, send)
         total = 0
 
         async def bounded_receive():
@@ -67,7 +70,7 @@ class BodyLimit:
             message = await receive()
             total += len(message.get("body", b""))
             if total > limit:
-                raise HTTPException(413, "The pair exceeds the 32 MiB upload limit.")
+                raise HTTPException(413, limit_error)
             return message
 
         await self.app(scope, bounded_receive, send)
@@ -128,14 +131,18 @@ async def preview(request: Request, s1: UploadFile = File(...), s2: UploadFile =
     return {"tile_id": pair.tile_id, "width": 512, "height": 512, "rgb": png_url(rgb), "radar": png_url(radar)}
 
 
-def predict_result(pair, service, started):
+def predict_result(pair, service, started, reference=None):
     mask, inference_ms = service.predict(pair)
     images = result_images(pair, mask)
     geotiff = geotiff_base64(pair, mask)
+    extra = {}
+    if reference is not None:
+        images.update(comparison_images(reference, mask))
+        extra["evaluation"] = evaluate_mask(mask, reference)
     return {"tile_id": pair.tile_id, "width": 512, "height": 512, "device": str(service.device),
             "threshold": 0.5, "patch_count": 4, "inference_ms": round(inference_ms, 2),
             "processing_ms": round((time.perf_counter() - started) * 1000, 2),
-            "images": images, "mask_geotiff_base64": geotiff}
+            "images": images, "mask_geotiff_base64": geotiff, **extra}
 
 
 @app.post("/api/predict")
@@ -143,6 +150,39 @@ async def predict(request: Request, s1: UploadFile = File(...), s2: UploadFile =
     started = time.perf_counter()
     pair = await uploaded_pair(request, s1, s2)
     return await run_in_threadpool(predict_result, pair, predictor(), started)
+
+
+async def uploaded_triplet(request, s1, s2, ground_truth):
+    try:
+        form = await request.form()
+        fields = ("s1", "s2", "ground_truth")
+        if len(form.multi_items()) != 3 or any(len(form.getlist(field)) != 1 for field in fields):
+            raise InputError("Upload exactly one S1, one S2 and one ground-truth TIFF from the same folder.")
+        service = predictor()
+        a, b, label = [await upload.read(MAX_FILE_BYTES + 1) for upload in (s1, s2, ground_truth)]
+        pair = await run_in_threadpool(read_pair, a, b, s1.filename or "", s2.filename or "", service.statistics)
+        reference = await run_in_threadpool(read_reference, label, ground_truth.filename or "", pair)
+        return pair, reference
+    finally:
+        for upload in (s1, s2, ground_truth):
+            await upload.close()
+
+
+@app.post("/api/hand-test/preview")
+async def hand_test_preview(request: Request, s1: UploadFile = File(...), s2: UploadFile = File(...),
+                            ground_truth: UploadFile = File(...)):
+    pair, reference = await uploaded_triplet(request, s1, s2, ground_truth)
+    rgb, radar = await run_in_threadpool(previews, pair)
+    return {"tile_id": pair.tile_id, "width": 512, "height": 512, "rgb": png_url(rgb),
+            "radar": png_url(radar), **comparison_images(reference)}
+
+
+@app.post("/api/hand-test/predict")
+async def hand_test_predict(request: Request, s1: UploadFile = File(...), s2: UploadFile = File(...),
+                            ground_truth: UploadFile = File(...)):
+    started = time.perf_counter()
+    pair, reference = await uploaded_triplet(request, s1, s2, ground_truth)
+    return await run_in_threadpool(predict_result, pair, predictor(), started, reference)
 
 
 @lru_cache(maxsize=1)

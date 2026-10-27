@@ -2,6 +2,8 @@
 
 A local web workspace for predicting water in paired Sentinel-1 and Sentinel-2 satellite imagery. The application loads the existing FYP D4 DeepLabV3+ / MobileNetV2 checkpoint. It does not train a model.
 
+The **Hand Test** tab also accepts a matching ground-truth mask and compares it with a fresh prediction, side by side.
+
 ![Space-themed flood segmentation workspace](docs/screenshots/desktop-empty.jpg)
 
 ## Run with Docker
@@ -46,6 +48,25 @@ Select a single `bolivia N` folder, not the entire `sample` directory. Samples a
 All **15 folders contain 30 original TIFFs**. `sample/manifest.json` maps the numbered folders to the original Bolivia test-list order. Original filenames are preserved. Labels are not included or required for prediction.
 
 ## Supported inputs
+
+### Hand Test comparison
+
+1. Open **Hand Test** and choose one directory such as `hand test/hand test 1`.
+2. The directory must contain one matching `_S1Hand.tif`, `_S2Hand.tif` and `_LabelHand.tif`.
+3. The ground truth appears beside an empty prediction placeholder. Click **Segment image** to run D4.
+4. Compare both masks and read **Water IoU**, **Dice** and **Pixel accuracy** below them. Optical, Radar, Mask, Overlay, opacity and prediction downloads remain available.
+
+The repository includes exactly **10 selected triplets (30 original TIFFs, approximately 37.4 MiB)** under `hand test/`. Folder mapping, selection reasons, source split and checksums are in its manifest and README. These are visually selected river/floodplain examples, not a representative benchmark of all 90 Hand Test tiles. No Hand Test gallery or automatic sample loading is provided.
+
+Comparison scores cover the full 512 × 512 image, using only pixels valid in both imagery and reference. Labels are `0=background`, `1=water`, `-1/255=ignored`; zero remains background even when nodata metadata says zero. Both comparison masks show excluded pixels in grey. Water IoU is `TP/(TP+FP+FN)`, Dice is `2TP/(2TP+FP+FN)`, and pixel accuracy is `(TP+TN)/evaluated pixels`. An undefined denominator displays **N/A**. Accuracy can be dominated by background, so assess IoU/Dice and the masks together.
+
+Ground truth is used only for scoring and display, never as model input. Uploads remain temporary. Tabs retain independent completed results and cannot be switched while validating or predicting. Historical 256 × 256 centre-crop scores stay separate from these uploaded-image scores. Prediction exports retain the original model mask; the grey comparison exclusion display does not alter exported predictions.
+
+Each Hand Test file may be up to 16 MiB, with 48 MiB total TIFF content plus bounded multipart overhead. The ground truth must be a single-band GeoTIFF with matching tile ID, 512 × 512 dimensions, coordinate system and grid. No resizing or reprojection is performed.
+
+![Actual ground-truth comparison](docs/screenshots/hand-test-desktop.jpg)
+
+### Satellite input requirements
 
 - Original Sen1Floods11-style 512 × 512 GeoTIFFs, no larger than 16 MiB per file.
 - Matching tile IDs, coordinate systems, raster transforms, dimensions, and expected band descriptions.
@@ -108,6 +129,8 @@ Interactive documentation: **http://localhost:8080/docs**.
 | GET | `/api/model-info` | Model provenance, configuration, and historical metrics |
 | POST | `/api/preview` | Validate two uploaded TIFFs and return display previews |
 | POST | `/api/predict` | Full-image prediction, PNG data URLs, base64 GeoTIFF, timing |
+| POST | `/api/hand-test/preview` | Validate `s1`, `s2`, `ground_truth`; return optical, radar and reference previews |
+| POST | `/api/hand-test/predict` | Prediction outputs plus comparison images, full-image scores and pixel/confusion counts |
 | GET | `/api/samples` | Sample manifest and download/thumbnail URLs |
 | GET | `/api/samples/{id}/thumbnail` | Optical preview of a bundled sample |
 | GET | `/api/samples/{id}/download` | ZIP containing a matching pair |
@@ -144,6 +167,21 @@ npm run dev
 ```
 
 Vite proxies the API to port 8000. The tests verify original-notebook preprocessing and centre-crop predictions, full-image inference on all 15 pairs, patch placement, GeoTIFF alignment, input validation, sample downloads, unavailable-model behaviour, and CUDA agreement when a GPU is exposed. The committed reference fixture was generated independently from the original training notebook, not from the app's model/preprocessing implementation.
+
+Hand Test tests additionally cover the ten triplets, independently recomputed metrics, ignored labels, empty-water cases, nodata=0, geographic mismatches and proof that swapping only ground truth leaves exported predictions unchanged.
+
+With the Docker app running on port 8081, run `python scripts/check_deployment.py` to compare served assets with the local production build and independently score all ten triplets through Nginx. Run the frontend production build first. This script uses the app's NumPy/Rasterio dependencies.
+
+Optional isolated-browser checks use Playwright, save real screenshots under `docs/screenshots/`, and save downloads and their report under the ignored `test-results/ui/` directory. From the repository root in PowerShell:
+
+```powershell
+npm.cmd --prefix frontend install --no-save --package-lock=false playwright@1.62.1
+$env:NODE_PATH = "$PWD\frontend\node_modules"
+& .\frontend\node_modules\.bin\playwright.cmd install chromium
+node scripts/check_ui.cjs
+```
+
+Set `UI_BASE_URL` to change the browser test address. `PLAYWRIGHT_CHROMIUM_EXECUTABLE` optionally selects an existing Chromium executable; otherwise Playwright uses its installed browser. These are testing dependencies, not runtime app requirements.
 
 ## Troubleshooting
 

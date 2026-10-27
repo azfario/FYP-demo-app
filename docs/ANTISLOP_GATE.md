@@ -2,27 +2,27 @@
 
 Date: 27 October 2026. Mode: during (owner's session choice). Direction: the owner's explicit dark glass, neon green space dashboard, retaining the exact existing background. ENERGY 2 / RHYTHM 1 / MOTION 1.
 
-Scope: frontend revision. Docker rebuild is unverified because Docker Desktop failed to start; this gate does not claim container verification. The production build and all controls were exercised against the unchanged local CPU backend. See VERIFICATION.md for the complete current control-by-control evidence.
+Scope: Hand Test comparison addition on branch `hand-test-data`. Source Docker builds and recreation of both containers succeeded. All controls were exercised in an isolated Chromium browser against the deployed Nginx/CPU app; all ten triplets were independently scored through its API. See VERIFICATION.md for the current control-by-control evidence.
 
 ## Hard Gate: PASS
 
 - R-02 PASS: authored interface copy contains no em dash.
 - R-03 PASS: actual client/scroll widths match at 320, 390, 768 and 1280px; controls meet 44px minimum height.
-- R-17 PASS: exact parameter count, device, inference_ms and processing_ms come from existing APIs; timings show Awaiting run before a prediction. Historical accuracy remains labelled centre-crop.
+- R-17 PASS: model facts/timing come from APIs; live scores come from the uploaded reference and prediction. All ten were independently recomputed. Historical accuracy remains labelled centre-crop and selected examples are not presented as a representative benchmark.
 - R-18 PASS: no testimonials or invented identities.
-- R-23 PASS: no new visual asset; original background bytes retained. Computational metrics were explicitly requested.
-- R-24 PASS: the skip link targets the existing workspace; no other navigation added.
+- R-23 PASS: no new decorative asset; original background bytes retained. Ten sample triplets and comparison metrics were explicitly requested.
+- R-24 PASS: skip link targets the workspace; both new workspace tabs target real labelled tab panels.
 - R-25 PASS: conservative contrast calculations range from 4.59:1 for the header over the brightest backdrop to 12.50:1 for the primary action. Muted panel text is 8.41:1.
-- R-26 PASS: folder picker, segment/repeat, every view, opacity, three actual downloads, clear/re-upload and retry were exercised successfully.
+- R-26 PASS: both tab states, pair/triplet pickers, segment/repeat, all views including Compare, opacity, downloads in both modes, clear/re-upload and retry were exercised successfully by scripts/check_ui.cjs.
 - R-27 PASS: connecting, empty, validating, processing, success, invalid-file and service-offline states were observed; unavailable model facts do not show invented numbers.
 - R-28 PASS: no FAQ.
 - R-32 PASS: skip-link Tab/Enter, folder Enter, prediction/view Space, range Home/End/PageUp and reverse Tab all worked with a measured 3px green focus outline.
 - R-33 PASS: authored App.jsx and styles.css directly; no source-rewriting helper scripts.
 - R-34 PASS: one owner-requested dark theme, no incomplete alternate theme.
-- R-35 PASS: seven frontend tests and production build passed; all controls exercised in the actual built page, real screenshots saved and inspected, fresh final browser logs empty. Docker limitation explicitly recorded.
-- R-36 PASS: no invented FPS, memory, FLOPs or speed claims. Captured 105.6 ms/228.6 ms values came from an actual CPU request and are not advertised as a fixed benchmark.
+- R-35 PASS: 38 Python tests, 12 frontend tests, production build and source Docker build passed. Both workflows exercised in the deployed page, seven screenshots saved and visually inspected, no uncaught page errors. In-app automation unavailability and isolated-browser fallback explicitly recorded.
+- R-36 PASS: no invented FPS, memory, FLOPs, speed or dataset-wide accuracy claims. Per-image scores and latency are actual observations, with historical and current protocols distinguished.
 - R-37 PASS: current explicit owner direction recorded before building, including design purposes in DESIGN_NOTES.md.
-- R-38 PASS: real model/upload data, empty state and clearly pending timings only.
+- R-38 PASS: original dataset files and actual predictions only; no reference leaks into model input. Pending prediction/metrics remain empty rather than invented.
 
 ## Purpose-Gate: PASS
 
@@ -52,7 +52,7 @@ Scope: frontend revision. Docker rebuild is unverified because Docker Desktop fa
 
 - C-1 PASS: written purpose for colour, glass, glow, layout, spacing, typography, metrics and imagery.
 - C-2 PASS: all public controls performed their actual actions; downloaded PNGs and GeoTIFF inspected with Pillow/Rasterio.
-- C-3 PASS: upload/results/accuracy retained; only requested computational facts added, no marketing content.
+- C-3 PASS: original workflow retained; only requested Hand Test upload/comparison and per-image scores added, with no gallery or marketing content.
 - C-4 PASS: actual mobile/desktop layouts, errors, offline recovery and keyboard use verified.
 - C-5 PASS: sourced model facts and actual request timings only.
 - R-05 PASS: two-column task workspace with mobile reflow, no generic landing-page sections.

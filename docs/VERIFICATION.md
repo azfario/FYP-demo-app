@@ -1,5 +1,52 @@
 # Verification record
 
+## Hand Test comparison, 27 October 2026
+
+Branch: `hand-test-data`, based on `ui-enhancement`. The original Segmentation tab, background, checkpoint, normalization, four-patch inference, threshold and historical metrics are preserved. Only separate reference-validation/comparison behavior and the requested workspace tab were added.
+
+### Automated and deployed checks
+
+- **38 Python tests passed**, including all original checks and the host CUDA-agreement test. New tests cover known confusion counts, perfect/incorrect/no-water/no-valid-pixel metrics, JSON null scores, ignored -1/255 labels, nodata=0 background handling, sensor-invalid pixels, file limits, incorrect bands/dimensions/CRS/alignment, corrupt and mismatched labels, missing/duplicate/extra uploads and unavailable-model handling.
+- **12 frontend tests passed**, including pair/triplet recognition, metadata filtering, missing labels, duplicate/extra files, identity/subfolder mismatches, oversized/empty ground truth and preservation of the original two-file rule.
+- All ten triplets passed preview/prediction and independent metric recomputation. A changed ground-truth mask changed evaluation but left the exported prediction GeoTIFF byte-identical to both the original-reference result and the ordinary two-file endpoint's result.
+- The Vite production build and standard source-based `docker compose up -d --build` completed successfully. Both containers were recreated on port 8081, and the backend became healthy. The final frontend was rebuilt once more after making the global tab lock update before paint.
+- `scripts/check_deployment.py` checked served HTML/JavaScript/CSS byte-for-byte against the final local production build, the original background hash, original model metadata and all ten triplets through actual Nginx routes. Scores were independently recomputed from decoded GeoTIFF predictions and original labels.
+- The backend container contains exactly **30 Hand Test TIFFs**; every bundled file's hash matches its manifest. The source split was verified during packaging: all ten are in Hand Test, none in training/validation. Copies total approximately 37.4 MiB and preserve original filenames and bytes.
+- PNG downloads from both modes were inspected as 512 × 512 images; GeoTIFF downloads preserve EPSG:4326, 512 × 512 dimensions and nodata=255. All ten API-exported masks retain the source grid.
+
+Pytest reports one existing Starlette/httpx deprecation warning. This did not fail any test. The deployed Docker service uses CPU. Host CUDA agreement passed; the updated GPU Docker override was not separately rebuilt or run for this addition.
+
+### Actual browser interactions
+
+The in-app automation connection returned no available browser. `scripts/check_ui.cjs` used an isolated headless Chromium browser through the bundled Playwright runtime against the running Docker app, not a mocked frontend. Intentional offline and corrupt-input cases were tested separately from normal success flows.
+
+| Control / state | Observed result |
+| --- | --- |
+| Default Segmentation | Two-file folder selection, optical preview and real 512 × 512 prediction worked; response has no evaluation extension |
+| Keyboard entry | First Tab showed the 3px green skip-link outline; Enter focused workspace |
+| Hand Test tab | ArrowRight selected the new tab and retained original results in the hidden panel |
+| Three-file selection | All filenames displayed; ground truth appeared beside an empty prediction placeholder before inference |
+| Segment / Segment again | Both completed actual D4 inference and selected Compare |
+| Processing lock | A controlled test delay before forwarding the real prediction request confirmed both tabs disabled and aria-busy=true |
+| Compare | Ground truth and prediction used equal square frames and the same white/black/grey legend |
+| Scores | Visible numbers matched the API: India_900498 IoU 91.47%, Dice 95.54%, pixel accuracy 95.82%; 261,992 evaluated and 152 excluded pixels |
+| Optical / Radar / Mask / Overlay | Each worked with keyboard Space in both modes; Radar/Overlay also worked in the original tab at tablet/mobile widths |
+| Opacity | Keyboard Home/End set 0%/100%; PageUp restored 50%; actual layer opacity was 0.5 |
+| Downloads | Mask PNG, current-overlay PNG and mask GeoTIFF completed in both modes and were saved to ignored test artifacts |
+| Tab preservation | Switching back restored Bolivia results; returning restored Hand Test comparison; arrow and End navigation worked |
+| Clear / re-upload | Another triplet removed stale scores; Clear removed images/exports and restored Awaiting run timings |
+| Missing/corrupt label | Correct frontend/server errors displayed; segmentation disabled for invalid input; Clear recovered |
+| Service error / Retry | Simulated failed model-info network request showed Unavailable facts; removing the failure and Retry restored real model information |
+| Diagnostics | No uncaught page errors in the complete interaction run |
+
+At 1280/768px comparison masks were side by side; at 390/320px they stacked. Client width equalled scroll width at every tested width. All visible enabled buttons measured at least 44px high. Both tabs were checked on desktop, tablet and mobile. Seven real screenshots were saved and visually inspected. The final screenshot set contains no generated UI mockups.
+
+### Design gate and interpretation
+
+Antislop Delivery Gate: **PASS**, with rule-by-rule evidence in `ANTISLOP_GATE.md`. The retained palette/overlay has previously verified conservative contrast bounds: header green 4.59:1 over the brightest possible backdrop, muted panel text 8.41:1 and primary-button text 12.50:1. New comparison labels and metrics reuse these colours. Blur remains limited to the two visible upload/results panels.
+
+The example scores above are full-image comparisons for one visually selected demonstration. They are not an aggregate score for the ten selected tiles or all 90 Hand Test tiles, and do not replace the historical centre-crop metrics. Reference masks may include permanent water.
+
 ## Neon dashboard revision, 27 October 2026
 
 Scope: frontend appearance and a read-only computational-performance display. Backend logic, prediction behavior, saved model, sample files and the existing background image were not changed. Branch: `ui-enhancement`.
