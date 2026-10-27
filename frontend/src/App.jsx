@@ -185,7 +185,6 @@ function Workspace({ mode, info, serviceError, refreshService, onBusyChange }) {
             <h2 id={`${mode}-performance-title`}>Model performance</h2>
             <p className="model-name">D4 · DeepLabV3+ / MobileNetV2</p>
             {info ? <table><caption className="sr-only">Historical D4 centre-crop IoU and Dice scores</caption><thead><tr><th scope="col">Dataset</th><th scope="col">IoU</th><th scope="col">Dice</th></tr></thead><tbody>{info.metrics.map(metric => <tr key={metric.dataset}><th scope="row">{metric.dataset}</th><td>{formatPercent(metric.iou)}</td><td>{formatPercent(metric.dice)}</td></tr>)}</tbody></table> : <p className="metrics-status">{serviceError ? 'Model metrics unavailable.' : 'Loading metrics…'}</p>}
-            <p className="accuracy-note">Historical 256 × 256 centre-crop scores, not whole-image accuracy. Water predictions can include permanent water.</p>
             <div className="compute-section" aria-labelledby={`${mode}-compute-title`}>
               <h3 id={`${mode}-compute-title`}>Computational performance</h3>
               <dl className="compute-metrics">
