@@ -12,6 +12,7 @@ RUN apt-get update \
 COPY backend /app/backend
 COPY models /app/models
 COPY sample /app/sample
+COPY ["hand test", "/app/hand test"]
 USER appuser
 EXPOSE 8000
 HEALTHCHECK --interval=15s --timeout=5s --start-period=45s --retries=5 CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=4)"
