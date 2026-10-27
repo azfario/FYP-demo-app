@@ -38,6 +38,16 @@ Antislop Delivery Gate: PASS for the frontend revision, with rule-by-rule eviden
 
 ## Original delivery record
 
+### Container deployment follow-up, 27 October 2026
+
+After Docker Desktop became available, the owner observed the old cream interface because port 8081 was serving the previous frontend container image. The temporary Vite preview used for the redesign verification was no longer running. This was a deployment mismatch, not a missing source change.
+
+A normal frontend Docker rebuild encountered a Docker Hub TLS timeout while fetching base-image metadata. To deploy without downloads, the already-verified `frontend/dist` assets were copied into a new image based on the locally cached frontend/Nginx image, tagged `fyp-demo-app-frontend:local` and labelled with UI revision `aaa19d623fe7a6aeba8d5ced441692788c657b56`. Only the frontend container was recreated. The temporary offline build context is ignored under `test-results/`; normal source Docker configuration remains unchanged.
+
+HTTP verification on port 8081 confirmed index.html, JavaScript and CSS match the production build byte-for-byte. The served JavaScript contains Computational performance; the CSS contains neon green and standard backdrop-filter declarations. The background hash still matches. The existing CPU backend reported ready and completed a real Bolivia_195474 prediction: 512 × 512, four patches, 151.55 ms inference and 383.09 ms processing. These are one-request observations, not fixed benchmark claims. A fresh versioned URL was opened through the app browser tool to avoid the already-open document's cache. Browser automation was unavailable for a new visual screenshot during this follow-up; the exact same assets were visually verified in the earlier screenshots.
+
+The full source-based Docker build remains unverified for this revision because of the external registry timeout, but the updated Docker frontend deployment and prediction path are now verified.
+
 Date: 26 October 2026 (Asia/Kuala_Lumpur).
 
 ## Verified
