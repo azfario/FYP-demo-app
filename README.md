@@ -2,7 +2,7 @@
 
 A local web workspace for predicting water in paired Sentinel-1 and Sentinel-2 satellite imagery. The application loads the existing FYP D4 DeepLabV3+ / MobileNetV2 checkpoint. It does not train a model.
 
-![Simplified satellite-background workspace](docs/screenshots/desktop-empty.jpg)
+![Space-themed flood segmentation workspace](docs/screenshots/desktop-empty.jpg)
 
 ## Run with Docker
 
@@ -159,7 +159,7 @@ Vite proxies the API to port 8000. The tests verify original-notebook preprocess
 
 React / Vite / Tailwind / Axios frontend; FastAPI / PyTorch / Rasterio / NumPy / Pillow / OpenCV backend; Nginx; Docker Compose. No database, accounts, or cloud hosting.
 
-The simplified UI uses the owner's satellite-and-star-field background direction, self-hosted Inter, opaque cream panels, one red primary action, and a compact model-performance table. The generated background and all runtime assets are bundled locally. See `docs/DESIGN_NOTES.md` for decisions and image-generation provenance, and `docs/VERIFICATION.md` for testing and the completed antislop Delivery Gate.
+The UI keeps the original satellite-and-star-field background, with dark transparent panels, self-hosted Inter, neon green controls and a compact model-performance table. Computational performance shows the model parameter count, actual device, measured inference latency and server processing time for each prediction. Timings cover the full image's four patches and exclude network time; no runtime figures are invented before prediction. The background and all runtime assets are bundled locally. See `docs/DESIGN_NOTES.md` for decisions and image-generation provenance, and `docs/VERIFICATION.md` for testing and the antislop Delivery Gate.
 
 ### Actual prediction example
 

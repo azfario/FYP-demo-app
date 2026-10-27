@@ -1,9 +1,9 @@
 # UI screenshots
 
-Real screenshots captured from the running Docker app using the in-app browser after the UI simplification:
+Real screenshots captured on 27 October 2026 from the production Vite build and unchanged local CPU backend, using the in-app browser after the neon dashboard redesign. Docker Desktop could not start during this revision; these are not container-test screenshots.
 
-- `desktop-empty.jpg`: initial upload interface and retained performance table, 1280px viewport.
-- `desktop-results.jpg`: actual D4 prediction and download controls, 1280px viewport.
+- `desktop-empty.jpg`: initial upload interface, retained accuracy table and computational metrics awaiting a run, 1280px viewport.
+- `desktop-results.jpg`: actual D4 prediction, measured computational performance and download controls, 1280px viewport.
 - `tablet-results.jpg`: actual results at a 768px viewport.
 - `mobile-results.jpg`: stacked upload, results and performance at a 390px viewport.
 

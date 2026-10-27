@@ -147,7 +147,7 @@ export default function App() {
     <main id="workspace" tabIndex={-1}>
       <div className="workspace-grid">
         <div className="sidebar">
-          <aside className="upload-panel" aria-labelledby="upload-title">
+          <aside className="hud-panel upload-panel" aria-labelledby="upload-title">
             <h2 id="upload-title">Upload images</h2>
             <p className="instruction">Select a folder containing matching Sentinel-1 and Sentinel-2 GeoTIFFs.</p>
             {serviceError && <div className="error-notice" role="alert"><p>{serviceError}</p><button className="button secondary" onClick={refreshService}>Retry connection</button></div>}
@@ -162,15 +162,25 @@ export default function App() {
             {pair && <button className="text-button clear-button" onClick={clearPair} disabled={busy} aria-label="Clear selected images">Clear</button>}
           </aside>
 
-          <section className="performance-panel" aria-labelledby="performance-title">
+          <section className="hud-panel performance-panel" aria-labelledby="performance-title">
             <h2 id="performance-title">Model performance</h2>
             <p className="model-name">D4 · DeepLabV3+ / MobileNetV2</p>
             {info ? <table><caption className="sr-only">Historical D4 centre-crop IoU and Dice scores</caption><thead><tr><th scope="col">Dataset</th><th scope="col">IoU</th><th scope="col">Dice</th></tr></thead><tbody>{info.metrics.map(metric => <tr key={metric.dataset}><th scope="row">{metric.dataset}</th><td>{formatPercent(metric.iou)}</td><td>{formatPercent(metric.dice)}</td></tr>)}</tbody></table> : <p className="metrics-status">{serviceError ? 'Model metrics unavailable.' : 'Loading metrics…'}</p>}
             <p className="accuracy-note">Historical 256 × 256 centre-crop scores, not whole-image accuracy. Water predictions can include permanent water.</p>
+            <div className="compute-section" aria-labelledby="compute-title">
+              <h3 id="compute-title">Computational performance</h3>
+              <dl className="compute-metrics">
+                <div><dt>Parameters</dt><dd>{info ? info.parameter_count.toLocaleString('en-US') : 'Unavailable'}</dd></div>
+                <div><dt>Device</dt><dd>{info ? info.device.toUpperCase() : 'Unavailable'}</dd></div>
+                <div><dt>Inference</dt><dd>{result ? `${result.inference_ms.toFixed(1)} ms` : 'Awaiting run'}</dd></div>
+                <div><dt>Processing</dt><dd>{result ? `${result.processing_ms.toFixed(1)} ms` : 'Awaiting run'}</dd></div>
+              </dl>
+              <p className="compute-note">{result ? `${result.width} × ${result.height} px · ${result.patch_count} patches. ` : 'Per 512 × 512 image, four patches. '}Inference measures the model step; processing includes server preparation and export. Network time is excluded.</p>
+            </div>
           </section>
         </div>
 
-          <section className="results-panel" aria-labelledby="viewer-title" aria-busy={busy}>
+          <section className="hud-panel results-panel" aria-labelledby="viewer-title" aria-busy={busy}>
             <div className="viewer-heading"><h2 id="viewer-title" ref={resultHeading} tabIndex={-1}>Results</h2>{preview && <span className="image-size">{preview.width} × {preview.height} px</span>}</div>
             {pair && <p className="tile-name">{pair.tileId}</p>}
             <div className="view-tabs" role="group" aria-label="Image view">{Object.entries(labels).map(([key, label]) => <button key={key} className={view === key ? 'view-tab active' : 'view-tab'} aria-pressed={view === key} disabled={!source || (!result && (key === 'mask' || key === 'overlay'))} onClick={() => setView(key)}>{label}</button>)}</div>
