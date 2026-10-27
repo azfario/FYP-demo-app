@@ -1,5 +1,11 @@
 # Verification record
 
+## Computational-only sidebar, 27 October 2026
+
+Removed the sidebar's historical accuracy table, model subtitle, duplicate computational subheading and small resolution/timing explanation. It now contains one **Model computational performance** heading and Parameters, Device, Inference and Processing values. Header, comparison caption, image alt text and browser title use **DeepLab** instead of D4. Hand Test comparison scores, upload requirements and result controls remain unchanged. Model identity and historical scores are still retained in scientific metadata and documentation.
+
+The 12 frontend tests and production build passed, and the actual frontend/Nginx container was rebuilt and recreated on port 8081. Browser regression checks verified the new heading, absent table/notes, DeepLab title/labels, both original workflows, current Hand Test scores, downloads, opacity, clear/re-upload, errors, recovery, keyboard navigation and 320/390/768/1280px layouts. Screenshots were refreshed and visually inspected. No backend, model or dataset files were changed, so the previously passing 38 Python tests were not repeated for this presentation-only edit. Antislop Delivery Gate remains PASS.
+
 ## Hand Test comparison, 27 October 2026
 
 Branch: `hand-test-data`, based on `ui-enhancement`. The original Segmentation tab, background, checkpoint, normalization, four-patch inference, threshold and historical metrics are preserved. Only separate reference-validation/comparison behavior and the requested workspace tab were added.

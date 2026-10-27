@@ -8,7 +8,7 @@ Scope: Hand Test comparison addition on branch `hand-test-data`. Source Docker b
 
 - R-02 PASS: authored interface copy contains no em dash.
 - R-03 PASS: actual client/scroll widths match at 320, 390, 768 and 1280px; controls meet 44px minimum height.
-- R-17 PASS: model facts/timing come from APIs; live scores come from the uploaded reference and prediction. All ten were independently recomputed. Historical accuracy remains labelled centre-crop and selected examples are not presented as a representative benchmark.
+- R-17 PASS: model facts/timing come from APIs; live Hand Test scores come from the uploaded reference and prediction. All ten were independently recomputed. Historical accuracy is retained only in metadata/documentation, not the simplified sidebar; selected examples are not presented as a representative benchmark.
 - R-18 PASS: no testimonials or invented identities.
 - R-23 PASS: no new decorative asset; original background bytes retained. Ten sample triplets and comparison metrics were explicitly requested.
 - R-24 PASS: skip link targets the workspace; both new workspace tabs target real labelled tab panels.

@@ -20,8 +20,9 @@ The space-dashboard brief replaces cream panels and the red action with dark gre
 | Restrained title glow and primary hover glow | Establish space identity and action feedback without glowing every border, value and control. |
 | One tinted shadow on results | Elevate the scientific image as the main workspace. |
 | Natural square satellite previews | Preserve geography and raster proportions in every view. |
-| Compact performance table | Retain sourced Validation, Hand Test and Bolivia Test IoU/Dice values, plus the centre-crop limitation. |
-| Computational metrics below accuracy | Show exact API parameter count and device, then measured inference and server processing times only after a real prediction. No estimated FPS, VRAM or FLOPs. |
+| Computational-only sidebar | Follow the owner's simplification: one Model computational performance heading and four values, without a historical accuracy table or small explanatory text. |
+| DeepLab model label | Use the owner's requested short name in the header, comparison caption, image alt text and page title; retain D4 provenance in scientific metadata. |
+| Four computational values | Show exact API parameter count and device, then measured inference and server processing times only after a real prediction. No estimated FPS, VRAM or FLOPs. |
 | Blue overlay and explicit legend | Distinguish model output from natural-colour imagery; this is a data colour, not a second primary UI action. |
 | Minimal motion | Indicate real processing and control state without distracting from image comparison. |
 | One fixed dark appearance | Follow the owner's explicit space-dashboard brief without adding a theme toggle. |
