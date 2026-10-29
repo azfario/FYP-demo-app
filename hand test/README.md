@@ -21,6 +21,13 @@ In the app, select **Hand Test**, then choose one numbered folder, not this pare
 
 Labels: `0=background`, `1=water`, `-1/255=ignored`. Scores use only pixels valid in both imagery and labels. Zero remains background even when label nodata metadata says zero. The app requires the original aligned 512 × 512 rasters; it never resizes or reprojects labels. Grey areas in Compare are excluded from scoring. Water includes permanent water; this is not a change-detection product that establishes newly flooded land.
 
+After prediction, **Water types** opens using the automatically matched historical
+JRC map. Blue marks detected permanent water, orange marks candidate floodwater.
+Choose **Compare** to view the original water comparison. Scores still measure
+all-water segmentation. **JRC reference** shows the historical reference itself;
+three selected tiles have valid all-zero references. For two-file Segmentation
+uploads, use the corresponding numbered folders under `demo pairs/`.
+
 Source: [Sen1Floods11, Cloud to Street](https://github.com/cloudtostreet/Sen1Floods11). Citation and attribution are in the [repository README](../README.md#dataset-attribution). This repository does not grant a new license for third-party data.
 
 To reproduce the copies from an existing original v1.1 directory:

@@ -1,0 +1,2242 @@
+{
+  "dataset": "Sen1Floods11 v1.1",
+  "source": "EC JRC/Google via Cloud to Street",
+  "source_url": "https://github.com/cloudtostreet/Sen1Floods11/blob/master/docs/README.md",
+  "encoding": {
+    "0": "outside permanent reference",
+    "1": "permanent water"
+  },
+  "temporal_note": "Historical supplied reference; exact derivation dates and threshold are not established here. Not a verified pre-event baseline.",
+  "tiles": {
+    "Bolivia_103757": {
+      "filename": "Bolivia_103757_JRCWaterHand.tif",
+      "sha256": "69d82d8b46560323ff216f2d45a67bc4fca06aa848d8da5dbc71df33f0f6abdc",
+      "bytes": 835
+    },
+    "Bolivia_129334": {
+      "filename": "Bolivia_129334_JRCWaterHand.tif",
+      "sha256": "885db6ff4400fa3b903008b7b0a0ba7e63ffedb4b83429a8e1c3b8c0ff339831",
+      "bytes": 1246
+    },
+    "Bolivia_195474": {
+      "filename": "Bolivia_195474_JRCWaterHand.tif",
+      "sha256": "035e10ffee703b52ad759e09923010e917aa1eb87ca94642a9ff79c076cb378e",
+      "bytes": 835
+    },
+    "Bolivia_23014": {
+      "filename": "Bolivia_23014_JRCWaterHand.tif",
+      "sha256": "25bbc64ca188532aa9d0565dd819c699fc2e2811d65b5d5bb98a3be1b71d4edc",
+      "bytes": 1301
+    },
+    "Bolivia_233925": {
+      "filename": "Bolivia_233925_JRCWaterHand.tif",
+      "sha256": "ef358c7cd32ed86d202e74ac14a0ca0f0983dbda7f0b7ce7814625e2c4c2280d",
+      "bytes": 835
+    },
+    "Bolivia_242570": {
+      "filename": "Bolivia_242570_JRCWaterHand.tif",
+      "sha256": "056b2e232f9a30216d61a23ce469df00da5ab0b7bb2f837b7407363e3b76a495",
+      "bytes": 835
+    },
+    "Bolivia_290290": {
+      "filename": "Bolivia_290290_JRCWaterHand.tif",
+      "sha256": "732061234d698b5ffbca1b0b7fd3321bfcd1c396bc7fa3c02eb5e023ce473fa0",
+      "bytes": 1049
+    },
+    "Bolivia_294583": {
+      "filename": "Bolivia_294583_JRCWaterHand.tif",
+      "sha256": "804ae77b9b73af7b8501d1edbe4b67fae7eb8fa5a62b5d391fb2efb2b0d5d1b4",
+      "bytes": 2197
+    },
+    "Bolivia_312675": {
+      "filename": "Bolivia_312675_JRCWaterHand.tif",
+      "sha256": "1bdf8a07ceb2b2e885920cda9ed90e7366746d1b01b0a848810929ee25fb473c",
+      "bytes": 835
+    },
+    "Bolivia_314919": {
+      "filename": "Bolivia_314919_JRCWaterHand.tif",
+      "sha256": "001bbc7e73eb14c0c20aa13bb3d21db3b061feea1b7701dd9aafdb2b59c89038",
+      "bytes": 949
+    },
+    "Bolivia_360519": {
+      "filename": "Bolivia_360519_JRCWaterHand.tif",
+      "sha256": "7409cceda077cb178caa3c2c89df557ccd7b778917cf133cdcb2a137ba1d3bfb",
+      "bytes": 835
+    },
+    "Bolivia_379434": {
+      "filename": "Bolivia_379434_JRCWaterHand.tif",
+      "sha256": "d5d1825f13ecbd8221e34ff157a59f51ba2bb6d9a7c5ec86f4bb40947edf3f59",
+      "bytes": 835
+    },
+    "Bolivia_432776": {
+      "filename": "Bolivia_432776_JRCWaterHand.tif",
+      "sha256": "1a05722fab70ae47d59e44817e8f9f690eebfecb579469a18a79977bfbe5d623",
+      "bytes": 1199
+    },
+    "Bolivia_60373": {
+      "filename": "Bolivia_60373_JRCWaterHand.tif",
+      "sha256": "79da082bb5528e76cdfac8361b9c7d6cecaf3525090e4006d609327a30c15a24",
+      "bytes": 1421
+    },
+    "Bolivia_76104": {
+      "filename": "Bolivia_76104_JRCWaterHand.tif",
+      "sha256": "a931439da84585746b80cc6e91dad151a358476f50ed0af92291cd0947202f7d",
+      "bytes": 835
+    },
+    "Ghana_103272": {
+      "filename": "Ghana_103272_JRCWaterHand.tif",
+      "sha256": "8fa059bc0f857f5640e1ea024abd77163c49b34a6c9851c614cdd83346deb885",
+      "bytes": 899
+    },
+    "Ghana_1033830": {
+      "filename": "Ghana_1033830_JRCWaterHand.tif",
+      "sha256": "276e0a21b4c338d8303526af946af0999f1ceb1ee90bdf2272b2d8b1b6e6909e",
+      "bytes": 1214
+    },
+    "Ghana_1078550": {
+      "filename": "Ghana_1078550_JRCWaterHand.tif",
+      "sha256": "e232abf8e800baffb7c04a700197665a2bc870cb2c4df30f85c6454c60005df4",
+      "bytes": 835
+    },
+    "Ghana_1089161": {
+      "filename": "Ghana_1089161_JRCWaterHand.tif",
+      "sha256": "1b048942b8f01c3760a9971b61f09e1c01c6264ad4d687e584559f0cccbc3ba3",
+      "bytes": 835
+    },
+    "Ghana_11745": {
+      "filename": "Ghana_11745_JRCWaterHand.tif",
+      "sha256": "ad19a241bf7844d3ed81eab979b45d4c1eefa72d620a49028bcdfb2c6e438fe7",
+      "bytes": 835
+    },
+    "Ghana_124834": {
+      "filename": "Ghana_124834_JRCWaterHand.tif",
+      "sha256": "a55353e2e71194d981f710edb8561b2a4dd390233c4f31352dc07d33f4444d9f",
+      "bytes": 835
+    },
+    "Ghana_128663": {
+      "filename": "Ghana_128663_JRCWaterHand.tif",
+      "sha256": "efe8dbd8c702471254bba62a57f296f13dcbf0a52cac1115c65cd2e6fa9fde01",
+      "bytes": 856
+    },
+    "Ghana_132163": {
+      "filename": "Ghana_132163_JRCWaterHand.tif",
+      "sha256": "9fd0a57933f6293e9a09d34425ad197c385d93e96121e77c59b6d5a26677bb7c",
+      "bytes": 835
+    },
+    "Ghana_134751": {
+      "filename": "Ghana_134751_JRCWaterHand.tif",
+      "sha256": "3e575c17babf18e013b26105bf786ed7b7112ebf8b4c51cc0e5dfee0a48cb2c2",
+      "bytes": 835
+    },
+    "Ghana_135389": {
+      "filename": "Ghana_135389_JRCWaterHand.tif",
+      "sha256": "0e621529d1207393738c34c219df041cf304b8c5ce636a64bafc8d5a5a792fb9",
+      "bytes": 835
+    },
+    "Ghana_141271": {
+      "filename": "Ghana_141271_JRCWaterHand.tif",
+      "sha256": "dd8b50ae842aa0500c8ca11fc7a0e4bdb0e37c8ec232785660fcfe379f46f16f",
+      "bytes": 835
+    },
+    "Ghana_141910": {
+      "filename": "Ghana_141910_JRCWaterHand.tif",
+      "sha256": "70790722ba292e3cb00cf1c8278a9cf30cc2e61ada5d21bf38f7beefe33d7220",
+      "bytes": 1570
+    },
+    "Ghana_142312": {
+      "filename": "Ghana_142312_JRCWaterHand.tif",
+      "sha256": "f37f88725706262f121be5c83b06e9e1d7548ce43cfc488a8befc573f4c45605",
+      "bytes": 835
+    },
+    "Ghana_144050": {
+      "filename": "Ghana_144050_JRCWaterHand.tif",
+      "sha256": "8d1623b53ba200544e468c02b0ca3764b74576f6fc72eecdde430675a9cd06fd",
+      "bytes": 835
+    },
+    "Ghana_146222": {
+      "filename": "Ghana_146222_JRCWaterHand.tif",
+      "sha256": "f6aacbb27c959a26b9202162f393cd6290f016c259f7db03dc8c978998745942",
+      "bytes": 835
+    },
+    "Ghana_147015": {
+      "filename": "Ghana_147015_JRCWaterHand.tif",
+      "sha256": "a4ebcaab9e3f0b9485d65dbf5637732b2e43755174451c31d969e2ae6d1bb4de",
+      "bytes": 835
+    },
+    "Ghana_154838": {
+      "filename": "Ghana_154838_JRCWaterHand.tif",
+      "sha256": "2fbd5584517b60b96f9c3724ba57ec1b3c82eb6e4940094e847fb297a464384e",
+      "bytes": 835
+    },
+    "Ghana_156478": {
+      "filename": "Ghana_156478_JRCWaterHand.tif",
+      "sha256": "1cdd9f2498213d8b19a990d11de9161599d9d62bf1f3e26d2b1b3ed7aad91dea",
+      "bytes": 835
+    },
+    "Ghana_161233": {
+      "filename": "Ghana_161233_JRCWaterHand.tif",
+      "sha256": "596249af0853f49b5acc0b220273049c3591ec0126f27e58313df6345510f376",
+      "bytes": 835
+    },
+    "Ghana_167233": {
+      "filename": "Ghana_167233_JRCWaterHand.tif",
+      "sha256": "8ca8e4035cfccbb2283cc74d228dcadd8e6259cfaf8a8fbba7d07fe55e51b7ce",
+      "bytes": 835
+    },
+    "Ghana_168875": {
+      "filename": "Ghana_168875_JRCWaterHand.tif",
+      "sha256": "7bc680d232f6ef2880ded93d5aeb938196581b006f2dae1fc9472256753a54bc",
+      "bytes": 835
+    },
+    "Ghana_187318": {
+      "filename": "Ghana_187318_JRCWaterHand.tif",
+      "sha256": "b03accb1c5933d01306e3e3c2d4b20d48f8a89e9376b107e18600307449a5daa",
+      "bytes": 835
+    },
+    "Ghana_194723": {
+      "filename": "Ghana_194723_JRCWaterHand.tif",
+      "sha256": "571f0c5e14480a7ac2e11ae3e668d2752240e500de7e5643999c17a86d512d29",
+      "bytes": 848
+    },
+    "Ghana_234935": {
+      "filename": "Ghana_234935_JRCWaterHand.tif",
+      "sha256": "4a524fa3c270e6e3128ee1589fc047b28557be21865ea24af66da8474b318b33",
+      "bytes": 835
+    },
+    "Ghana_247288": {
+      "filename": "Ghana_247288_JRCWaterHand.tif",
+      "sha256": "05a46ea59970d7a5398d3fd5b6ae66de25136d31e0e4190944e386a24dfd426b",
+      "bytes": 1231
+    },
+    "Ghana_24858": {
+      "filename": "Ghana_24858_JRCWaterHand.tif",
+      "sha256": "fb4d6d675dc43b4cb101cc1f57ecf7412586cecad22750c0dd75159d8fe61e4c",
+      "bytes": 835
+    },
+    "Ghana_26376": {
+      "filename": "Ghana_26376_JRCWaterHand.tif",
+      "sha256": "a173f57786d74c2f94744b9ed75e0cf7cd8cc3f573c51d78dd2bda82810c314c",
+      "bytes": 835
+    },
+    "Ghana_264787": {
+      "filename": "Ghana_264787_JRCWaterHand.tif",
+      "sha256": "7de220f8d179125744173da21147d3ea6f5cf6229c626638701b7bfdba4fa90c",
+      "bytes": 835
+    },
+    "Ghana_277": {
+      "filename": "Ghana_277_JRCWaterHand.tif",
+      "sha256": "4e2d521281331d2392c4f427069fd7a7a2d165e270f16fade99983832cc8637e",
+      "bytes": 2131
+    },
+    "Ghana_308249": {
+      "filename": "Ghana_308249_JRCWaterHand.tif",
+      "sha256": "f0776fe52753ea1c46b56830490a3e2cfecacaeb76e7d4e5ccb278048314c280",
+      "bytes": 969
+    },
+    "Ghana_313799": {
+      "filename": "Ghana_313799_JRCWaterHand.tif",
+      "sha256": "ef4152e6e725c9ec17d6ce8adb66993c10cd4dfe6c5c3bb9c138ab821d7bf733",
+      "bytes": 835
+    },
+    "Ghana_319168": {
+      "filename": "Ghana_319168_JRCWaterHand.tif",
+      "sha256": "5a1427400844f2176ffec8c0ba14012537b061a0b4834c74a048b980ffb038ae",
+      "bytes": 835
+    },
+    "Ghana_359826": {
+      "filename": "Ghana_359826_JRCWaterHand.tif",
+      "sha256": "3127ff3920c9eff3f649703941be3969276ed8bde62c5081466aff7e24d60f54",
+      "bytes": 835
+    },
+    "Ghana_362274": {
+      "filename": "Ghana_362274_JRCWaterHand.tif",
+      "sha256": "a2927fb821e74a65e998cf72c182fb93fd9d3d7701378162fc9d76597bd24e80",
+      "bytes": 835
+    },
+    "Ghana_406026": {
+      "filename": "Ghana_406026_JRCWaterHand.tif",
+      "sha256": "f7c275962b5c67c336317933e6ca914ac9bf50af2928ffe93f87526bf9083d61",
+      "bytes": 848
+    },
+    "Ghana_45911": {
+      "filename": "Ghana_45911_JRCWaterHand.tif",
+      "sha256": "51a4b79d6d5e89469be8754a9c51efd8af3efc3ae089f6ff8f2ce072b70e3913",
+      "bytes": 835
+    },
+    "Ghana_495107": {
+      "filename": "Ghana_495107_JRCWaterHand.tif",
+      "sha256": "2ba287e5799f4c121b5c649f41c174c53c31904ebab35ec45344ed9cdfbb494c",
+      "bytes": 835
+    },
+    "Ghana_49890": {
+      "filename": "Ghana_49890_JRCWaterHand.tif",
+      "sha256": "8cafd24bdc74417f7c28e7b2976712b84b80e82dc532b1f1a018e77ed2f60773",
+      "bytes": 835
+    },
+    "Ghana_5079": {
+      "filename": "Ghana_5079_JRCWaterHand.tif",
+      "sha256": "d675bef44f1cf9350472d38fdca5346ec8daa3795266de19f8886f82f176736b",
+      "bytes": 835
+    },
+    "Ghana_53713": {
+      "filename": "Ghana_53713_JRCWaterHand.tif",
+      "sha256": "8498b45b7323ae57112fc183a37788a7c14dc6b1e47ebb7f5f6b9dff4a02212b",
+      "bytes": 835
+    },
+    "Ghana_597288": {
+      "filename": "Ghana_597288_JRCWaterHand.tif",
+      "sha256": "64cd00f1e1bfefd4f779db7b2dc137a672f96ac67ce659e53ef1dd1fe7f694b6",
+      "bytes": 857
+    },
+    "Ghana_61925": {
+      "filename": "Ghana_61925_JRCWaterHand.tif",
+      "sha256": "bf45462d1459a6361760440cbaa0b37ddf6291caff784c975834cd38955f775c",
+      "bytes": 879
+    },
+    "Ghana_7496": {
+      "filename": "Ghana_7496_JRCWaterHand.tif",
+      "sha256": "af01540e99115084450c63b016d84e8ed67894ee9369199fe582777c5069e577",
+      "bytes": 835
+    },
+    "Ghana_8090": {
+      "filename": "Ghana_8090_JRCWaterHand.tif",
+      "sha256": "5b7c81bca982ba6d4a49d2985689b5853eb1a866481b0f06930295d21ac2b48f",
+      "bytes": 835
+    },
+    "Ghana_83200": {
+      "filename": "Ghana_83200_JRCWaterHand.tif",
+      "sha256": "a133581cb27d5afda8ed128bcb235ecd9bdcc4f8d8fb5a4516864732c7f05617",
+      "bytes": 835
+    },
+    "Ghana_83483": {
+      "filename": "Ghana_83483_JRCWaterHand.tif",
+      "sha256": "d4a9de3c9b9b6c99c8fa15fc5622a06989aa852d1dba208cc4a547ea9334cefe",
+      "bytes": 835
+    },
+    "Ghana_866994": {
+      "filename": "Ghana_866994_JRCWaterHand.tif",
+      "sha256": "f8df99083ffee7502c914e60bb8fa7647d37800e951efccc7ad51496032b868e",
+      "bytes": 3355
+    },
+    "Ghana_868803": {
+      "filename": "Ghana_868803_JRCWaterHand.tif",
+      "sha256": "e3a37456dc80005f98bc75db9d2f7a8ef70ef8ca547c4123597b90aa2b084a54",
+      "bytes": 2049
+    },
+    "Ghana_887131": {
+      "filename": "Ghana_887131_JRCWaterHand.tif",
+      "sha256": "6d68d8f129439400dcbbdfe44e1ce25ef49f28dd4d168f65ecfd9673f0d7f251",
+      "bytes": 835
+    },
+    "Ghana_895194": {
+      "filename": "Ghana_895194_JRCWaterHand.tif",
+      "sha256": "a3cee558f1a0ccbfc5869750d71847241e36bdc33a17db18f6b1942abad3c5a5",
+      "bytes": 835
+    },
+    "Ghana_953791": {
+      "filename": "Ghana_953791_JRCWaterHand.tif",
+      "sha256": "067dd6f6b28e35221ee4abc5b78f00b2a7a92fb05f1877231b421661535d6838",
+      "bytes": 835
+    },
+    "Ghana_97059": {
+      "filename": "Ghana_97059_JRCWaterHand.tif",
+      "sha256": "894645817972a84dc8c0a51cda5edd9e3636ec8525a72e182dbb5490e1576afb",
+      "bytes": 835
+    },
+    "Ghana_97516": {
+      "filename": "Ghana_97516_JRCWaterHand.tif",
+      "sha256": "00951fd982d165e5dc14aab0cfd01d1db5b3aa9a60b8a11cf2982f5277417161",
+      "bytes": 873
+    },
+    "India_1017769": {
+      "filename": "India_1017769_JRCWaterHand.tif",
+      "sha256": "b98f40cdbeb0f76e4d3aec263e8a2735cbc4dbf1d34402b050af5b8cdbfc91dd",
+      "bytes": 2088
+    },
+    "India_1018317": {
+      "filename": "India_1018317_JRCWaterHand.tif",
+      "sha256": "f8bdd04dd3cfbdb6f2dadb25a5d93f93e2309b714f95211221c7f0c0f6ff66c0",
+      "bytes": 3164
+    },
+    "India_1018327": {
+      "filename": "India_1018327_JRCWaterHand.tif",
+      "sha256": "77ac6643504eae9586ff31d2ab2a07999fccf7adf6810c62d1f31f75c4510330",
+      "bytes": 1526
+    },
+    "India_103447": {
+      "filename": "India_103447_JRCWaterHand.tif",
+      "sha256": "3ca5bb32f56cc5f8841a827555a8d8d8d6c8b8ab273a23c952245b5b41911203",
+      "bytes": 2223
+    },
+    "India_1050276": {
+      "filename": "India_1050276_JRCWaterHand.tif",
+      "sha256": "e969644c162f97363860e490da631f0cdc390b0f696dc6d078386b75ce79e66e",
+      "bytes": 1621
+    },
+    "India_1068117": {
+      "filename": "India_1068117_JRCWaterHand.tif",
+      "sha256": "bb72624c31173ebed97ba56ddd00c078f4d3dcbbe5c069d983518fb243a7bd3c",
+      "bytes": 2323
+    },
+    "India_1072277": {
+      "filename": "India_1072277_JRCWaterHand.tif",
+      "sha256": "86d46d5c0043e636a2c5718bdf3ea56dcd96519bc6fc14878c4315327ff9d3ca",
+      "bytes": 847
+    },
+    "India_118868": {
+      "filename": "India_118868_JRCWaterHand.tif",
+      "sha256": "d9dfae442f8914cb633f8ee52c90f2e3803087cf440af0cd330a2d540ba3968e",
+      "bytes": 835
+    },
+    "India_135434": {
+      "filename": "India_135434_JRCWaterHand.tif",
+      "sha256": "ec74bddd61fa3e7fcabeee93ca25c4d8f81b6facc4b0225cfaebada70b19d2bc",
+      "bytes": 952
+    },
+    "India_136196": {
+      "filename": "India_136196_JRCWaterHand.tif",
+      "sha256": "508f50e9739bd9ff39611e38698daa62a2126cda82a782240cbac45507efda26",
+      "bytes": 835
+    },
+    "India_164336": {
+      "filename": "India_164336_JRCWaterHand.tif",
+      "sha256": "e1e687742045f539baf71000fd7505b39960509aa07d06081bbd767670341301",
+      "bytes": 835
+    },
+    "India_166709": {
+      "filename": "India_166709_JRCWaterHand.tif",
+      "sha256": "f609501367c7c2339e965571a5db868341a670ee4227b2b528bcfcb6fcd566fa",
+      "bytes": 835
+    },
+    "India_177319": {
+      "filename": "India_177319_JRCWaterHand.tif",
+      "sha256": "b8e50d287fda7cf22422054bedd73f989f3dbc3a35b2ec55fb6279db863fb2de",
+      "bytes": 835
+    },
+    "India_179238": {
+      "filename": "India_179238_JRCWaterHand.tif",
+      "sha256": "26c7c98c991b505b04c248f0c79ef0703407ccf27e7a77d114f59da38c49ce73",
+      "bytes": 835
+    },
+    "India_180633": {
+      "filename": "India_180633_JRCWaterHand.tif",
+      "sha256": "4c5a6d4333ade2866247257e1372627e9cfc53b5051d0473d7a03108c8c8305f",
+      "bytes": 2337
+    },
+    "India_207862": {
+      "filename": "India_207862_JRCWaterHand.tif",
+      "sha256": "8c6ee505734c4ba5b194b54ebaf763dac15d6189f24282a4ca0635f7a5b91363",
+      "bytes": 835
+    },
+    "India_244057": {
+      "filename": "India_244057_JRCWaterHand.tif",
+      "sha256": "2a1038540723f809cf915c844a335187f650f3936e6e7c1d081283822922bbcb",
+      "bytes": 835
+    },
+    "India_25540": {
+      "filename": "India_25540_JRCWaterHand.tif",
+      "sha256": "e87a2fc1d7c58bf254f7fc3d6b0ca6303b12ff4f1b0bc3e6317b696c79646f42",
+      "bytes": 835
+    },
+    "India_265762": {
+      "filename": "India_265762_JRCWaterHand.tif",
+      "sha256": "00d98940a42b34c22f9526fe0b74bb523ca7a866e51d4cfb08c6b8d8569ef91c",
+      "bytes": 835
+    },
+    "India_273873": {
+      "filename": "India_273873_JRCWaterHand.tif",
+      "sha256": "992994f55fdd35ccb9fe2829022b17f74684249070cf7416834259e0ed542739",
+      "bytes": 867
+    },
+    "India_285297": {
+      "filename": "India_285297_JRCWaterHand.tif",
+      "sha256": "733be2054b8f7f71fc5fdd503b0561abfd0c99e5205950043a2514d29efe8f3c",
+      "bytes": 835
+    },
+    "India_287642": {
+      "filename": "India_287642_JRCWaterHand.tif",
+      "sha256": "6fe5f859e9b4ee91f0a59c2c3272f95e1684bdd3102ed9cf28740ce619527f74",
+      "bytes": 855
+    },
+    "India_324254": {
+      "filename": "India_324254_JRCWaterHand.tif",
+      "sha256": "c4816beb6b6b2f38feca24fd61deca00a57969d1c32c31886afff13fd211e05a",
+      "bytes": 835
+    },
+    "India_373039": {
+      "filename": "India_373039_JRCWaterHand.tif",
+      "sha256": "065d3a991a3286ba2fa093b3ca34bea71d361e73b304eb72936fe47975062d93",
+      "bytes": 847
+    },
+    "India_383430": {
+      "filename": "India_383430_JRCWaterHand.tif",
+      "sha256": "db1940712378782dbf544b04cd91339096bb53fabc9bc5404638ba1afeec5571",
+      "bytes": 1082
+    },
+    "India_391908": {
+      "filename": "India_391908_JRCWaterHand.tif",
+      "sha256": "155ed50b53adedb5dee2468b75dd3a790aced44d5b096916dd0771855277b2ce",
+      "bytes": 1676
+    },
+    "India_399883": {
+      "filename": "India_399883_JRCWaterHand.tif",
+      "sha256": "9257c80ceeb02208f902cfc1d35f091f485d5e91a600211a2ee28e8e73f704fc",
+      "bytes": 2980
+    },
+    "India_44475": {
+      "filename": "India_44475_JRCWaterHand.tif",
+      "sha256": "72869f92f67dbb050b0bbda60a58bcd2b067c31ca442df4d9ae31275f666c234",
+      "bytes": 835
+    },
+    "India_500266": {
+      "filename": "India_500266_JRCWaterHand.tif",
+      "sha256": "cb073d0cdf174af8f76abe402a3f507fc4b049d1dad44722d428d139ae77d067",
+      "bytes": 863
+    },
+    "India_533192": {
+      "filename": "India_533192_JRCWaterHand.tif",
+      "sha256": "8fb4001ef900b69415daa509faca792ff19011454e7ced8d924f95bdae961b0c",
+      "bytes": 1497
+    },
+    "India_534470": {
+      "filename": "India_534470_JRCWaterHand.tif",
+      "sha256": "31c5014f1b52fb0aa41cf47dd87b65c8ea623ab05626ae8713e68d1f607967c5",
+      "bytes": 835
+    },
+    "India_56450": {
+      "filename": "India_56450_JRCWaterHand.tif",
+      "sha256": "ce3e7f480587e253c23087972cb9b0a34d155badf6ba7d3a335b33be3a9c5862",
+      "bytes": 835
+    },
+    "India_566697": {
+      "filename": "India_566697_JRCWaterHand.tif",
+      "sha256": "c191f5c7291e410c0ccd1b7f7f882b6e6ef07755bd45c29eb3080fccba05dc95",
+      "bytes": 835
+    },
+    "India_570384": {
+      "filename": "India_570384_JRCWaterHand.tif",
+      "sha256": "0b8bb595844a687952bfaed3090ae8f5238f45c77b3386905730ec576575c6c9",
+      "bytes": 1535
+    },
+    "India_591317": {
+      "filename": "India_591317_JRCWaterHand.tif",
+      "sha256": "fba213bdb2f86d97735b395fdb935bfb9dc1a59a0285860d4c97cefacee49e59",
+      "bytes": 1524
+    },
+    "India_591549": {
+      "filename": "India_591549_JRCWaterHand.tif",
+      "sha256": "1fe0be38770dcf942415309b52845893e8a481ab9aa443b358ad3b5b684fd080",
+      "bytes": 849
+    },
+    "India_592446": {
+      "filename": "India_592446_JRCWaterHand.tif",
+      "sha256": "a2f603656c1e9dea3dbbbb21e4997fd0f9fc04d34d66cc239a1cd3f4c1ca3013",
+      "bytes": 1701
+    },
+    "India_59460": {
+      "filename": "India_59460_JRCWaterHand.tif",
+      "sha256": "50c636bdb2620e4f805c18b9e8318cf2fa0e182534e7be162e8a0522b42498d8",
+      "bytes": 835
+    },
+    "India_624341": {
+      "filename": "India_624341_JRCWaterHand.tif",
+      "sha256": "a97bbb53c8e672b85bf64ba2588c40587cc60eff7b7984a08a4f4a84dd31adc6",
+      "bytes": 835
+    },
+    "India_631692": {
+      "filename": "India_631692_JRCWaterHand.tif",
+      "sha256": "3d7bd6c800270a2861141ece84bbe82c916bf104043d57357611753d4748be41",
+      "bytes": 835
+    },
+    "India_652725": {
+      "filename": "India_652725_JRCWaterHand.tif",
+      "sha256": "c949e4b3d74e70d103eead284e20bfcf411c0c8ed7ae3a6fdc7393651fdbd2bb",
+      "bytes": 918
+    },
+    "India_664410": {
+      "filename": "India_664410_JRCWaterHand.tif",
+      "sha256": "4d002f9f26fbf1e23e478b0728da283bdc5fa5fc8fccc3ea7aecf7ef2154fb7d",
+      "bytes": 880
+    },
+    "India_691027": {
+      "filename": "India_691027_JRCWaterHand.tif",
+      "sha256": "a42ac31bbf1a9ce799d99d54f4083bf38294aa379701eb9ce78ba3cb7a11666e",
+      "bytes": 911
+    },
+    "India_698338": {
+      "filename": "India_698338_JRCWaterHand.tif",
+      "sha256": "657f9877e73fac8e63fa2928b4363eb2848dc789712991e9cff34d1e6b1271d6",
+      "bytes": 835
+    },
+    "India_70352": {
+      "filename": "India_70352_JRCWaterHand.tif",
+      "sha256": "a046cca2ea777deb4076b34ca9bcdebfe099d0e4d5d423807cce996652cba0ae",
+      "bytes": 2062
+    },
+    "India_707886": {
+      "filename": "India_707886_JRCWaterHand.tif",
+      "sha256": "320e42a2518bffba55d3dfa6f198a871d27a747e8e2ab9dbc99553c4a9cbd483",
+      "bytes": 1706
+    },
+    "India_73419": {
+      "filename": "India_73419_JRCWaterHand.tif",
+      "sha256": "2f3025924e30e5a1a431c39dcdfbd06669c2d478ce932a9f0a91e3b6e9bb7df8",
+      "bytes": 864
+    },
+    "India_747970": {
+      "filename": "India_747970_JRCWaterHand.tif",
+      "sha256": "bf5e7d82145de96c2ebffce696e8d01afb70759558506bfd981339df8171eab4",
+      "bytes": 1139
+    },
+    "India_747992": {
+      "filename": "India_747992_JRCWaterHand.tif",
+      "sha256": "f6d29f86fd699f122c47bd0afc698f77d10b5a7d390f86667813a10ebe04bb2b",
+      "bytes": 835
+    },
+    "India_764946": {
+      "filename": "India_764946_JRCWaterHand.tif",
+      "sha256": "fea5a454bf5991e33a6baacdedc1f159cad1a0c7b1df0d5e7498cd73fdcaa2ae",
+      "bytes": 1034
+    },
+    "India_769408": {
+      "filename": "India_769408_JRCWaterHand.tif",
+      "sha256": "0c2a3c7bee604574e6110c529f8173b45f446d9691cf0f726ecbbf9760b2145c",
+      "bytes": 835
+    },
+    "India_772630": {
+      "filename": "India_772630_JRCWaterHand.tif",
+      "sha256": "164b8b683a569f133124da3dd86511e65c9ff5508a02238ee3be09f524bfd3dc",
+      "bytes": 835
+    },
+    "India_773682": {
+      "filename": "India_773682_JRCWaterHand.tif",
+      "sha256": "9eeaaaf222f9e3b6852021b9cc7b47d1bf04e01b3f37cfd8e0920e650d44c4c1",
+      "bytes": 981
+    },
+    "India_774689": {
+      "filename": "India_774689_JRCWaterHand.tif",
+      "sha256": "c64c4e6883916f61800fdfd376dae83521496c4e68c4868cc576550d72b082b1",
+      "bytes": 1112
+    },
+    "India_79637": {
+      "filename": "India_79637_JRCWaterHand.tif",
+      "sha256": "af3f1d462901519ec9f89c92fd4c1da435df4bdeb87aeab4bdfd06a4f0b8c246",
+      "bytes": 835
+    },
+    "India_80221": {
+      "filename": "India_80221_JRCWaterHand.tif",
+      "sha256": "c5f7cd2b22a236b37f075e20462108d974bf42fab475a6acb3725cdbb53d3d10",
+      "bytes": 2956
+    },
+    "India_804466": {
+      "filename": "India_804466_JRCWaterHand.tif",
+      "sha256": "3e5071a2657087d083d8ab59a58f99f35c4c10728a3ff408156b29f889a35d79",
+      "bytes": 1127
+    },
+    "India_828067": {
+      "filename": "India_828067_JRCWaterHand.tif",
+      "sha256": "50a2e450e8204689aa35c74a251dcbe92a6c270879ea53158e0d9b227b878290",
+      "bytes": 1109
+    },
+    "India_833266": {
+      "filename": "India_833266_JRCWaterHand.tif",
+      "sha256": "eabd7929b239af5382926ffcab1e950ab23082936200d4d36f40fd301099d5c7",
+      "bytes": 842
+    },
+    "India_842775": {
+      "filename": "India_842775_JRCWaterHand.tif",
+      "sha256": "0a54905e3c52db289c59cc8ea644cc545f9f7821e61ea0386771f00f9e8ff4f5",
+      "bytes": 835
+    },
+    "India_869358": {
+      "filename": "India_869358_JRCWaterHand.tif",
+      "sha256": "7137e4d37b0401fa140eab7de06243f41a54cb7f76ea8e0c511fb0e72ceb9891",
+      "bytes": 870
+    },
+    "India_900498": {
+      "filename": "India_900498_JRCWaterHand.tif",
+      "sha256": "c54b152e410d2ad8f4f5317d2e81da4d2764071333a9e4dec3380fdb40ef5a6f",
+      "bytes": 3715
+    },
+    "India_91379": {
+      "filename": "India_91379_JRCWaterHand.tif",
+      "sha256": "53791e4f50328eeb5c97a67175564ab194bcfa4ee5d13759da7ea242c90f88f7",
+      "bytes": 1092
+    },
+    "India_943439": {
+      "filename": "India_943439_JRCWaterHand.tif",
+      "sha256": "4f2acd34e6d2e09c720ac8ea8b35c1fa6dd2fec87751b6759d83f89cf6cdba70",
+      "bytes": 1491
+    },
+    "India_952728": {
+      "filename": "India_952728_JRCWaterHand.tif",
+      "sha256": "c20e0889f3edb3d781758542bbab6a896ebfd5c80875ba3303f1ce17d33ea32e",
+      "bytes": 954
+    },
+    "India_956930": {
+      "filename": "India_956930_JRCWaterHand.tif",
+      "sha256": "08036f50daa8dffd60e9818fef8806d59839079b5732a298b516e7e06822f33e",
+      "bytes": 1383
+    },
+    "India_979278": {
+      "filename": "India_979278_JRCWaterHand.tif",
+      "sha256": "68e86d6098e4073b0b8e0bad76baf391537a5e9269849190aa93fccf8ea1086b",
+      "bytes": 1580
+    },
+    "India_981708": {
+      "filename": "India_981708_JRCWaterHand.tif",
+      "sha256": "fc787fee6098b60f140fd1ecd52862dfe8012b33a35eecc915708fb89365d705",
+      "bytes": 835
+    },
+    "Mekong_1111068": {
+      "filename": "Mekong_1111068_JRCWaterHand.tif",
+      "sha256": "9febe889122ba34f6efe815f7f8215726d83cc5cb56555145fa5609a96b80221",
+      "bytes": 835
+    },
+    "Mekong_1149855": {
+      "filename": "Mekong_1149855_JRCWaterHand.tif",
+      "sha256": "d1a7c67c7295881ab0b9ba1aed773c270b7de98f5e6e5fd395317f53fd9a8fd4",
+      "bytes": 848
+    },
+    "Mekong_1191208": {
+      "filename": "Mekong_1191208_JRCWaterHand.tif",
+      "sha256": "8a4c238fa9340f332aa11d617966ce1a414c68abf0999c0f4ef3e7ab727ae035",
+      "bytes": 1428
+    },
+    "Mekong_119477": {
+      "filename": "Mekong_119477_JRCWaterHand.tif",
+      "sha256": "8bd850caba8ba9d285b53430ec2ead4cb0900ef49801b7527d6b1d27abdea97d",
+      "bytes": 835
+    },
+    "Mekong_1248200": {
+      "filename": "Mekong_1248200_JRCWaterHand.tif",
+      "sha256": "3b3382b89f8e818e506298e821c558214a5321ed3c74ac9d7732bf01333bc75c",
+      "bytes": 1088
+    },
+    "Mekong_1282475": {
+      "filename": "Mekong_1282475_JRCWaterHand.tif",
+      "sha256": "708fabb4ab2326bed44c45a07657ce8f056ed92bd6f7e070a092f8e22ba915af",
+      "bytes": 835
+    },
+    "Mekong_1395593": {
+      "filename": "Mekong_1395593_JRCWaterHand.tif",
+      "sha256": "ddc53509a82e38e387bad50c5190efa414d48b89a0fcc89da770031c86ff45f8",
+      "bytes": 835
+    },
+    "Mekong_1396181": {
+      "filename": "Mekong_1396181_JRCWaterHand.tif",
+      "sha256": "94e06ca3d3e1230c563ee3332358e8b6bcf436b3cca0173b918207961810d1ce",
+      "bytes": 1107
+    },
+    "Mekong_1413877": {
+      "filename": "Mekong_1413877_JRCWaterHand.tif",
+      "sha256": "6423a450bb7c7dc65bd5be1ad1e42d9686b52dee52ac4a318c1512bae9197465",
+      "bytes": 835
+    },
+    "Mekong_1439641": {
+      "filename": "Mekong_1439641_JRCWaterHand.tif",
+      "sha256": "f3abf836b90226c21c7a2663a563fc807f6344823b8c2c985ddc71131a8a8958",
+      "bytes": 1802
+    },
+    "Mekong_1443339": {
+      "filename": "Mekong_1443339_JRCWaterHand.tif",
+      "sha256": "852a1f4fbc7731db8dda26821bf9ae3c26fe5bc40253deedfc0d9dcbdff7ac24",
+      "bytes": 1202
+    },
+    "Mekong_16233": {
+      "filename": "Mekong_16233_JRCWaterHand.tif",
+      "sha256": "c3ee526e74e46f8802083870638ad1e487f2e04ad55eb3ea73a4ebda2b22647d",
+      "bytes": 855
+    },
+    "Mekong_213094": {
+      "filename": "Mekong_213094_JRCWaterHand.tif",
+      "sha256": "be04ec7c28a8db679a036252f445db20a60d8bf3df6a8d96db84844b6bdc7781",
+      "bytes": 835
+    },
+    "Mekong_221789": {
+      "filename": "Mekong_221789_JRCWaterHand.tif",
+      "sha256": "9a82fee6afedca104ab77fafccfcc92d5d6ffe35c98cfc7f6670b0e534424dbf",
+      "bytes": 835
+    },
+    "Mekong_254910": {
+      "filename": "Mekong_254910_JRCWaterHand.tif",
+      "sha256": "18145dea42b6ac37ab572b9b041cdd35a2da9d08cbf5affa663c037c2f9b2bdb",
+      "bytes": 835
+    },
+    "Mekong_269835": {
+      "filename": "Mekong_269835_JRCWaterHand.tif",
+      "sha256": "115022921eecded281cc3c215820f5ce4955a1d0992a200ec688aa1ba841ac23",
+      "bytes": 835
+    },
+    "Mekong_293769": {
+      "filename": "Mekong_293769_JRCWaterHand.tif",
+      "sha256": "744acc6b34f4c0cd9eff17f5d1b6a4335e4eeea3557e6917509334364af60071",
+      "bytes": 1617
+    },
+    "Mekong_333434": {
+      "filename": "Mekong_333434_JRCWaterHand.tif",
+      "sha256": "385d1da22d0bbda33c12b6c198f6d6a8c3d8f092b2dc67e4c0735e6b9068a3a6",
+      "bytes": 857
+    },
+    "Mekong_342411": {
+      "filename": "Mekong_342411_JRCWaterHand.tif",
+      "sha256": "bf5abf0d18d4899683a12c7998c604ab1a4fe976d2e8fae6d0002d70c0fc0521",
+      "bytes": 835
+    },
+    "Mekong_382276": {
+      "filename": "Mekong_382276_JRCWaterHand.tif",
+      "sha256": "746ac7655b9d843dfc8a550719a884700090de1e12188431bb4ff607b21dad7c",
+      "bytes": 835
+    },
+    "Mekong_424793": {
+      "filename": "Mekong_424793_JRCWaterHand.tif",
+      "sha256": "f70c5c87711e23069095e47e3e47f82aa93f4fb8899543a290b698861c36fdf3",
+      "bytes": 835
+    },
+    "Mekong_45934": {
+      "filename": "Mekong_45934_JRCWaterHand.tif",
+      "sha256": "7f29691ec7988ab8463fc2c85397ef5e26838028a508bf9eea5e72157767c674",
+      "bytes": 835
+    },
+    "Mekong_474783": {
+      "filename": "Mekong_474783_JRCWaterHand.tif",
+      "sha256": "dcf36f895bd9fec457641e6482d88c0a5c174b9e652b14131b901108f41d9240",
+      "bytes": 835
+    },
+    "Mekong_52610": {
+      "filename": "Mekong_52610_JRCWaterHand.tif",
+      "sha256": "3eb1ef3c925caada73580fa478312086a6cf877221b1c42db37fa4c8dd6c7295",
+      "bytes": 1453
+    },
+    "Mekong_596495": {
+      "filename": "Mekong_596495_JRCWaterHand.tif",
+      "sha256": "7ecc49924334a97a6a20d98218eb923995f3c81c52dc28b7b5617689fba08d1f",
+      "bytes": 4564
+    },
+    "Mekong_774566": {
+      "filename": "Mekong_774566_JRCWaterHand.tif",
+      "sha256": "4c0fed816e059d9a0fb3b189729d12957ffa69267c5fa8cb7db7edf160a6cf11",
+      "bytes": 4520
+    },
+    "Mekong_846007": {
+      "filename": "Mekong_846007_JRCWaterHand.tif",
+      "sha256": "4b63febb56261ec03dbc690b47baf9c0b7b2ff46c699e9ac6461ed5a8bdafdbc",
+      "bytes": 835
+    },
+    "Mekong_922373": {
+      "filename": "Mekong_922373_JRCWaterHand.tif",
+      "sha256": "e74ffc65678de86e2b946cebc6251dabb25d0c12384adb041042e818b7312ef7",
+      "bytes": 886
+    },
+    "Mekong_977338": {
+      "filename": "Mekong_977338_JRCWaterHand.tif",
+      "sha256": "f3732e4b2d840d905b1252fd9aad1f6ae820def0928f09e07e130db4c917b5bd",
+      "bytes": 5408
+    },
+    "Mekong_98310": {
+      "filename": "Mekong_98310_JRCWaterHand.tif",
+      "sha256": "e69b595672ce914940f87e37b23996e95728b86fa572c1bffff118f9377c29a7",
+      "bytes": 4268
+    },
+    "Nigeria_1095404": {
+      "filename": "Nigeria_1095404_JRCWaterHand.tif",
+      "sha256": "687ab3cf00bf463bd8a682c5e46b2718bef04a93a1594494f605f515ee493635",
+      "bytes": 847
+    },
+    "Nigeria_143329": {
+      "filename": "Nigeria_143329_JRCWaterHand.tif",
+      "sha256": "1beb2da7060239db03729d59285d16d82998f48ee2b0131123b5abcf5e4e51e8",
+      "bytes": 835
+    },
+    "Nigeria_22088": {
+      "filename": "Nigeria_22088_JRCWaterHand.tif",
+      "sha256": "871c5895f9b5927b47d1a85560d9a6c553c6ef0eae25e065b4da2ad3b26cef30",
+      "bytes": 835
+    },
+    "Nigeria_225131": {
+      "filename": "Nigeria_225131_JRCWaterHand.tif",
+      "sha256": "a3b402d975472da934609258a979dd43906ac4857a843778916a8e71d4f361e7",
+      "bytes": 835
+    },
+    "Nigeria_31096": {
+      "filename": "Nigeria_31096_JRCWaterHand.tif",
+      "sha256": "51480a836b73c803da6bc2bb184c25c2a30ba4aa021c1b40d3258b2a4ef1dbfa",
+      "bytes": 835
+    },
+    "Nigeria_35845": {
+      "filename": "Nigeria_35845_JRCWaterHand.tif",
+      "sha256": "94558e8b395e231b8b007cc7550eca60de44d5c80cf08b180696d53ac7c8f968",
+      "bytes": 835
+    },
+    "Nigeria_417184": {
+      "filename": "Nigeria_417184_JRCWaterHand.tif",
+      "sha256": "d98d9af9595374a3f68244b38177994412e5aa0346bfd9cb2c23aa6cf0065018",
+      "bytes": 873
+    },
+    "Nigeria_439488": {
+      "filename": "Nigeria_439488_JRCWaterHand.tif",
+      "sha256": "6b401548daa01621b7fec655363915278ef4efc9eb8ff42e012f9f5e26d25c2d",
+      "bytes": 835
+    },
+    "Nigeria_529525": {
+      "filename": "Nigeria_529525_JRCWaterHand.tif",
+      "sha256": "9b15ad1d1edec7b98e6692cc1fe36a19354381d742e72cfad198c32508ecf326",
+      "bytes": 1058
+    },
+    "Nigeria_598959": {
+      "filename": "Nigeria_598959_JRCWaterHand.tif",
+      "sha256": "18f83cf2e21bb95d6796973c72b148acc3ecb6302374412f403214b742f83d23",
+      "bytes": 835
+    },
+    "Nigeria_600295": {
+      "filename": "Nigeria_600295_JRCWaterHand.tif",
+      "sha256": "8d406bee7aec45c59a2e96d3c39e6a04ce4ea4d58c2db4817f990ce634c5e4ad",
+      "bytes": 1942
+    },
+    "Nigeria_707067": {
+      "filename": "Nigeria_707067_JRCWaterHand.tif",
+      "sha256": "bbb73d412e3b8cd5401bef44cc1970a905fb2496ad2f57eee692d4daa1a19649",
+      "bytes": 835
+    },
+    "Nigeria_78061": {
+      "filename": "Nigeria_78061_JRCWaterHand.tif",
+      "sha256": "b93f8d04a5406a05d25f8de11db5ba1318870681fb1790475acbf3f7a49b9361",
+      "bytes": 835
+    },
+    "Nigeria_812045": {
+      "filename": "Nigeria_812045_JRCWaterHand.tif",
+      "sha256": "534feb11b6968c0ba44df3e008bbc5cfa562f27cd6256824bc443be33fdaf97e",
+      "bytes": 1949
+    },
+    "Nigeria_81933": {
+      "filename": "Nigeria_81933_JRCWaterHand.tif",
+      "sha256": "2f301eb8224c7fddb8784bdbfc488055d7792a5cb55413fb6dc4c35b02894470",
+      "bytes": 2550
+    },
+    "Nigeria_820924": {
+      "filename": "Nigeria_820924_JRCWaterHand.tif",
+      "sha256": "f6c78e46217b0dc75ff4e097c3b253abe05f58e5cbc0dc7d7324795a957b92c8",
+      "bytes": 835
+    },
+    "Nigeria_952958": {
+      "filename": "Nigeria_952958_JRCWaterHand.tif",
+      "sha256": "be63f135c271d7fded2dc753b37b02a86f268548f5776b6cbbe36958550392a0",
+      "bytes": 835
+    },
+    "Nigeria_984831": {
+      "filename": "Nigeria_984831_JRCWaterHand.tif",
+      "sha256": "226e1dc6536f16426e81a96854f24c352c705cbc9b16d2df4fc6cf8375bab182",
+      "bytes": 2305
+    },
+    "Pakistan_1027214": {
+      "filename": "Pakistan_1027214_JRCWaterHand.tif",
+      "sha256": "31d9a8bb7588e5ed20dc602df500a85a660d2c8090b921636f07ec6a5a9d306a",
+      "bytes": 2973
+    },
+    "Pakistan_1036366": {
+      "filename": "Pakistan_1036366_JRCWaterHand.tif",
+      "sha256": "4b0d66bd11a3d83b6ae060f69f9afef77c606d8c003fef929fb138e219c17af4",
+      "bytes": 2062
+    },
+    "Pakistan_132143": {
+      "filename": "Pakistan_132143_JRCWaterHand.tif",
+      "sha256": "8f5ae509c87a267efbf8b007031ef516c284f7544fd9ce299b610ce313560b66",
+      "bytes": 835
+    },
+    "Pakistan_167553": {
+      "filename": "Pakistan_167553_JRCWaterHand.tif",
+      "sha256": "2c2e8be6b8551ae5d3469605ebdccc4dd36f66c07de7e97be658b05f09096d38",
+      "bytes": 835
+    },
+    "Pakistan_210595": {
+      "filename": "Pakistan_210595_JRCWaterHand.tif",
+      "sha256": "f032996b5599f4e60a721ddb4f827efcdc7f2924b955a62972c7f60d52a8d65a",
+      "bytes": 835
+    },
+    "Pakistan_211386": {
+      "filename": "Pakistan_211386_JRCWaterHand.tif",
+      "sha256": "80f0fd603b3ce4d167bc4455f9a84056ee75e8149178ec0a0a8881bceae32a4c",
+      "bytes": 835
+    },
+    "Pakistan_246510": {
+      "filename": "Pakistan_246510_JRCWaterHand.tif",
+      "sha256": "28685d03641438ff833ac44e3adc1d86a00661831d6bb300d283bb84c51ba731",
+      "bytes": 1067
+    },
+    "Pakistan_246718": {
+      "filename": "Pakistan_246718_JRCWaterHand.tif",
+      "sha256": "1723d9f15ab6202dc30563f0a64ce94f9fb709ed2fd6bf85836f008e844c7da5",
+      "bytes": 975
+    },
+    "Pakistan_336228": {
+      "filename": "Pakistan_336228_JRCWaterHand.tif",
+      "sha256": "4ef37afc7911be14e285e31d0cff54367f600dff82e4debfa29dd782f1fe690a",
+      "bytes": 835
+    },
+    "Pakistan_35915": {
+      "filename": "Pakistan_35915_JRCWaterHand.tif",
+      "sha256": "bed43beec73bc2c96c7b6a58e2a0a606df65c4c9ad7d85fadf3946e2ac138357",
+      "bytes": 1854
+    },
+    "Pakistan_366265": {
+      "filename": "Pakistan_366265_JRCWaterHand.tif",
+      "sha256": "5f53c75f20170d9cf0098cb215368699dfe5dbf19cb466adea1e93f72d46d90c",
+      "bytes": 835
+    },
+    "Pakistan_401863": {
+      "filename": "Pakistan_401863_JRCWaterHand.tif",
+      "sha256": "9a6fb36dfcad0af6a55e7c66036ac45f81c73b5717a6a31f47f704bbe6254396",
+      "bytes": 1372
+    },
+    "Pakistan_43105": {
+      "filename": "Pakistan_43105_JRCWaterHand.tif",
+      "sha256": "f9569d18f340f8d7b87c292faa1da88d9635adec9cb6f57b09fdc1a7df695cab",
+      "bytes": 835
+    },
+    "Pakistan_474121": {
+      "filename": "Pakistan_474121_JRCWaterHand.tif",
+      "sha256": "f315d0bd4c99a3148003e878f1854e643b3b2808544eeaa826dc647764938920",
+      "bytes": 1512
+    },
+    "Pakistan_528249": {
+      "filename": "Pakistan_528249_JRCWaterHand.tif",
+      "sha256": "ee30c0f4929381c043682552173976787050ef9da9df706b6b681bc5146e5a26",
+      "bytes": 835
+    },
+    "Pakistan_548910": {
+      "filename": "Pakistan_548910_JRCWaterHand.tif",
+      "sha256": "e74924df2c41ebf9d7ecae6cd6583eccd0348161dae29c25429cdcb3363ff40c",
+      "bytes": 835
+    },
+    "Pakistan_65724": {
+      "filename": "Pakistan_65724_JRCWaterHand.tif",
+      "sha256": "9ac273fcbc04e091fdc50afdabbd0edfc0db0d113a8aeb238a5e27598449a848",
+      "bytes": 835
+    },
+    "Pakistan_664885": {
+      "filename": "Pakistan_664885_JRCWaterHand.tif",
+      "sha256": "1c45ac0ee95282540281e99b19c0112ba11f18ef1372a029281e260e0e4868a2",
+      "bytes": 2351
+    },
+    "Pakistan_667363": {
+      "filename": "Pakistan_667363_JRCWaterHand.tif",
+      "sha256": "dcdbc1902d9f2a868009a77a78f4804b117f9584b1202ba571f5968bdb583f79",
+      "bytes": 835
+    },
+    "Pakistan_694942": {
+      "filename": "Pakistan_694942_JRCWaterHand.tif",
+      "sha256": "833843887537a1f9fe169a28b96f771c6ff2e8888f2fef42e2c0c9a5b254a16d",
+      "bytes": 835
+    },
+    "Pakistan_70625": {
+      "filename": "Pakistan_70625_JRCWaterHand.tif",
+      "sha256": "da01aee550337cad7165f4f69a2dbdd581819d8b0ff4bb2df34169d4da22a812",
+      "bytes": 1099
+    },
+    "Pakistan_712873": {
+      "filename": "Pakistan_712873_JRCWaterHand.tif",
+      "sha256": "3b0f54869110ba0389cc435b75eabdb8b7667d9f875699add6b41c49eb20d11d",
+      "bytes": 835
+    },
+    "Pakistan_740461": {
+      "filename": "Pakistan_740461_JRCWaterHand.tif",
+      "sha256": "c3268cf7f86187e2b8758598ec387efac7c94f931e65ec7d47e3c661a16aebdc",
+      "bytes": 835
+    },
+    "Pakistan_760290": {
+      "filename": "Pakistan_760290_JRCWaterHand.tif",
+      "sha256": "d9991249964fa9f1fa604c455ae8cfffd05656915ac9c97ff495834e26fc4864",
+      "bytes": 835
+    },
+    "Pakistan_849790": {
+      "filename": "Pakistan_849790_JRCWaterHand.tif",
+      "sha256": "e2a331a5924663809452174a223785c469115c9a079e0fe4ca13f1c529e1b94c",
+      "bytes": 835
+    },
+    "Pakistan_909806": {
+      "filename": "Pakistan_909806_JRCWaterHand.tif",
+      "sha256": "77f9c6d5b5e07b5557522b822cf2534828e9807081edfce9d42fb49796b3145a",
+      "bytes": 835
+    },
+    "Pakistan_94095": {
+      "filename": "Pakistan_94095_JRCWaterHand.tif",
+      "sha256": "95cfdde0ee79b029680ade7366d9042fdd0e6ca2ca5539efcc9b88772c4bd147",
+      "bytes": 3901
+    },
+    "Pakistan_9684": {
+      "filename": "Pakistan_9684_JRCWaterHand.tif",
+      "sha256": "71a4aaa6179f37e4054337cadf44c3a39ff8280d0fd4bc39f0224b9645ef29c1",
+      "bytes": 835
+    },
+    "Paraguay_1019808": {
+      "filename": "Paraguay_1019808_JRCWaterHand.tif",
+      "sha256": "dc8ea9e42c89c692ba9daaebe90a947e9f8ef0ccff9bbcbc7ec94ae6fe0a225e",
+      "bytes": 835
+    },
+    "Paraguay_1029042": {
+      "filename": "Paraguay_1029042_JRCWaterHand.tif",
+      "sha256": "8564576314b3eedec24f51ee1e537c29b9fc2c4a72268387bcc560d9b486eb95",
+      "bytes": 3427
+    },
+    "Paraguay_1029191": {
+      "filename": "Paraguay_1029191_JRCWaterHand.tif",
+      "sha256": "40832da2b813a7dd3cb9825fc5077da8d256ec1deb6f860719fe91aa6a353ab2",
+      "bytes": 2879
+    },
+    "Paraguay_1056717": {
+      "filename": "Paraguay_1056717_JRCWaterHand.tif",
+      "sha256": "30de61272e6f3a646c7c8f703e5489ab62a33ed3a385930a51092c7dd1676c10",
+      "bytes": 999
+    },
+    "Paraguay_1076204": {
+      "filename": "Paraguay_1076204_JRCWaterHand.tif",
+      "sha256": "72661ff0c788ee9d3b08ed01f970f8376f1957035d036187ef5ef67666355f7a",
+      "bytes": 1062
+    },
+    "Paraguay_11869": {
+      "filename": "Paraguay_11869_JRCWaterHand.tif",
+      "sha256": "b4b10d25b137d3a8250eb8a397d27b05598bc59fa16c941d9d70036629851521",
+      "bytes": 942
+    },
+    "Paraguay_126224": {
+      "filename": "Paraguay_126224_JRCWaterHand.tif",
+      "sha256": "7d99e1bfcab73bd4d0a56091f2173e6c676be9bb1e10b5f55058083fbb97fc09",
+      "bytes": 986
+    },
+    "Paraguay_12870": {
+      "filename": "Paraguay_12870_JRCWaterHand.tif",
+      "sha256": "738b2c864ab7f05f2f40eeeafbd8001887829f655628188aea0edc69d6274e81",
+      "bytes": 835
+    },
+    "Paraguay_148318": {
+      "filename": "Paraguay_148318_JRCWaterHand.tif",
+      "sha256": "dd5255e458bfde4abd65314cd7d7b69099d5ed690a69eef633da908077894ef6",
+      "bytes": 835
+    },
+    "Paraguay_149787": {
+      "filename": "Paraguay_149787_JRCWaterHand.tif",
+      "sha256": "59dd99b91a172a7ca6e78f837c0f93da67687e313e123a615eee1ff5b59d80a6",
+      "bytes": 2564
+    },
+    "Paraguay_149830": {
+      "filename": "Paraguay_149830_JRCWaterHand.tif",
+      "sha256": "153278ec416391561910d68219de55faffe601608f5b52f6f78ca967ee2ff2aa",
+      "bytes": 835
+    },
+    "Paraguay_153941": {
+      "filename": "Paraguay_153941_JRCWaterHand.tif",
+      "sha256": "043777233cabac32ed5a475d5c94abb58ced2238affc72166df91f237eaf70ac",
+      "bytes": 835
+    },
+    "Paraguay_172476": {
+      "filename": "Paraguay_172476_JRCWaterHand.tif",
+      "sha256": "66993ecb6767e5511d35aa598e69073faad54c5f949118019e8a4fb3b5fcd40e",
+      "bytes": 835
+    },
+    "Paraguay_179624": {
+      "filename": "Paraguay_179624_JRCWaterHand.tif",
+      "sha256": "50f582cbf82fc79b128de00cb210f547425704c8ffb06d36649f8246535fb000",
+      "bytes": 835
+    },
+    "Paraguay_191503": {
+      "filename": "Paraguay_191503_JRCWaterHand.tif",
+      "sha256": "be7b8f7b766129ca86e502dad55ea57e541e517c20548ccc126c3b4720d1c126",
+      "bytes": 835
+    },
+    "Paraguay_198534": {
+      "filename": "Paraguay_198534_JRCWaterHand.tif",
+      "sha256": "dab00c4b53fb0e19a373cc97a1c602d8f6e2ef6439556f0b21339cf187084ed6",
+      "bytes": 835
+    },
+    "Paraguay_205585": {
+      "filename": "Paraguay_205585_JRCWaterHand.tif",
+      "sha256": "163a35422a49818082e0319e88304b31c0162d032f8119d072ce24e84bebfac1",
+      "bytes": 835
+    },
+    "Paraguay_212687": {
+      "filename": "Paraguay_212687_JRCWaterHand.tif",
+      "sha256": "ff7bb9938baf44493da2c0d2606c4456e8ca4a6f39911a56470038247b0edfca",
+      "bytes": 835
+    },
+    "Paraguay_215904": {
+      "filename": "Paraguay_215904_JRCWaterHand.tif",
+      "sha256": "3d661fbc5e27a68941c48727ab82fdaaa2d54179e77730c06060a76398a339a1",
+      "bytes": 835
+    },
+    "Paraguay_224845": {
+      "filename": "Paraguay_224845_JRCWaterHand.tif",
+      "sha256": "d6d4148b3f6de16c6a8fb96aa34119ecacad39ddb0203d770e2ff29e079c2130",
+      "bytes": 835
+    },
+    "Paraguay_225187": {
+      "filename": "Paraguay_225187_JRCWaterHand.tif",
+      "sha256": "6f01fa89af6d2df777c53bc59a9b0188a34e2dfd3c3c62fb221386e5ab6805ed",
+      "bytes": 835
+    },
+    "Paraguay_232281": {
+      "filename": "Paraguay_232281_JRCWaterHand.tif",
+      "sha256": "83599f9bad230b35901fbef9080abbde845f943549b11935458481f7e8743c5f",
+      "bytes": 835
+    },
+    "Paraguay_24341": {
+      "filename": "Paraguay_24341_JRCWaterHand.tif",
+      "sha256": "7ee2271d92398fea4af30bf30b213bf7450dfeef57677f7509a6d39ce5e8dc87",
+      "bytes": 2556
+    },
+    "Paraguay_246154": {
+      "filename": "Paraguay_246154_JRCWaterHand.tif",
+      "sha256": "eca7828d89d8de6934578b66795467dbe972d7c68a3a1bd82d755cc868823b61",
+      "bytes": 835
+    },
+    "Paraguay_247656": {
+      "filename": "Paraguay_247656_JRCWaterHand.tif",
+      "sha256": "56673f688c4accda8e42c103bc6737283e423e5ecf0e20e860efe512a0a564c0",
+      "bytes": 1910
+    },
+    "Paraguay_252217": {
+      "filename": "Paraguay_252217_JRCWaterHand.tif",
+      "sha256": "f2307bcd1e1653110b5b9bfd18588632e82c9eb91596e25ca81ffe13c20cf28c",
+      "bytes": 835
+    },
+    "Paraguay_271769": {
+      "filename": "Paraguay_271769_JRCWaterHand.tif",
+      "sha256": "bfa59140e671f092efb4e45622e53344c694748a84ba0e72a9258b6fe53c99da",
+      "bytes": 885
+    },
+    "Paraguay_280900": {
+      "filename": "Paraguay_280900_JRCWaterHand.tif",
+      "sha256": "e03630e664c0c41b72a21661231d03105a3f517e7694b180763a1067565fbeac",
+      "bytes": 951
+    },
+    "Paraguay_284928": {
+      "filename": "Paraguay_284928_JRCWaterHand.tif",
+      "sha256": "03107a8d34be1c927b15539b44b28e7ddc434d4ed5133fc74251b253cc6a9352",
+      "bytes": 835
+    },
+    "Paraguay_305760": {
+      "filename": "Paraguay_305760_JRCWaterHand.tif",
+      "sha256": "f75c9bd66658fa9b9f571f8f0de91332812b30bd5db0f2967fff26826a695f87",
+      "bytes": 835
+    },
+    "Paraguay_339807": {
+      "filename": "Paraguay_339807_JRCWaterHand.tif",
+      "sha256": "128dd81be1f2a8976eb728cc4516bf5d0f6361b8028fec1664149f6a7e8797d9",
+      "bytes": 2801
+    },
+    "Paraguay_34417": {
+      "filename": "Paraguay_34417_JRCWaterHand.tif",
+      "sha256": "86b8c24d64dbba59d49d114dc37c90fa649bb45c66b255839d8ac87854976838",
+      "bytes": 835
+    },
+    "Paraguay_36015": {
+      "filename": "Paraguay_36015_JRCWaterHand.tif",
+      "sha256": "0063945bf26e84ece107253a56e7f6194bc22d8ffbef86a6629e7368e5a5fecc",
+      "bytes": 835
+    },
+    "Paraguay_36146": {
+      "filename": "Paraguay_36146_JRCWaterHand.tif",
+      "sha256": "46d0aaa00ee294c257ebe2137aa244d3fc3b3105bb4ae58fcd4aa0c0bd0ef2c4",
+      "bytes": 835
+    },
+    "Paraguay_403081": {
+      "filename": "Paraguay_403081_JRCWaterHand.tif",
+      "sha256": "a51b850af607ab70b6b6055734ad6625be841cc56dd1701c8dcb152edac1af80",
+      "bytes": 835
+    },
+    "Paraguay_40936": {
+      "filename": "Paraguay_40936_JRCWaterHand.tif",
+      "sha256": "718ad2fa43e035a86334d59c25aee1f6b29149861c01121451708c06b664b260",
+      "bytes": 835
+    },
+    "Paraguay_44682": {
+      "filename": "Paraguay_44682_JRCWaterHand.tif",
+      "sha256": "4a235bf3856dc98f5b6e190b3ad458c58a3ce10a01849b4dc85948aa74bce392",
+      "bytes": 835
+    },
+    "Paraguay_470303": {
+      "filename": "Paraguay_470303_JRCWaterHand.tif",
+      "sha256": "ab84f6028f5912a4e3e7e0fda35c60ca4b318d6839c896e288c9b9a7049fc089",
+      "bytes": 835
+    },
+    "Paraguay_482517": {
+      "filename": "Paraguay_482517_JRCWaterHand.tif",
+      "sha256": "69b0717a53bbcc9da5ca17fe2e9e64389d1ca7ff8945411dd47021c06989406b",
+      "bytes": 2406
+    },
+    "Paraguay_48673": {
+      "filename": "Paraguay_48673_JRCWaterHand.tif",
+      "sha256": "ac8e1cde8d13f3f39ebdfc44faaec1fc04f29a922da19e72577194f3d69e28b3",
+      "bytes": 835
+    },
+    "Paraguay_511199": {
+      "filename": "Paraguay_511199_JRCWaterHand.tif",
+      "sha256": "439b44e2428a9fb2bcb693b2f6bd84ef1fdf2e1890e8e3d1ada8317a5ad26485",
+      "bytes": 835
+    },
+    "Paraguay_54421": {
+      "filename": "Paraguay_54421_JRCWaterHand.tif",
+      "sha256": "af6157ea37431806d4c4d11eb72b4b41c10d34db02aa7b7b85898e0121c8260d",
+      "bytes": 835
+    },
+    "Paraguay_581976": {
+      "filename": "Paraguay_581976_JRCWaterHand.tif",
+      "sha256": "e7a399a0653f6c4519a6a2397baf900ed8bb64f2ad0159f58dad261bdd30df88",
+      "bytes": 835
+    },
+    "Paraguay_59731": {
+      "filename": "Paraguay_59731_JRCWaterHand.tif",
+      "sha256": "f437f6cccc55f82ee0ae525e18a0b79edf73057461b102ea1bad3678f89b0568",
+      "bytes": 1063
+    },
+    "Paraguay_605682": {
+      "filename": "Paraguay_605682_JRCWaterHand.tif",
+      "sha256": "6258bf135ef5190b64b39b9c646a2aa71129f115932e6b310de47f51854b2114",
+      "bytes": 835
+    },
+    "Paraguay_62897": {
+      "filename": "Paraguay_62897_JRCWaterHand.tif",
+      "sha256": "1a9bcb1213156ad9e6ac32ddf51beedad299c3c401716e16853b9a691a35fe9e",
+      "bytes": 835
+    },
+    "Paraguay_648632": {
+      "filename": "Paraguay_648632_JRCWaterHand.tif",
+      "sha256": "a9599c14abe50c44f0b9e5787938082d55b8bbb8d8f685a5879dc74d71e7cca5",
+      "bytes": 835
+    },
+    "Paraguay_651904": {
+      "filename": "Paraguay_651904_JRCWaterHand.tif",
+      "sha256": "5bba1c6e9eeefef1e625332915ec9917988bf9f56d531a5f69d69291025f3348",
+      "bytes": 1613
+    },
+    "Paraguay_657443": {
+      "filename": "Paraguay_657443_JRCWaterHand.tif",
+      "sha256": "b7dc3905eef832d33dfb5d000a0e702c925f05e147b1a5821eb1123776a9466a",
+      "bytes": 3107
+    },
+    "Paraguay_683296": {
+      "filename": "Paraguay_683296_JRCWaterHand.tif",
+      "sha256": "564a1ece00f5987762ab34a731203996e5ff2300526e8c66797d6b62977a263f",
+      "bytes": 954
+    },
+    "Paraguay_721886": {
+      "filename": "Paraguay_721886_JRCWaterHand.tif",
+      "sha256": "f76f8b8be44e42ed1cac7e1f95858ebf6292c65ee49c60fab6ff266439202677",
+      "bytes": 835
+    },
+    "Paraguay_76868": {
+      "filename": "Paraguay_76868_JRCWaterHand.tif",
+      "sha256": "4760251c0dc75fad5819589b782df2f88a02a6d7d41e5ba9ef96c9b551883f20",
+      "bytes": 1530
+    },
+    "Paraguay_7894": {
+      "filename": "Paraguay_7894_JRCWaterHand.tif",
+      "sha256": "95da100628cd095322c03e26855772a4a668039319c74e6a899771422a74608c",
+      "bytes": 835
+    },
+    "Paraguay_790830": {
+      "filename": "Paraguay_790830_JRCWaterHand.tif",
+      "sha256": "a0c904887a30d08c667f687f555913044c5acaea3ae9c9ef2fd5fb911097119a",
+      "bytes": 2235
+    },
+    "Paraguay_791364": {
+      "filename": "Paraguay_791364_JRCWaterHand.tif",
+      "sha256": "c61989d3f821a78bcaca7b2e32907e992f40678e6d5d9fa85c07f97bb59d3808",
+      "bytes": 835
+    },
+    "Paraguay_792268": {
+      "filename": "Paraguay_792268_JRCWaterHand.tif",
+      "sha256": "4060af2fd59fd4b5b55604f1cf6cf78b80ff6ef548535130a415178288341456",
+      "bytes": 986
+    },
+    "Paraguay_795075": {
+      "filename": "Paraguay_795075_JRCWaterHand.tif",
+      "sha256": "21bade83b4728a38fe7f257cbcbd6ecc30db76c1b83e62deacbd76a3377caaf6",
+      "bytes": 897
+    },
+    "Paraguay_80102": {
+      "filename": "Paraguay_80102_JRCWaterHand.tif",
+      "sha256": "079f0ed05f68de8fc69c047d2d641a2d51b9526b2e9954e84bc1a80c125208b8",
+      "bytes": 835
+    },
+    "Paraguay_822142": {
+      "filename": "Paraguay_822142_JRCWaterHand.tif",
+      "sha256": "65d931bfcfc7db580e513cfc63d3ad956b5a8079f725c92abc480f9a0e61a999",
+      "bytes": 3431
+    },
+    "Paraguay_868895": {
+      "filename": "Paraguay_868895_JRCWaterHand.tif",
+      "sha256": "863ed76939869cbe13eb6b04da940dc43a21bcd1ed789b931a05b7844ee94336",
+      "bytes": 1489
+    },
+    "Paraguay_892933": {
+      "filename": "Paraguay_892933_JRCWaterHand.tif",
+      "sha256": "1f7b491bfd3df2adc8aa1cddae890fdd3d60d600a6de75e643ee8e9e341928b3",
+      "bytes": 835
+    },
+    "Paraguay_896458": {
+      "filename": "Paraguay_896458_JRCWaterHand.tif",
+      "sha256": "7eb4946c0667a91924942f2ec04df6fc988f1f6b2e6fd9f39678b540314c5f2f",
+      "bytes": 2339
+    },
+    "Paraguay_913449": {
+      "filename": "Paraguay_913449_JRCWaterHand.tif",
+      "sha256": "a3193debe71709c43f5c52c9d9c9a77a6c4c75a1c128da712d2f753d09966b63",
+      "bytes": 853
+    },
+    "Paraguay_921838": {
+      "filename": "Paraguay_921838_JRCWaterHand.tif",
+      "sha256": "14a6cf75d186f80a693f50b4029fc5924f5e1ed874ad08f1ebfee8aa73ceb336",
+      "bytes": 835
+    },
+    "Paraguay_934240": {
+      "filename": "Paraguay_934240_JRCWaterHand.tif",
+      "sha256": "8d4317fe8e4c836baed69e9eb9bcbd94cc478ac36e75550adc277b5d9a62d691",
+      "bytes": 835
+    },
+    "Paraguay_989230": {
+      "filename": "Paraguay_989230_JRCWaterHand.tif",
+      "sha256": "95bc912c36a2dbb9ac890ff70ca66f658454e4f7ccb7fda2630e570036ce99c8",
+      "bytes": 3295
+    },
+    "Paraguay_997480": {
+      "filename": "Paraguay_997480_JRCWaterHand.tif",
+      "sha256": "ca9a068e9ab162835a89bf1618a40fcc9dc3021dd7b4a9dd6b34b1897f547e03",
+      "bytes": 835
+    },
+    "Somalia_1068756": {
+      "filename": "Somalia_1068756_JRCWaterHand.tif",
+      "sha256": "97320fafcb643ac0bad20d53d72818b0c816f19d67d55e103fc2d26e05c5d21d",
+      "bytes": 835
+    },
+    "Somalia_1087508": {
+      "filename": "Somalia_1087508_JRCWaterHand.tif",
+      "sha256": "58713d384c231f8b267e03e6a760141803f89e785ad57b1604859ff31bf57c45",
+      "bytes": 835
+    },
+    "Somalia_12849": {
+      "filename": "Somalia_12849_JRCWaterHand.tif",
+      "sha256": "a9f9e5fea81d90cfae6adfc86ea07cf2e04b2b1597add0768f18859dcd28600d",
+      "bytes": 835
+    },
+    "Somalia_166342": {
+      "filename": "Somalia_166342_JRCWaterHand.tif",
+      "sha256": "9e9a1b205005d570d927431765e9387187e0d537921d68a2c9113a0040741c45",
+      "bytes": 835
+    },
+    "Somalia_167787": {
+      "filename": "Somalia_167787_JRCWaterHand.tif",
+      "sha256": "6596c32f41b67be3e336a648b2faf519616d13f45c8537f373a9807e92fff2eb",
+      "bytes": 835
+    },
+    "Somalia_195014": {
+      "filename": "Somalia_195014_JRCWaterHand.tif",
+      "sha256": "01d37fe58fa9067b2e0dfbc6122ee100bd85f7cc283df1a2790498408193e53d",
+      "bytes": 835
+    },
+    "Somalia_205466": {
+      "filename": "Somalia_205466_JRCWaterHand.tif",
+      "sha256": "be6ae8988c0b9caae64fb1501b931c84cec3911f72693cae349b01327c002675",
+      "bytes": 835
+    },
+    "Somalia_230192": {
+      "filename": "Somalia_230192_JRCWaterHand.tif",
+      "sha256": "38399da7c10c451d8e5e9c252afdc1ee529848118cc8b4714bd148d52bbcd9f6",
+      "bytes": 835
+    },
+    "Somalia_256539": {
+      "filename": "Somalia_256539_JRCWaterHand.tif",
+      "sha256": "378efce8f8b523c6ec1d72e846df7ed3614b77ead464ef86108a28d4861f9441",
+      "bytes": 835
+    },
+    "Somalia_295782": {
+      "filename": "Somalia_295782_JRCWaterHand.tif",
+      "sha256": "7659456f3bbcaa0ade45413919d7553dd661cc083aa8fe1bcb50749d5ecabe3a",
+      "bytes": 835
+    },
+    "Somalia_322855": {
+      "filename": "Somalia_322855_JRCWaterHand.tif",
+      "sha256": "070d7a9a214044b47705d86c8c55611e581dff1362b6996859a25b73202bd7e5",
+      "bytes": 835
+    },
+    "Somalia_32375": {
+      "filename": "Somalia_32375_JRCWaterHand.tif",
+      "sha256": "a5486b8a0eacc314a6a01f9e5b13d2d93c8be582b81bc2a38afc665de306b2a2",
+      "bytes": 835
+    },
+    "Somalia_371421": {
+      "filename": "Somalia_371421_JRCWaterHand.tif",
+      "sha256": "98c26e750772ec7fe2f6568b1f4dc8e6a04ec8c78fe209c51de8f7f96c318357",
+      "bytes": 835
+    },
+    "Somalia_60129": {
+      "filename": "Somalia_60129_JRCWaterHand.tif",
+      "sha256": "41b075ed0fc6f4351f0631ac22e6b9b1b2b99ce07a6a07f1b3cb9724df18d5c8",
+      "bytes": 835
+    },
+    "Somalia_61368": {
+      "filename": "Somalia_61368_JRCWaterHand.tif",
+      "sha256": "a9304ce219bf0c83f17e2130c6a11306de819e97e1d0e72a82d77039eff0c544",
+      "bytes": 835
+    },
+    "Somalia_626316": {
+      "filename": "Somalia_626316_JRCWaterHand.tif",
+      "sha256": "118315c5453f27ef391abd433500ea24c42c2264cca0a1b6d4effed962e8be5a",
+      "bytes": 835
+    },
+    "Somalia_649376": {
+      "filename": "Somalia_649376_JRCWaterHand.tif",
+      "sha256": "1cf10b0a17a1916fb173509cf9452ffe179f3d454d3f5d08e35c1b051a3d40bc",
+      "bytes": 835
+    },
+    "Somalia_685158": {
+      "filename": "Somalia_685158_JRCWaterHand.tif",
+      "sha256": "b7a54018d6a604868b9d2d03f82a2ade750216efbc575cd1c8466810de9bea1c",
+      "bytes": 835
+    },
+    "Somalia_699062": {
+      "filename": "Somalia_699062_JRCWaterHand.tif",
+      "sha256": "b29322bd8efb6094b08e7477762b4250b817931169e67dc9c32d5475cf267e43",
+      "bytes": 835
+    },
+    "Somalia_7931": {
+      "filename": "Somalia_7931_JRCWaterHand.tif",
+      "sha256": "7df62bd4faa4383a402a3d33c4a2d5fa32877436686ad56491a44759d6f253e5",
+      "bytes": 835
+    },
+    "Somalia_886726": {
+      "filename": "Somalia_886726_JRCWaterHand.tif",
+      "sha256": "64074f9cb1c367a0bc705550fb859eb855dbc9c0e14754e9a597f6ef2382e594",
+      "bytes": 835
+    },
+    "Somalia_93023": {
+      "filename": "Somalia_93023_JRCWaterHand.tif",
+      "sha256": "52b8e28fc8cce8b2031135d5aacc0b8b4988f63d5bdf412065827aaec6b47ec6",
+      "bytes": 835
+    },
+    "Somalia_94102": {
+      "filename": "Somalia_94102_JRCWaterHand.tif",
+      "sha256": "d8f07fda6fa72405362333671727661be77d7ec20b31d5b571d1227a853cf162",
+      "bytes": 835
+    },
+    "Somalia_970508": {
+      "filename": "Somalia_970508_JRCWaterHand.tif",
+      "sha256": "770501c916e87b01bb8ee358fe34a89cf968cee432f37016bc80ec1a44005aea",
+      "bytes": 835
+    },
+    "Somalia_989553": {
+      "filename": "Somalia_989553_JRCWaterHand.tif",
+      "sha256": "98bf89422744a28e79dd41aa5567fafe94a55fb43b105ebc596fce350b11ebae",
+      "bytes": 835
+    },
+    "Somalia_992457": {
+      "filename": "Somalia_992457_JRCWaterHand.tif",
+      "sha256": "efab71cfbf59eea84027557b869483e2604b65b1474af171d69f7f770c1e0413",
+      "bytes": 835
+    },
+    "Spain_1167260": {
+      "filename": "Spain_1167260_JRCWaterHand.tif",
+      "sha256": "3fd790d48398e787134bcdedd04660150183c3566458357b5e765fc655c6ea77",
+      "bytes": 835
+    },
+    "Spain_1199913": {
+      "filename": "Spain_1199913_JRCWaterHand.tif",
+      "sha256": "2cf1c4c581d1ccb41b039de15b82f994a7ac88d022a407b44204e80e4a493b24",
+      "bytes": 1031
+    },
+    "Spain_2472849": {
+      "filename": "Spain_2472849_JRCWaterHand.tif",
+      "sha256": "0780f3db808de92020ea0603dfabc871c5de11ccbd969a7fbb710ba3ed9c1d79",
+      "bytes": 835
+    },
+    "Spain_2523247": {
+      "filename": "Spain_2523247_JRCWaterHand.tif",
+      "sha256": "5753d33e043c2506e9f2b1dee9fa75b1ac03d26960264f6d2d590e37f45438c0",
+      "bytes": 848
+    },
+    "Spain_2594119": {
+      "filename": "Spain_2594119_JRCWaterHand.tif",
+      "sha256": "d666ce6c42a9eab29a8be7a1dbcd0a9b2f14012dcb46efee3f73fbe32b58e8e6",
+      "bytes": 1050
+    },
+    "Spain_2938657": {
+      "filename": "Spain_2938657_JRCWaterHand.tif",
+      "sha256": "8851fde4dd6af363afea8cb40cb2d660a3b28e6182770827499abeb6f3acc93b",
+      "bytes": 1102
+    },
+    "Spain_3285448": {
+      "filename": "Spain_3285448_JRCWaterHand.tif",
+      "sha256": "167f14469cb38b442301f02e229b0be093ff312120c8fb34dd2fdb11d441b77a",
+      "bytes": 2413
+    },
+    "Spain_337094": {
+      "filename": "Spain_337094_JRCWaterHand.tif",
+      "sha256": "e29310add0cdad2e879ffcfa619fab8eeab7a2b425ec930830c218d3e7b30a72",
+      "bytes": 916
+    },
+    "Spain_4282030": {
+      "filename": "Spain_4282030_JRCWaterHand.tif",
+      "sha256": "21ed69db1b08f1724fd2c5d0d2cd0e28afa870ea28f8bb6e0900e8fa37f71bd7",
+      "bytes": 1699
+    },
+    "Spain_4915752": {
+      "filename": "Spain_4915752_JRCWaterHand.tif",
+      "sha256": "66643f1394c72a1365420c1e25305d7d34432fe2f5e91f9ed2e3a90e3ad3fb5a",
+      "bytes": 1177
+    },
+    "Spain_5650136": {
+      "filename": "Spain_5650136_JRCWaterHand.tif",
+      "sha256": "d41c131615e8452a365978638aff113e780c45c0d629789636233fe0349959eb",
+      "bytes": 4219
+    },
+    "Spain_5678382": {
+      "filename": "Spain_5678382_JRCWaterHand.tif",
+      "sha256": "4ce54a4febdd1b9ad1a6d863b3f661ac5a473a3bcb0ec0800927f67fef38d2ef",
+      "bytes": 835
+    },
+    "Spain_5816638": {
+      "filename": "Spain_5816638_JRCWaterHand.tif",
+      "sha256": "3cec4a69e9de049aaebdd034b6449f372e04f7a8d46b300ad97878253fa65f8b",
+      "bytes": 835
+    },
+    "Spain_5923267": {
+      "filename": "Spain_5923267_JRCWaterHand.tif",
+      "sha256": "4ce1068f47604f9e8c060105f42e146ffe12b8442f61a9667e7bca798957c7a7",
+      "bytes": 3628
+    },
+    "Spain_6095801": {
+      "filename": "Spain_6095801_JRCWaterHand.tif",
+      "sha256": "8c07d4c5982f39876ece7b2f0a566cc36e2df61511d4c3e473f47a830de2a09d",
+      "bytes": 835
+    },
+    "Spain_6199994": {
+      "filename": "Spain_6199994_JRCWaterHand.tif",
+      "sha256": "ef71dd879da3bc4bbcf7d421723818379a25d66ad6502cb59a7497981be783a4",
+      "bytes": 835
+    },
+    "Spain_6537196": {
+      "filename": "Spain_6537196_JRCWaterHand.tif",
+      "sha256": "5ac30b349f5fc71c001c05a6fe338750cf5a99ea18d3761e519a06146d252a2a",
+      "bytes": 903
+    },
+    "Spain_6860600": {
+      "filename": "Spain_6860600_JRCWaterHand.tif",
+      "sha256": "65bff536241aea44a0beff71702adb1e3247ff477763250bf4481b16ffa488a7",
+      "bytes": 835
+    },
+    "Spain_716716": {
+      "filename": "Spain_716716_JRCWaterHand.tif",
+      "sha256": "0765bc4784d4444089dee24c25e168d1d567d7519ab25337bbd6d848d9c12a14",
+      "bytes": 913
+    },
+    "Spain_7370579": {
+      "filename": "Spain_7370579_JRCWaterHand.tif",
+      "sha256": "53cfd4eb3b67b555cd0c54f69de6d7364eeb3c39565b83aa6d1d3db7853d44a6",
+      "bytes": 835
+    },
+    "Spain_7387658": {
+      "filename": "Spain_7387658_JRCWaterHand.tif",
+      "sha256": "0c9da27d202226a27bc24d9e0dfae0f7c9b0108f91a4d56f28d60006d748153e",
+      "bytes": 1909
+    },
+    "Spain_7558720": {
+      "filename": "Spain_7558720_JRCWaterHand.tif",
+      "sha256": "397b9e2006efcec3573b339f9c989fc1e36fd15daa235c7c16e0422c18367a02",
+      "bytes": 835
+    },
+    "Spain_7604243": {
+      "filename": "Spain_7604243_JRCWaterHand.tif",
+      "sha256": "fb253afb1d71746f25805a645232b1b995610824fe99e5019f5aba75d82ea708",
+      "bytes": 1401
+    },
+    "Spain_7786924": {
+      "filename": "Spain_7786924_JRCWaterHand.tif",
+      "sha256": "ce538695bfc761c03af35e6ed25375137c3df91749b6a8416828e8c5af5a55ef",
+      "bytes": 922
+    },
+    "Spain_7856615": {
+      "filename": "Spain_7856615_JRCWaterHand.tif",
+      "sha256": "57f0d22ceceb673d23b286a9c9d901c2d659e91525f624e6509d954920510332",
+      "bytes": 835
+    },
+    "Spain_8104659": {
+      "filename": "Spain_8104659_JRCWaterHand.tif",
+      "sha256": "43b49d0eaaa2d7873d2547969c9107f17245a3335d76b3e21ee49ca437d03277",
+      "bytes": 835
+    },
+    "Spain_8154154": {
+      "filename": "Spain_8154154_JRCWaterHand.tif",
+      "sha256": "c274382abb010169b09492d8d79c4b377bafcd2cfeb2a261704d27f76dce583a",
+      "bytes": 874
+    },
+    "Spain_8199661": {
+      "filename": "Spain_8199661_JRCWaterHand.tif",
+      "sha256": "6994980beccb70d92afd81cb8262b12a5702f68bfb70761a634e03534411a867",
+      "bytes": 905
+    },
+    "Spain_8372658": {
+      "filename": "Spain_8372658_JRCWaterHand.tif",
+      "sha256": "51d48bceb5b7eaf15e5c50d514b488e247bcc4cba356f9b3859a3717e7b4b00d",
+      "bytes": 835
+    },
+    "Spain_8565131": {
+      "filename": "Spain_8565131_JRCWaterHand.tif",
+      "sha256": "1c81fc1fe1190097c7422c7dda397257763d46abbd4dc2e6cf6a98b6ee2083cd",
+      "bytes": 971
+    },
+    "Sri-Lanka_101973": {
+      "filename": "Sri-Lanka_101973_JRCWaterHand.tif",
+      "sha256": "897154b9f7002fe0a64018837d34cdb6dbcf892996bc61feff7ef14913e1bd4e",
+      "bytes": 883
+    },
+    "Sri-Lanka_1038087": {
+      "filename": "Sri-Lanka_1038087_JRCWaterHand.tif",
+      "sha256": "c33af5d0e193ac4069d37cc02d5cc66111d5fe14eec669716708fcba226e0faf",
+      "bytes": 1028
+    },
+    "Sri-Lanka_1049830": {
+      "filename": "Sri-Lanka_1049830_JRCWaterHand.tif",
+      "sha256": "400d685417d31518b329dcac059ca0114b10d79d7e22337dda303bf6d66a97ce",
+      "bytes": 1419
+    },
+    "Sri-Lanka_117737": {
+      "filename": "Sri-Lanka_117737_JRCWaterHand.tif",
+      "sha256": "fd82ff961ffb55bb5a5d91c5c306ac6710ef9d1b6a7f02f58d4e79c191af39d8",
+      "bytes": 913
+    },
+    "Sri-Lanka_120804": {
+      "filename": "Sri-Lanka_120804_JRCWaterHand.tif",
+      "sha256": "e4eff56db54a0b3551ead13a8990d2ba4597b4877246478303113714d4406e09",
+      "bytes": 969
+    },
+    "Sri-Lanka_132922": {
+      "filename": "Sri-Lanka_132922_JRCWaterHand.tif",
+      "sha256": "aab2b566ec6a497faea2e8faeeca63e97124d3ecbdf5ce162e98efce8f6d8a6d",
+      "bytes": 888
+    },
+    "Sri-Lanka_135713": {
+      "filename": "Sri-Lanka_135713_JRCWaterHand.tif",
+      "sha256": "ab5884389c01c31b72f5caa5c12c6bfe52d27c55a598cfebd11e1041829dbb98",
+      "bytes": 847
+    },
+    "Sri-Lanka_14484": {
+      "filename": "Sri-Lanka_14484_JRCWaterHand.tif",
+      "sha256": "21f5127b0cffc65ece19336a063e5bc74d265a2d3db2f234fc5ada93892cf1af",
+      "bytes": 886
+    },
+    "Sri-Lanka_152185": {
+      "filename": "Sri-Lanka_152185_JRCWaterHand.tif",
+      "sha256": "e53f9496a85f8ba2edbdceb3faf2677a687f4da4960080305906524451b54978",
+      "bytes": 835
+    },
+    "Sri-Lanka_163406": {
+      "filename": "Sri-Lanka_163406_JRCWaterHand.tif",
+      "sha256": "1aedcb6e27855ed03bbf080351badb4fd982fe972923f55d782e9a050fd217ab",
+      "bytes": 958
+    },
+    "Sri-Lanka_178753": {
+      "filename": "Sri-Lanka_178753_JRCWaterHand.tif",
+      "sha256": "d2dd0717d425e14badf38232ecbead837e449e9ad6126780e42689472858ce7f",
+      "bytes": 835
+    },
+    "Sri-Lanka_233609": {
+      "filename": "Sri-Lanka_233609_JRCWaterHand.tif",
+      "sha256": "346b31c413798e853f61470393675fb5caf04afe2d75a9e7b40f599935dfd8c0",
+      "bytes": 1070
+    },
+    "Sri-Lanka_236030": {
+      "filename": "Sri-Lanka_236030_JRCWaterHand.tif",
+      "sha256": "1729c1e5bf9178afc875da9a5b3b40b153baaabdf5e98125908389b43c6e113a",
+      "bytes": 965
+    },
+    "Sri-Lanka_236628": {
+      "filename": "Sri-Lanka_236628_JRCWaterHand.tif",
+      "sha256": "d23840b7418edb03c11efac2eefc6640e1582b4e905bb97b58c0c747489f9983",
+      "bytes": 1021
+    },
+    "Sri-Lanka_249079": {
+      "filename": "Sri-Lanka_249079_JRCWaterHand.tif",
+      "sha256": "a1b13ad7f3bc9ac03bc8ea53520b97a4541401a04e8ff7a3cc5a3c3cb7d04b5e",
+      "bytes": 835
+    },
+    "Sri-Lanka_31559": {
+      "filename": "Sri-Lanka_31559_JRCWaterHand.tif",
+      "sha256": "4b94a4fae2c94ee006fcc350af9744d3a1c7d1837bfc6a547a763b79e651d01e",
+      "bytes": 835
+    },
+    "Sri-Lanka_321316": {
+      "filename": "Sri-Lanka_321316_JRCWaterHand.tif",
+      "sha256": "568323c59f9e78baee0dcb2246d7690f9be1d9a881c0f4c892252faae01e0770",
+      "bytes": 2823
+    },
+    "Sri-Lanka_377277": {
+      "filename": "Sri-Lanka_377277_JRCWaterHand.tif",
+      "sha256": "c02002fe8e6202d3051172a2de7ebd133846653d79efa0fd65ec369b6473eaf6",
+      "bytes": 1409
+    },
+    "Sri-Lanka_400518": {
+      "filename": "Sri-Lanka_400518_JRCWaterHand.tif",
+      "sha256": "83bdc7357ffb21333ce78b67f5030b3a4b99b12896bf3e62f6c92ec0b2b990bf",
+      "bytes": 955
+    },
+    "Sri-Lanka_450918": {
+      "filename": "Sri-Lanka_450918_JRCWaterHand.tif",
+      "sha256": "df02a77a21ac1fbc1677ab983879bc88b3c2922272afd6e6629e206579dc4229",
+      "bytes": 835
+    },
+    "Sri-Lanka_49764": {
+      "filename": "Sri-Lanka_49764_JRCWaterHand.tif",
+      "sha256": "f898c475e70392cb867e92a9c0c16d147bb305193dd0944741043b8ae10dd95b",
+      "bytes": 835
+    },
+    "Sri-Lanka_52223": {
+      "filename": "Sri-Lanka_52223_JRCWaterHand.tif",
+      "sha256": "e281d26521005acf6e4661afdb471ed0c817f56272395fd3ad62248d26628043",
+      "bytes": 835
+    },
+    "Sri-Lanka_523539": {
+      "filename": "Sri-Lanka_523539_JRCWaterHand.tif",
+      "sha256": "e2603b7a78c8e8a9150e705b96b623999aa6c6e35e1bb4bf11953dee44ba315c",
+      "bytes": 1356
+    },
+    "Sri-Lanka_534068": {
+      "filename": "Sri-Lanka_534068_JRCWaterHand.tif",
+      "sha256": "4ce7e21e664df9ce4f65320b257f460b1b9da01e52c3817c0c06d48ef499ae8f",
+      "bytes": 1167
+    },
+    "Sri-Lanka_551926": {
+      "filename": "Sri-Lanka_551926_JRCWaterHand.tif",
+      "sha256": "bc8ec4abd659d3ceaaa218f0cacb28079f2197bfd445a9802df1676a2ae3f2ba",
+      "bytes": 1105
+    },
+    "Sri-Lanka_55568": {
+      "filename": "Sri-Lanka_55568_JRCWaterHand.tif",
+      "sha256": "74b86093caee8e38ec6250099ab6797b15f1b9bcb8b7931a555efb866aad1f44",
+      "bytes": 1306
+    },
+    "Sri-Lanka_579082": {
+      "filename": "Sri-Lanka_579082_JRCWaterHand.tif",
+      "sha256": "f0321198fc5a7e8b5508e0b960b7efa9b1ac6b16070516e2a48a99db696013fc",
+      "bytes": 896
+    },
+    "Sri-Lanka_612594": {
+      "filename": "Sri-Lanka_612594_JRCWaterHand.tif",
+      "sha256": "bc6833a594d685b3c465031336127d83d7e7f8ed5d5d554a6218387ba2d11dd4",
+      "bytes": 2703
+    },
+    "Sri-Lanka_63307": {
+      "filename": "Sri-Lanka_63307_JRCWaterHand.tif",
+      "sha256": "a79bc8e94d6f393bfe6f29569180cb0b91477b7f2a39d9f923640edafcce3a00",
+      "bytes": 835
+    },
+    "Sri-Lanka_649970": {
+      "filename": "Sri-Lanka_649970_JRCWaterHand.tif",
+      "sha256": "e31c46bb7cd057d1e053ddd2c8015afcf61f4e109bcf88ba52ad8a677a9f9c02",
+      "bytes": 983
+    },
+    "Sri-Lanka_653336": {
+      "filename": "Sri-Lanka_653336_JRCWaterHand.tif",
+      "sha256": "48f41620dca33efa30a08b2ccc91eb4b4987b61d5b74405b5f341c06e6d54467",
+      "bytes": 1777
+    },
+    "Sri-Lanka_713926": {
+      "filename": "Sri-Lanka_713926_JRCWaterHand.tif",
+      "sha256": "0f894f0a6fd2b3e86c4ffd2169092874f35c6850ad2a5c721d4dca6b50cdd8af",
+      "bytes": 3119
+    },
+    "Sri-Lanka_748447": {
+      "filename": "Sri-Lanka_748447_JRCWaterHand.tif",
+      "sha256": "7c9270c4b81803778dc0ffb0b9dc47f7176313b19f996f9a8cc9bafad8cf33d9",
+      "bytes": 863
+    },
+    "Sri-Lanka_845821": {
+      "filename": "Sri-Lanka_845821_JRCWaterHand.tif",
+      "sha256": "652ddf2be5104fffc6c1854db47a8b365925ce8308b02b30b689e27277566bd7",
+      "bytes": 1108
+    },
+    "Sri-Lanka_847275": {
+      "filename": "Sri-Lanka_847275_JRCWaterHand.tif",
+      "sha256": "2d2f9d9618a8bfc667b302f12a45366010f56de8381a64bf0378b4d0bc88ca6e",
+      "bytes": 2192
+    },
+    "Sri-Lanka_849649": {
+      "filename": "Sri-Lanka_849649_JRCWaterHand.tif",
+      "sha256": "f234ac0bcaf830c1bfc2c0083adbe41f7f4c489d0dd18e6138030aff9ebe52d7",
+      "bytes": 976
+    },
+    "Sri-Lanka_85652": {
+      "filename": "Sri-Lanka_85652_JRCWaterHand.tif",
+      "sha256": "3b0547905bbb3d7b2f2b05d75a85d32c8e80928b6e4e31f20a5813c8f0371f07",
+      "bytes": 835
+    },
+    "Sri-Lanka_883641": {
+      "filename": "Sri-Lanka_883641_JRCWaterHand.tif",
+      "sha256": "a6f58b5a620c58716a87feedeb8bd573f250f63ee32b8dec87803a5c896fb74f",
+      "bytes": 879
+    },
+    "Sri-Lanka_916628": {
+      "filename": "Sri-Lanka_916628_JRCWaterHand.tif",
+      "sha256": "9bdf70a93d1b265f50533171daf6707fa59992350ba00c78d267b1ec4e0e295f",
+      "bytes": 1720
+    },
+    "Sri-Lanka_922192": {
+      "filename": "Sri-Lanka_922192_JRCWaterHand.tif",
+      "sha256": "32dde4cbffdd74ebda3e438195d59c5d69e24e6b2e26634a6be02881356f0a02",
+      "bytes": 966
+    },
+    "Sri-Lanka_92824": {
+      "filename": "Sri-Lanka_92824_JRCWaterHand.tif",
+      "sha256": "e63746413bfc8e9504ad630f88c2954f95de5d7a90ad1d32a0456cad13a178d6",
+      "bytes": 1071
+    },
+    "Sri-Lanka_956740": {
+      "filename": "Sri-Lanka_956740_JRCWaterHand.tif",
+      "sha256": "8f415d0f0d51d977a6372c1be32b19cda76411448e170d8bdb2241c13139bcdf",
+      "bytes": 1509
+    },
+    "USA_1010394": {
+      "filename": "USA_1010394_JRCWaterHand.tif",
+      "sha256": "671462ed89231d5a0a8ae85c736164ec19ac272a01762078e7b82fdf166b0995",
+      "bytes": 873
+    },
+    "USA_1039203": {
+      "filename": "USA_1039203_JRCWaterHand.tif",
+      "sha256": "682484293ac680d760571826fddade9868d635d7001db906b4d557a26748e1f4",
+      "bytes": 924
+    },
+    "USA_1049586": {
+      "filename": "USA_1049586_JRCWaterHand.tif",
+      "sha256": "233a041f269d8bd645c88e5e90b1284f325b652b3a376e299d58a6a777cdf32e",
+      "bytes": 937
+    },
+    "USA_1068362": {
+      "filename": "USA_1068362_JRCWaterHand.tif",
+      "sha256": "fede0a57aac1c49aae7b4456793ba294acd22a0cc6e32ad1fa9bd4268fa33796",
+      "bytes": 955
+    },
+    "USA_1082482": {
+      "filename": "USA_1082482_JRCWaterHand.tif",
+      "sha256": "a3ae4fbd839b8a96f9c715dd169cf104abde29c578652cb36d5cf2151ead1d5b",
+      "bytes": 926
+    },
+    "USA_11422": {
+      "filename": "USA_11422_JRCWaterHand.tif",
+      "sha256": "d283efafbf8281fca4ad013320263a0c318d456c3cbe53435b80050c01e201c3",
+      "bytes": 2004
+    },
+    "USA_114964": {
+      "filename": "USA_114964_JRCWaterHand.tif",
+      "sha256": "e7843c5ff09cda0a2cde05ef4a7df40ee2a7f4e2ed90d3c614c3457a01a46d63",
+      "bytes": 848
+    },
+    "USA_115033": {
+      "filename": "USA_115033_JRCWaterHand.tif",
+      "sha256": "4639f82e34bf82506adb51490b73eb3cff0c19cc54615afc3185ad9b77f911cb",
+      "bytes": 865
+    },
+    "USA_170264": {
+      "filename": "USA_170264_JRCWaterHand.tif",
+      "sha256": "2876701218870036a0ef11fa3578c098007d3af3f5d4365925a19175a3863703",
+      "bytes": 912
+    },
+    "USA_179917": {
+      "filename": "USA_179917_JRCWaterHand.tif",
+      "sha256": "af5d289c2f2e8a50f1712a068bb9618d366e24c76f55f8da56c076ba56593ca3",
+      "bytes": 880
+    },
+    "USA_181263": {
+      "filename": "USA_181263_JRCWaterHand.tif",
+      "sha256": "1b08d64b313947639ebcc3ead660a3fa37b34045f5ed99a98485aebf2ed8af02",
+      "bytes": 847
+    },
+    "USA_181503": {
+      "filename": "USA_181503_JRCWaterHand.tif",
+      "sha256": "89e0526554c7549fd070ee4fe188fb7ed25a8faeb9fcf42607f3c4ea18332372",
+      "bytes": 860
+    },
+    "USA_19225": {
+      "filename": "USA_19225_JRCWaterHand.tif",
+      "sha256": "e126d68144f028b02c3c803f5b2daaa055f2e3c43117f5c758e1c0699a7ddb0d",
+      "bytes": 893
+    },
+    "USA_198411": {
+      "filename": "USA_198411_JRCWaterHand.tif",
+      "sha256": "f6956c6ff3e23e54c6ee400e586cb6eefd913b01de95226735ecbf1d6a31ced7",
+      "bytes": 2019
+    },
+    "USA_211406": {
+      "filename": "USA_211406_JRCWaterHand.tif",
+      "sha256": "c3aa62ef540e947cfb164fcd798c40fd12806e179e222e004ec4d987e6f93c31",
+      "bytes": 929
+    },
+    "USA_217598": {
+      "filename": "USA_217598_JRCWaterHand.tif",
+      "sha256": "b609f81510f96aaf2be7bff993908ecc6d283d988402b053b7b523660f1d4fa5",
+      "bytes": 916
+    },
+    "USA_224165": {
+      "filename": "USA_224165_JRCWaterHand.tif",
+      "sha256": "11389ba8742b9be977b93be14ec68122f5db01dea93c13653a8292e8ac20e36e",
+      "bytes": 835
+    },
+    "USA_225017": {
+      "filename": "USA_225017_JRCWaterHand.tif",
+      "sha256": "6f83cd173f023368afff36a32813c337d9a2eeda8f30d74a025e91b8a61727d2",
+      "bytes": 1399
+    },
+    "USA_231124": {
+      "filename": "USA_231124_JRCWaterHand.tif",
+      "sha256": "0b470e60416f85a0b0954c104c13c03d86b36db0efa63b71a45b4108ca151aec",
+      "bytes": 835
+    },
+    "USA_232060": {
+      "filename": "USA_232060_JRCWaterHand.tif",
+      "sha256": "ffdfd08704deaee699ed16e1f3c1f61a1183f76b188ea5c6ca3791a37d6ae38d",
+      "bytes": 922
+    },
+    "USA_251323": {
+      "filename": "USA_251323_JRCWaterHand.tif",
+      "sha256": "dd9f323c00b583ed3185616f485ac7a345717ed4bfe9b44be0058f5406b3b881",
+      "bytes": 855
+    },
+    "USA_260929": {
+      "filename": "USA_260929_JRCWaterHand.tif",
+      "sha256": "364a8d155ef9d24c0530cd265079d513f01882502fab79bb0c836aa875f71b61",
+      "bytes": 856
+    },
+    "USA_275372": {
+      "filename": "USA_275372_JRCWaterHand.tif",
+      "sha256": "449653ee49ca3318f0ec79398bf2f059b0dfde0314dbc445884315b078a57bb6",
+      "bytes": 937
+    },
+    "USA_308150": {
+      "filename": "USA_308150_JRCWaterHand.tif",
+      "sha256": "932fe1a492a46f134b2cf70e3c554020b294a7cfd211741cf31f8e60dde38278",
+      "bytes": 1108
+    },
+    "USA_347609": {
+      "filename": "USA_347609_JRCWaterHand.tif",
+      "sha256": "0442bbb8f21c232926dccf527b014f755459f7976303d1d56f5729b9569f9a12",
+      "bytes": 960
+    },
+    "USA_348639": {
+      "filename": "USA_348639_JRCWaterHand.tif",
+      "sha256": "16e795a1aaf89012bb44c6e1a0884694911d355e465b1e0e4047fa410307d055",
+      "bytes": 1731
+    },
+    "USA_350244": {
+      "filename": "USA_350244_JRCWaterHand.tif",
+      "sha256": "35bb2c25d824451a63278820854e9cc49b43847838a928238464b34162a5d131",
+      "bytes": 873
+    },
+    "USA_354981": {
+      "filename": "USA_354981_JRCWaterHand.tif",
+      "sha256": "24872c05fd8ee557ba4086645927058caaa4db0bd3d6ad4496e3b372ea9f0e52",
+      "bytes": 934
+    },
+    "USA_366607": {
+      "filename": "USA_366607_JRCWaterHand.tif",
+      "sha256": "3d170f46d2c3f489f3e1a0cae0fadf8de8c3f1ebc19d223e9d008b58334e8ad0",
+      "bytes": 2188
+    },
+    "USA_375183": {
+      "filename": "USA_375183_JRCWaterHand.tif",
+      "sha256": "2af5581828aa484b6405ed5ced2beeac5238f41389b8bb91e0e2e656d737c105",
+      "bytes": 953
+    },
+    "USA_387945": {
+      "filename": "USA_387945_JRCWaterHand.tif",
+      "sha256": "9f9f90174404577d37eff9ab7431787363dd4fb568ac6456efd93b97c51680da",
+      "bytes": 835
+    },
+    "USA_430764": {
+      "filename": "USA_430764_JRCWaterHand.tif",
+      "sha256": "f8ba0af61beaf50d91197308cdc26735693e6b08de2b874655cf5d3a97bd8e6a",
+      "bytes": 835
+    },
+    "USA_438959": {
+      "filename": "USA_438959_JRCWaterHand.tif",
+      "sha256": "6b8c9d5f6e07292d53e4d418439a7ce6c4624ca1dccbfba89e4f3cab39cc2b5e",
+      "bytes": 987
+    },
+    "USA_486103": {
+      "filename": "USA_486103_JRCWaterHand.tif",
+      "sha256": "713911c68973c9cc10c589f4f5295a40c20a57d32b10d610810579c48968b0d1",
+      "bytes": 1012
+    },
+    "USA_504150": {
+      "filename": "USA_504150_JRCWaterHand.tif",
+      "sha256": "25401b5985776d6ed4f848931793ed0535a5d8ba5cb2b6526a3f4c2caa6e210c",
+      "bytes": 1098
+    },
+    "USA_519181": {
+      "filename": "USA_519181_JRCWaterHand.tif",
+      "sha256": "77972745113f263301548bf4c31b6f5998418cec06b67203bfa4d8764175a9cf",
+      "bytes": 1027
+    },
+    "USA_527077": {
+      "filename": "USA_527077_JRCWaterHand.tif",
+      "sha256": "8f6cf88a8a22bc409a08d68b51fed1b2d1411573665f947b13c5f3fb7472dca7",
+      "bytes": 914
+    },
+    "USA_58086": {
+      "filename": "USA_58086_JRCWaterHand.tif",
+      "sha256": "17a7730695715da59cac827fd8fa929566ee5c0d51d32f8fb080fc801fec726a",
+      "bytes": 931
+    },
+    "USA_595451": {
+      "filename": "USA_595451_JRCWaterHand.tif",
+      "sha256": "3f05858e14121bd06ab27cb86289cba04f5e3b556b309982af291d5faa479e22",
+      "bytes": 873
+    },
+    "USA_604222": {
+      "filename": "USA_604222_JRCWaterHand.tif",
+      "sha256": "29f88002ab8685771f50a62256306680f299b5b6eceec539aa99eca043f5aca5",
+      "bytes": 835
+    },
+    "USA_605492": {
+      "filename": "USA_605492_JRCWaterHand.tif",
+      "sha256": "c5f16c3df93390732c14d1655ef9c20fdf912a9f34ce03e3cca51abc26622643",
+      "bytes": 917
+    },
+    "USA_638521": {
+      "filename": "USA_638521_JRCWaterHand.tif",
+      "sha256": "a3e9d7b67530b0aba9b0655723b0a0a8b3a4c90da9af82920b88781c345abfa6",
+      "bytes": 835
+    },
+    "USA_646878": {
+      "filename": "USA_646878_JRCWaterHand.tif",
+      "sha256": "05f2cd0dab98c2356df5cb593b7b4460da272ce89d983d38c9f628498fa8ac05",
+      "bytes": 835
+    },
+    "USA_652955": {
+      "filename": "USA_652955_JRCWaterHand.tif",
+      "sha256": "30d5438d1ebbe00af73459331da61b766d7c74eb0b97de614b98d9abbc070466",
+      "bytes": 858
+    },
+    "USA_655230": {
+      "filename": "USA_655230_JRCWaterHand.tif",
+      "sha256": "f4cd3f1fb4c10690f80bacbcd70febb643edbdf3815c7cbffee1b6b8f199af7d",
+      "bytes": 866
+    },
+    "USA_66026": {
+      "filename": "USA_66026_JRCWaterHand.tif",
+      "sha256": "0f891ea579564d4e1de4344318e80ca2459f266e13b24668f42ffc3468e45de2",
+      "bytes": 904
+    },
+    "USA_664261": {
+      "filename": "USA_664261_JRCWaterHand.tif",
+      "sha256": "06fceb5e5246e2627b9e61ed3ba958bb255482b6146d681fd338fed6aa8d1913",
+      "bytes": 945
+    },
+    "USA_66511": {
+      "filename": "USA_66511_JRCWaterHand.tif",
+      "sha256": "75ef42686d7859313f81fff15e60d3d9fb072ab8c757565bdc4af9d72cb9c025",
+      "bytes": 861
+    },
+    "USA_670826": {
+      "filename": "USA_670826_JRCWaterHand.tif",
+      "sha256": "fc74839033e898a74192881bc385334ea6e2494bda078a055a5f4867e49f3f6e",
+      "bytes": 864
+    },
+    "USA_67102": {
+      "filename": "USA_67102_JRCWaterHand.tif",
+      "sha256": "b909980a7eb9b3401909ae1c90a6743bd53486239c50a5fd466c3bf318d90f54",
+      "bytes": 1411
+    },
+    "USA_693819": {
+      "filename": "USA_693819_JRCWaterHand.tif",
+      "sha256": "5f3f331e7ad81b232e2dc7668eeccf0bb4f23ca66c6cfcb041e4f781608c7cc1",
+      "bytes": 904
+    },
+    "USA_741073": {
+      "filename": "USA_741073_JRCWaterHand.tif",
+      "sha256": "368b6c843617dc522314b9676dceae461939c55346e8603f7d4fa2bb31f32d35",
+      "bytes": 1074
+    },
+    "USA_741178": {
+      "filename": "USA_741178_JRCWaterHand.tif",
+      "sha256": "c549c89f87682e9ac20b8b488686ce58ebffa9282bf351f0359a5214527a20ff",
+      "bytes": 885
+    },
+    "USA_758178": {
+      "filename": "USA_758178_JRCWaterHand.tif",
+      "sha256": "0420032a79f2f0da37caf99733ef8b92bd7619c9c76aa60ea45148f73cd02ddf",
+      "bytes": 896
+    },
+    "USA_761032": {
+      "filename": "USA_761032_JRCWaterHand.tif",
+      "sha256": "08d4c03a4135a4bf880c86ba055028faa33618a61e45ea25d975d94942c4e48b",
+      "bytes": 835
+    },
+    "USA_770353": {
+      "filename": "USA_770353_JRCWaterHand.tif",
+      "sha256": "9d140a711e7c7034b39bb1ffe4794891e8709e47b4de421c61d7a70243f2069d",
+      "bytes": 1423
+    },
+    "USA_778194": {
+      "filename": "USA_778194_JRCWaterHand.tif",
+      "sha256": "e6bf6d9d2c08ff98f84098da7c82e60609f6721c6a51643306a4fee337837482",
+      "bytes": 1155
+    },
+    "USA_788696": {
+      "filename": "USA_788696_JRCWaterHand.tif",
+      "sha256": "a38e0c49d3be4f20edb0c967edcd2ab0ebc84c366e36087f872f748d4aecca54",
+      "bytes": 3433
+    },
+    "USA_806273": {
+      "filename": "USA_806273_JRCWaterHand.tif",
+      "sha256": "a2e4cd0bba09d041945175ca47554f1ee8fc21d5071e7e5e7219a29c9b316e0e",
+      "bytes": 967
+    },
+    "USA_826217": {
+      "filename": "USA_826217_JRCWaterHand.tif",
+      "sha256": "fb8e49a16d7283aed0b888ee3e28b428a0238d77c51238cd543afa29d32c273a",
+      "bytes": 938
+    },
+    "USA_831672": {
+      "filename": "USA_831672_JRCWaterHand.tif",
+      "sha256": "ecce2de5e4ebf919959466a7755b9dfc84e160716c09872f6c6898e73201e9f2",
+      "bytes": 848
+    },
+    "USA_84195": {
+      "filename": "USA_84195_JRCWaterHand.tif",
+      "sha256": "0596ba2c8c04b718b7db464f510b7b14881c15c8a083620a1a695abcfc0778bf",
+      "bytes": 1000
+    },
+    "USA_86502": {
+      "filename": "USA_86502_JRCWaterHand.tif",
+      "sha256": "673d10a5cbf6a67e923ae56210a72bc3681d2f102eb6c0bd3bbd820faa54d4f9",
+      "bytes": 1288
+    },
+    "USA_905409": {
+      "filename": "USA_905409_JRCWaterHand.tif",
+      "sha256": "3aa2a5c760e23df9e206c4333e5185bb0c6c691484d5bfcee4fec47a553a39a2",
+      "bytes": 2428
+    },
+    "USA_908474": {
+      "filename": "USA_908474_JRCWaterHand.tif",
+      "sha256": "87aeb1856bd876e562f2e5ba1d1b09577def7f259e26259ea434fda50a48938e",
+      "bytes": 955
+    },
+    "USA_933610": {
+      "filename": "USA_933610_JRCWaterHand.tif",
+      "sha256": "18c99921e76d5d0082429e7e57ef76e7e3af5ef69301fc97a5b1e16230f0cef8",
+      "bytes": 1174
+    },
+    "USA_955053": {
+      "filename": "USA_955053_JRCWaterHand.tif",
+      "sha256": "57705e06d66edc806ec9c26826956c2143bb8bfe86eb1a63b9be908ab4336e99",
+      "bytes": 937
+    },
+    "USA_986268": {
+      "filename": "USA_986268_JRCWaterHand.tif",
+      "sha256": "2eacbccd04c9f86f030c7a57bf280d34601de1dfba6f73d62a9a4364fd397fa5",
+      "bytes": 847
+    },
+    "USA_994009": {
+      "filename": "USA_994009_JRCWaterHand.tif",
+      "sha256": "6d2db1a78e8cf51fa7842c5052b86c41f84264023c3624500df459cdb61d69d6",
+      "bytes": 936
+    }
+  }
+}

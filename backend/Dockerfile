@@ -12,6 +12,7 @@ RUN apt-get update \
 COPY backend /app/backend
 COPY models /app/models
 COPY sample /app/sample
+COPY references /app/references
 COPY ["hand test", "/app/hand test"]
 USER appuser
 EXPOSE 8000

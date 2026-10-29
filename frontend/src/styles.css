@@ -83,6 +83,9 @@ h3 { color: var(--accent); font-size: 14px; font-weight: 600; line-height: 1.5; 
 .empty-copy { max-width: 260px; padding: 24px; font-size: 14px; color: var(--muted); line-height: 1.6; text-align: center; }
 .viewer-caption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; font-size: 12px; color: var(--muted); line-height: 1.6; margin-top: 12px; }
 .viewer-caption span:last-child { white-space: nowrap; }
+.viewer-caption > span:first-child { white-space: normal; }
+.separation-note { margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.65; }
+.reference-image, .overlay-image { image-rendering: pixelated; }
 .opacity-control { display: grid; grid-template-columns: auto minmax(60px, 1fr) 36px; gap: 12px; align-items: center; font-size: 12px; border-top: 1px solid var(--line); padding-top: 12px; margin-top: 14px; color: var(--accent); }
 .opacity-control input { width: 100%; min-height: 44px; accent-color: #39ff88; }
 .opacity-control output { font-variant-numeric: tabular-nums; text-align: right; }

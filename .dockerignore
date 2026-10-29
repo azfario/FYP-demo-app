@@ -4,6 +4,7 @@
 **/.pytest_cache
 **/node_modules
 frontend/dist
+demo pairs
 docs
 tests
 test-results

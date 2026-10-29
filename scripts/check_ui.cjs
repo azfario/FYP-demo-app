@@ -35,6 +35,25 @@ async function predict(page, hand = false) {
 
 async function viewsAndDownloads(page, mode) {
   const panel = visiblePanel(page);
+  await panel.getByRole('button', { name: 'JRC reference', exact: true }).press('Space');
+  assert.match(await panel.locator('.main-image').getAttribute('alt'), /JRC reference/);
+  await panel.getByRole('button', { name: 'Water types', exact: true }).press('Space');
+  assert.match(await panel.locator('.viewer-caption').innerText(), /Orange: candidate floodwater/);
+  const waterSlider = panel.getByRole('slider', { name: 'Overlay opacity' });
+  await waterSlider.press('Home');
+  assert.equal(await panel.locator('.overlay-image').getAttribute('style'), 'opacity: 0;');
+  await waterSlider.press('End');
+  assert.equal(await panel.locator('.overlay-image').getAttribute('style'), 'opacity: 1;');
+  await waterSlider.press('Home');
+  for (let i = 0; i < 5; i++) await waterSlider.press('PageUp');
+  for (const name of ['Water types PNG', 'Water types GeoTIFF', 'Candidate flood GeoTIFF']) {
+    const downloaded = page.waitForEvent('download');
+    await panel.getByRole('button', { name, exact: true }).click();
+    const file = await downloaded;
+    await file.saveAs(path.join(artifacts, `${mode}-${file.suggestedFilename()}`));
+    assert.equal(await file.failure(), null);
+  }
+  mark(`${mode} separation`, 'JRC reference and Water types; keyboard opacity 0/50/100; three actual separation downloads');
   for (const name of ['Optical', 'Radar', 'Mask', 'Overlay']) {
     await panel.getByRole('button', { name, exact: true }).press('Space');
     assert.equal(await panel.getByRole('button', { name, exact: true }).getAttribute('aria-pressed'), 'true');
@@ -47,7 +66,7 @@ async function viewsAndDownloads(page, mode) {
   for (let i = 0; i < 5; i++) await slider.press('PageUp');
   assert.equal(await panel.locator('.overlay-image').getAttribute('style'), 'opacity: 0.5;');
   await slider.press('Shift+Tab');
-  assert.equal(await page.locator(':focus').innerText(), 'Overlay');
+  assert.equal(await page.locator(':focus').innerText(), 'JRC reference');
   for (const name of ['Mask PNG', 'Overlay PNG', 'Mask GeoTIFF']) {
     const downloaded = page.waitForEvent('download');
     await panel.getByRole('button', { name, exact: true }).click();
@@ -84,6 +103,7 @@ async function run() {
     await upload(page, path.join(root, 'sample/bolivia 3')); await ready(page);
     const original = await predict(page);
     assert.equal(original.evaluation, undefined);
+    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Water types', exact: true }).getAttribute('aria-pressed'), 'true');
     await viewsAndDownloads(page, 'segmentation');
     await page.getByRole('heading', { name: 'Flood Segmentation', exact: true }).click();
     await page.screenshot({ path: path.join(screenshots, 'desktop-results.jpg'), fullPage: true });
@@ -121,12 +141,14 @@ async function run() {
     const measured = await (await pendingResponse).json();
     await visiblePanel(page).getByText('Segmentation complete.', { exact: true }).waitFor();
     await page.unroute('**/api/hand-test/predict');
+    assert.equal(await page.locator(':focus').getAttribute('id'), 'hand-test-viewer-title');
+    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Water types', exact: true }).getAttribute('aria-pressed'), 'true');
+    await visiblePanel(page).getByRole('button', { name: 'Compare', exact: true }).click();
     assert.equal(await visiblePanel(page).locator('.comparison-image').count(), 2);
     assert.equal(await visiblePanel(page).getByText('DeepLab prediction', { exact: true }).isVisible(), true);
     assert.equal(await visiblePanel(page).locator('.performance-panel table, .compute-note, .model-name').count(), 0);
     const expected = ['iou', 'dice', 'pixel_accuracy'].map(key => `${(measured.evaluation[key] * 100).toFixed(2)}%`);
     assert.deepEqual(await visiblePanel(page).locator('.evaluation-metrics dd').allTextContents(), expected);
-    assert.equal(await page.locator(':focus').getAttribute('id'), 'hand-test-viewer-title');
     mark('Comparison and scores', JSON.stringify(measured.evaluation));
     await predict(page, true);
     await viewsAndDownloads(page, 'hand-test');
@@ -169,6 +191,41 @@ async function run() {
     assert.equal(await visiblePanel(page).getByRole('button', { name: 'Segment image', exact: true }).isDisabled(), true);
     await visiblePanel(page).getByRole('button', { name: 'Clear selected images' }).click();
     mark('Reset and errors', 're-upload removes stale scores, Clear resets timings, missing-label and corrupt-label errors recover');
+
+    await page.getByRole('tab', { name: 'Segmentation', exact: true }).click();
+    const demoPreviewResponse = page.waitForResponse(response => response.url().endsWith('/api/preview'));
+    await upload(page, path.join(root, 'demo pairs/demo 01')); await ready(page);
+    const demoPreview = await (await demoPreviewResponse).json();
+    const demo = await predict(page);
+    assert.ok(demo.water_separation.counts.detected_permanent_water > 0);
+    assert.ok(demo.water_separation.counts.candidate_floodwater > 0);
+    for (const [width, filename] of [[1280, 'water-types-desktop.jpg'], [390, 'water-types-mobile.jpg'], [320, null]]) {
+      await page.setViewportSize({ width, height: 1200 });
+      const size = await page.evaluate(() => ({ client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth }));
+      assert.equal(size.client, size.scroll);
+      if (filename) await page.screenshot({ path: path.join(screenshots, filename), fullPage: true });
+    }
+    await upload(page, path.join(root, 'demo pairs/demo 03')); await ready(page);
+    const noPermanent = await predict(page);
+    assert.equal(noPermanent.water_separation.counts.detected_permanent_water, 0);
+    mark('Demonstration pairs', 'demo 01 shows both detected classes; demo 03 supports an all-zero JRC reference; 320/390/1280px have no overflow');
+    await page.route('**/api/preview', async route => {
+      await route.fulfill({ json: { ...demoPreview, water_separation: { available: false, reason: 'No bundled JRC reference for this tile.' } } });
+    });
+    await page.route('**/api/predict', async route => {
+      await route.fulfill({ json: { ...demo, water_separation: { available: false, reason: 'No bundled JRC reference for this tile.' } } });
+    });
+    await upload(page, path.join(root, 'demo pairs/demo 01')); await ready(page);
+    await predict(page);
+    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Water types', exact: true }).isDisabled(), true);
+    assert.equal(await visiblePanel(page).getByRole('button', { name: 'JRC reference', exact: true }).isDisabled(), true);
+    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Overlay', exact: true }).getAttribute('aria-pressed'), 'true');
+    assert.match(await visiblePanel(page).locator('.separation-note').innerText(), /separation unavailable/);
+    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Water types PNG', exact: true }).count(), 0);
+    await page.unroute('**/api/preview'); await page.unroute('**/api/predict');
+    await visiblePanel(page).getByRole('button', { name: 'Clear selected images' }).click();
+    assert.equal(await visiblePanel(page).locator('.separation-note').count(), 0);
+    mark('Unavailable JRC', 'mocked unavailable-reference responses retain original overlay and mask downloads; separation controls disabled; Clear removes stale status');
 
     await page.route('**/api/model-info', route => route.abort());
     await page.reload({ waitUntil: 'networkidle' });
