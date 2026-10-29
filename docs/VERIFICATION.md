@@ -5,8 +5,12 @@
 See [WATER_SEPARATION_VERIFICATION.md](WATER_SEPARATION_VERIFICATION.md) for the
 current feature's 52 backend tests, 12 frontend tests, production build,
 both-workspace browser checks, real downloads and all-ten-demo API verification.
-This feature was tested using local Uvicorn/Vite because Docker was not running.
-Docker evidence below applies to the earlier revisions identified there.
+The subsequent Docker verification also passed: both images built, backend health
+passed, all 446 bundled references matched, all ten paired demos and ten Hand Test
+comparisons passed through Nginx, and both browser workflows passed. The backend
+build reused cached dependency layers after an initial cold-download PyPI timeout;
+see the linked record for exact limits and image IDs. Docker evidence in the older
+sections below applies to the revisions identified there.
 
 ## Computational-only sidebar, 27 October 2026
 

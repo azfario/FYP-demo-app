@@ -64,10 +64,60 @@ python scripts/check_water_demo.py --base-url http://127.0.0.1:5173
 The browser check is `node scripts/check_ui.cjs`, with `UI_BASE_URL` pointing to
 the running app. Set `NODE_PATH` if Playwright is supplied externally and
 `PLAYWRIGHT_CHROMIUM_EXECUTABLE` to an installed browser if needed. This run used
-local Uvicorn/Vite and installed Chrome because Docker Desktop was not running.
-Docker packaging includes `references/`; a new Docker build/runtime was not
-verified during this feature change. Previous Docker results elsewhere in the
-repository refer to earlier versions.
+local Uvicorn/Vite and installed Chrome initially. The subsequent Docker
+verification below exercised the same feature through Nginx and Linux CPU PyTorch.
+
+## Docker verification, 29-30 October 2026
+
+- Both original Dockerfiles built successfully. Frontend: Node production build
+  plus Nginx; backend: Python 3.11 plus PyTorch CPU. No Dockerfile or application
+  changes were needed for this verification.
+- The first cold backend build timed out downloading Rasterio from
+  `files.pythonhosted.org`, after very slow dependency downloads. A subsequent
+  standard build succeeded using the previous successful official Python base
+  and cached dependency layers. This establishes cached-build and runtime
+  success; it does not establish an uninterrupted fresh-download build.
+- The locally cached official Python base was
+  `sha256:90d117a7f1ef6535dc75831e1a9184725757fede0d4d424d7977fb5429d50610`.
+  Its content was retrieved by digest from Google's Docker Hub mirror and tagged
+  locally as `python:3.11-slim-bookworm`. The repository's Dockerfile was unchanged.
+- Successful backend image:
+  `sha256:75ae4866e326cab6750d48436d73ca0945e152b86927e391bea19b0d03f08f20`.
+  Frontend image:
+  `sha256:76cdcb543a86988b2c73a9253ac90a5dfb96c7ffa2ddd0f1d3ca6734ea1ace46`.
+- Started isolated Compose project `fyp-water-verify`, bound only to
+  `127.0.0.1:8082`, with no source bind mounts. Backend health passed; Nginx served
+  the frontend and forwarded real uploads/predictions.
+- All **446 bundled JRC reference checksums** matched inside the non-root
+  container (UID 10001). The water-separation source checksum matched the feature
+  commit exactly: `6febe6c21967923ab711564288921e820e0cb17e2c17fd192443bdba9290ef5b`.
+- All **10 paired demonstrations** passed through Nginx. Independent checks
+  confirmed classified/candidate-flood pixel values, reference provenance,
+  geography, nodata and counts. Their CPU class counts matched the table above.
+- All **10 Hand Test triplets** passed preview and prediction; uploaded-reference
+  IoU, Dice and pixel accuracy matched independent calculations. Served HTML/JS/CSS
+  matched the local production build byte-for-byte; original model and background
+  were retained.
+- Both workspaces passed the browser script against Docker: all six image views
+  (plus Hand Test Compare), opacity, six downloads per workspace, keyboard
+  controls, 320/390/768/1280px layouts, reset/error handling and service recovery.
+  There were no uncaught page errors. Screenshots now show the actual CPU Docker
+  deployment. Generated reports remain under ignored `test-results/`.
+- Only the isolated test containers/network were removed after verification;
+  built images and dependency caches were retained. Existing app services were
+  not stopped or recreated. The optional GPU image was outside this verification.
+
+Reproduce using the normal CPU configuration:
+
+```powershell
+docker compose build
+docker compose up -d --no-build --wait
+python scripts/check_water_demo.py --base-url http://127.0.0.1:8081
+```
+
+The example URL uses this workspace's `.env` port override (8081); the repository
+default is 8080. Use the port selected for your deployment. Downloading uncached
+base images and Python dependencies requires working external registry/PyPI access.
 
 ## Interpretation
 

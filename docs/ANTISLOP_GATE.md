@@ -18,8 +18,12 @@
   keyboard focus are retained. No marketing sections or fabricated metrics.
 
 Current evidence: [WATER_SEPARATION_VERIFICATION.md](WATER_SEPARATION_VERIFICATION.md).
+Docker follow-up, 29-30 October 2026, PASS: the same browser checks passed through Nginx/CPU containers,
+including real separation downloads, all ten paired demos, all ten Hand Test
+comparisons and all 446 in-container reference checksums. Both images built with
+cached backend dependencies after an initial external PyPI download timeout.
 The following detailed rule evidence describes the retained design and prior
-revision; its Docker claims do not describe the JRC extension's local-only run.
+revision; see the current linked record for the JRC extension's Docker evidence.
 
 Date: 27 October 2026. Mode: during (owner's session choice). Direction: the owner's explicit dark glass, neon green space dashboard, retaining the exact existing background. ENERGY 2 / RHYTHM 1 / MOTION 1.
 
