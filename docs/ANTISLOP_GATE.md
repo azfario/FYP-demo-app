@@ -1,5 +1,18 @@
 # Antislop Delivery Gate: PASS
 
+## Solid mask presentation, 30 October 2026: PASS
+
+- Hard Gate PASS: 53 backend tests, 12 frontend tests and production build;
+  both browser workflows, three real downloads each, no page errors and no
+  overflow at 320/390/768/1280px. Exact mask colours are verified by pixel tests.
+- Purpose-Gate PASS: requested blue/red data colours have explicit legends;
+  obsolete tabs/opacity controls are removed and existing app direction retained.
+- Liveliness PASS: same ENERGY 2 / RHYTHM 1 / MOTION 1, satellite workspace
+  framing, green action hierarchy and geographic result focal point.
+- Craftsmanship PASS: edited source directly; Compare, imagery, JRC, downloads,
+  unavailable-reference fallback and keyboard controls worked in the live app.
+  Desktop/mobile masks were visually inspected; no fabricated result claims.
+
 ## JRC separation extension, 29 October 2026: PASS
 
 - Hard Gate PASS: 52 backend tests, 12 frontend tests and production build passed;

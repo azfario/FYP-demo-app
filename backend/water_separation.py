@@ -12,7 +12,7 @@ from rasterio.io import MemoryFile
 from .visualization import png_url
 
 PERMANENT_COLOR = ImageColor.getrgb('#435ee5')
-FLOOD_COLOR = ImageColor.getrgb('#f59e42')
+FLOOD_COLOR = ImageColor.getrgb('#e53935')
 SOURCE = 'Sen1Floods11 v1.1 JRCWaterHand; EC JRC/Google'
 LIMITATION = 'Candidate floodwater excludes JRC permanent water; seasonal water and prediction errors may remain.'
 
@@ -87,13 +87,17 @@ def separation_result(pair, prediction, root):
     if reference is None:
         return info
     classes = classify_water(prediction, reference, pair.valid)
+    color_mask = np.zeros((*classes.shape, 3), dtype=np.uint8)
+    color_mask[classes == 1] = PERMANENT_COLOR
+    color_mask[classes == 2] = FLOOD_COLOR
+    color_mask[classes == 255] = (120, 120, 120)
     layer = np.zeros((*classes.shape, 4), dtype=np.uint8)
     layer[classes == 1] = (*PERMANENT_COLOR, 255)
     layer[classes == 2] = (*FLOOD_COLOR, 255)
     layer[classes == 255] = (120, 120, 120, 255)
     candidate = np.where(classes == 2, 1, 0).astype(np.uint8)
     candidate[classes == 255] = 255
-    return {**info, 'overlay_layer': png_url(layer),
+    return {**info, 'mask_png': png_url(color_mask), 'overlay_layer': png_url(layer),
             'counts': {'detected_permanent_water': int((classes == 1).sum()),
                        'candidate_floodwater': int((classes == 2).sum()),
                        'excluded': int((classes == 255).sum())},

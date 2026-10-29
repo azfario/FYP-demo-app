@@ -1,12 +1,14 @@
 import base64
 import hashlib
 import json
+from io import BytesIO
 from types import SimpleNamespace
 from unittest.mock import patch
 
 import numpy as np
 import pytest
 import rasterio
+from PIL import Image
 from rasterio.io import MemoryFile
 from rasterio.transform import from_origin
 
@@ -38,6 +40,15 @@ def test_known_classes_and_unknown_pixels():
     reference = np.array([[1, 0, 1, 0, 1, 255, 0]])
     valid = np.array([[True, True, True, True, True, True, False]])
     np.testing.assert_array_equal(classify_water(prediction, reference, valid), [[1, 2, 0, 0, 255, 255, 255]])
+
+
+def test_solid_blue_red_mask_matches_classified_pixels(tmp_path):
+    pair, _ = synthetic(tmp_path, np.array([[1, 0, 1, 0]], dtype=np.uint8))
+    pair.valid[0, 3] = False
+    result = separation_result(pair, np.array([[1, 1, 0, 1]], dtype=np.uint8), tmp_path)
+    with Image.open(BytesIO(base64.b64decode(result['mask_png'].split(',', 1)[1]))) as png:
+        assert png.mode == 'RGB' and png.size == (4, 1)
+        np.testing.assert_array_equal(np.asarray(png), [[[67, 94, 229], [229, 57, 53], [0, 0, 0], [120, 120, 120]]])
 
 
 @pytest.mark.parametrize('permanent,expected', [(0, 2), (1, 1)])
