@@ -22,8 +22,9 @@ For **Hand Test**, select the corresponding folder under `hand test/`, containin
 the additional original hand-labelled water reference. Those scores still measure
 water segmentation, not independently verified flood-only accuracy.
 
-Water types shows **blue detected permanent water** and **orange candidate
-floodwater**. The JRC reference view shows the historical mask independently of
+Permanent water vs flood shows a solid mask with **blue detected permanent water**
+and **red candidate floodwater**, black background and grey no-data. The JRC
+reference view shows the historical mask independently of
 the prediction. Demos 03, 07 and 10 have valid all-zero JRC references, so their
 predicted water is entirely candidate floodwater where imagery is valid. An empty
 reference does not prove that permanent water is absent in reality.

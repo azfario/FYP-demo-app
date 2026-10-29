@@ -4,15 +4,19 @@
 
 The extension retains the satellite/control-panel direction, audience and ENERGY
 2 / RHYTHM 1 / MOTION 1 settings below. The results imagery remains the focal point.
-Water types and JRC reference are functional views requested for both workspaces.
-Blue retains its existing water meaning; orange identifies candidate floodwater.
+Permanent water vs flood and JRC reference are functional views requested for both workspaces.
+Blue retains its existing water meaning; red identifies candidate floodwater.
 These are data categories with explicit text legends, rather than additional
 action accents. Grey marks unavailable pixels. The JRC view distinguishes the
 reference footprint from model-detected permanent water. Wrapping view controls
 and download rows preserve 44px touch targets on narrow screens. Existing optical
 imagery, background, typography, glass, spacing and green controls are retained.
 A brief reference limitation accompanies the result rather than technical input
-controls or an additional upload step. Both PNG overlays export the chosen opacity.
+controls or an additional upload step. The latest requested result is a solid
+blue/red mask on black background, with grey no-data, rather than an optical
+overlay. Mask, Overlay and Water types tabs and opacity controls were removed;
+Compare, Optical, Radar and JRC reference are retained. The PNG download is the
+same mask shown in the viewer. The longer view label has room to wrap on mobile.
 
 Reading this as: a compact flood-segmentation workspace for portfolio reviewers, with the owner's space-control-panel direction, dark transparent surfaces and neon green hierarchy, dial ENERGY 2 / RHYTHM 1 / MOTION 1.
 

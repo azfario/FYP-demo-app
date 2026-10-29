@@ -5,8 +5,8 @@ A local web workspace for predicting water in paired Sentinel-1 and Sentinel-2 s
 The **Hand Test** tab also accepts a matching ground-truth mask and compares it with a fresh prediction, side by side.
 
 Both workspaces automatically separate predicted water using the bundled JRC
-permanent-water reference. **Water types** shows blue detected permanent water
-and orange candidate floodwater. Start with [demo pairs/demo 01](demo%20pairs/demo%2001)
+permanent-water reference. **Permanent water vs flood** shows a solid mask with
+blue detected permanent water and red candidate floodwater. Start with [demo pairs/demo 01](demo%20pairs/demo%2001)
 or any of the [10 paired demonstrations](demo%20pairs/README.md).
 
 ![Space-themed flood segmentation workspace](docs/screenshots/desktop-empty.jpg)
@@ -38,7 +38,7 @@ Only the frontend port is exposed, bound to `127.0.0.1:8080`. Nginx forwards API
 1. Choose **Choose a folder** and select `sample/bolivia 1`, or any other numbered tile folder.
 2. Wait for the optical preview and the message **Ready to segment.**
 3. Choose **Segment image**.
-4. Water types opens when a matching JRC reference is available. Switch between Optical, Radar, Mask, Overlay, Water types and JRC reference. Adjust overlay opacity and download PNGs or georeferenced TIFFs.
+4. Permanent water vs flood opens when a matching JRC reference is available. Switch between Optical, Radar, Permanent water vs flood and JRC reference. Download the colour mask PNG or georeferenced TIFFs.
 
 Each folder contains exactly one matching pair, for example:
 
@@ -59,7 +59,7 @@ All **15 folders contain 30 original TIFFs**. `sample/manifest.json` maps the nu
 1. Open **Hand Test** and choose one directory such as `hand test/hand test 1`.
 2. The directory must contain one matching `_S1Hand.tif`, `_S2Hand.tif` and `_LabelHand.tif`.
 3. The ground truth appears beside an empty prediction placeholder. Click **Segment image** to run D4.
-4. Water types opens after prediction when JRC is available. Select **Compare** for both water masks and read **Water IoU**, **Dice** and **Pixel accuracy** below them. Imagery, water separation, opacity and downloads remain available.
+4. Permanent water vs flood opens after prediction when JRC is available. Select **Compare** for both original water masks and read **Water IoU**, **Dice** and **Pixel accuracy** below them. Optical, Radar, JRC reference and downloads remain available.
 
 The repository includes exactly **10 selected triplets (30 original TIFFs, approximately 37.4 MiB)** under `hand test/`. Folder mapping, selection reasons, source split and checksums are in its manifest and README. These are visually selected river/floodplain examples, not a representative benchmark of all 90 Hand Test tiles. No Hand Test gallery or automatic sample loading is provided.
 
@@ -114,13 +114,15 @@ Downloads in both workspaces:
 
 | Download | Meaning |
 | --- | --- |
-| Water types PNG | Optical image plus classified overlay at the selected opacity |
-| Water types GeoTIFF | `0=background`, `1=detected permanent water`, `2=candidate floodwater`, `255=no data` |
+| Permanent water vs flood PNG | Solid mask: blue permanent water, red candidate floodwater, black background, grey no-data |
+| Permanent water vs flood GeoTIFF | `0=background`, `1=detected permanent water`, `2=candidate floodwater`, `255=no data` |
 | Candidate flood GeoTIFF | `0=not candidate floodwater`, `1=candidate floodwater`, `255=no data` |
 
 GeoTIFFs retain the source grid and record the method, source, reference checksum
-and class meanings. The original Mask PNG, Overlay PNG and Mask GeoTIFF remain
-available separately. Each prediction uses the same fixed water threshold > 0.5.
+and class meanings. Mask, Overlay and Water types have been replaced by the single
+Permanent water vs flood view; opacity controls are no longer needed. Original
+water predictions remain available through the API and Hand Test Compare. Each
+prediction uses the same fixed water threshold > 0.5.
 
 Historical JRC masks are not verified observations immediately before each event.
 Exact derivation dates and threshold of these supplied binary references have not

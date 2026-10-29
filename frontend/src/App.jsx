@@ -3,7 +3,7 @@ import axios from 'axios';
 import { errorMessage, pairFromFolder, tripletFromFolder } from './files.js';
 
 const api = axios.create({ baseURL: '/api', timeout: 120000 });
-const labels = { rgb: 'Optical', radar: 'Radar', mask: 'Mask', overlay: 'Overlay', water_types: 'Water types', jrc: 'JRC reference' };
+const labels = { rgb: 'Optical', radar: 'Radar', permanent_flood: 'Permanent water vs flood', jrc: 'JRC reference' };
 const formatPercent = value => `${(value * 100).toFixed(2)}%`;
 const formatMetric = value => value == null ? 'N/A' : formatPercent(value);
 const modes = { segmentation: 'Segmentation', 'hand-test': 'Hand Test' };
@@ -29,15 +29,6 @@ function geotiffDownload(base64, name) {
   const url = URL.createObjectURL(new Blob([bytes], { type: 'image/tiff' }));
   saveUrl(url, name);
   setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
-function loadImage(url) {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error('Cannot prepare the overlay download. Please retry.'));
-    image.src = url;
-  });
 }
 
 function Spinner() { return <span className="spinner" aria-hidden="true" />; }
@@ -87,8 +78,6 @@ function Workspace({ mode, info, serviceError, refreshService, onBusyChange }) {
   const [phase, setPhase] = useState('empty');
   const [error, setError] = useState('');
   const [view, setView] = useState(defaultView);
-  const [opacity, setOpacity] = useState(50);
-  const [exporting, setExporting] = useState(false);
   const fileInput = useRef(null);
   const controller = useRef(null);
   const generation = useRef(0);
@@ -111,7 +100,7 @@ function Workspace({ mode, info, serviceError, refreshService, onBusyChange }) {
     if (!files?.length) return;
     controller.current?.abort();
     const version = ++generation.current;
-    setPair(null); setPreview(null); setResult(null); setError(''); setView(defaultView); setOpacity(50);
+    setPair(null); setPreview(null); setResult(null); setError(''); setView(defaultView);
     try {
       const selected = handTest ? tripletFromFolder(files) : pairFromFolder(files);
       setPair(selected); setPhase('validating');
@@ -134,7 +123,7 @@ function Workspace({ mode, info, serviceError, refreshService, onBusyChange }) {
     try {
       const response = await api.post(`${endpoint}/predict`, formData(pair), { signal: controller.current.signal });
       if (version !== generation.current) return;
-      setResult(response.data); setView(response.data.water_separation?.available ? 'water_types' : handTest ? 'compare' : 'overlay'); setPhase('success');
+      setResult(response.data); setView(response.data.water_separation?.available ? 'permanent_flood' : defaultView); setPhase('success');
       requestAnimationFrame(() => resultHeading.current?.focus({ preventScroll: true }));
     } catch (err) {
       if (version !== generation.current || axios.isCancel(err)) return;
@@ -144,25 +133,11 @@ function Workspace({ mode, info, serviceError, refreshService, onBusyChange }) {
 
   function clearPair() {
     controller.current?.abort(); ++generation.current;
-    setPair(null); setPreview(null); setResult(null); setError(''); setPhase('empty'); setView(defaultView); setOpacity(50);
-  }
-
-  async function downloadOverlay(waterTypes = false) {
-    setExporting(true);
-    try {
-      const [base, layer] = await Promise.all([loadImage(result.images.rgb), loadImage(waterTypes ? result.water_separation.overlay_layer : result.images.overlay_layer)]);
-      const canvas = document.createElement('canvas');
-      canvas.width = result.width; canvas.height = result.height;
-      const context = canvas.getContext('2d');
-      context.drawImage(base, 0, 0); context.globalAlpha = opacity / 100; context.drawImage(layer, 0, 0);
-      saveUrl(canvas.toDataURL('image/png'), `${result.tile_id}_${waterTypes ? 'water_types' : 'overlay'}_${opacity}.png`);
-    } catch (err) { setError(err.message); }
-    finally { setExporting(false); }
+    setPair(null); setPreview(null); setResult(null); setError(''); setPhase('empty'); setView(defaultView);
   }
 
   const source = result?.images || preview;
   const separation = result?.water_separation || preview?.water_separation;
-  const overlayView = view === 'overlay' || view === 'water_types';
   const status = { empty: 'No folder selected.', validating: 'Validating images…', ready: 'Ready to segment.', processing: 'Segmenting…', success: 'Segmentation complete.', error: 'Check the selected files.' }[phase];
 
   return <>
@@ -197,25 +172,22 @@ function Workspace({ mode, info, serviceError, refreshService, onBusyChange }) {
           <section className="hud-panel results-panel" aria-labelledby={`${mode}-viewer-title`} aria-busy={busy}>
             <div className="viewer-heading"><h2 id={`${mode}-viewer-title`} ref={resultHeading} tabIndex={-1}>Results</h2>{preview && <span className="image-size">{preview.width} × {preview.height} px</span>}</div>
             {pair && <p className="tile-name">{pair.tileId}</p>}
-            <div className="view-tabs hand-view-tabs" role="group" aria-label="Image view">{Object.entries(viewLabels).map(([key, label]) => <button key={key} className={view === key ? 'view-tab active' : 'view-tab'} aria-pressed={view === key} disabled={!source || (!result && ['mask', 'overlay', 'water_types'].includes(key)) || (['water_types', 'jrc'].includes(key) && !separation?.available)} onClick={() => setView(key)}>{label}</button>)}</div>
+            <div className="view-tabs hand-view-tabs" role="group" aria-label="Image view">{Object.entries(viewLabels).map(([key, label]) => <button key={key} className={`view-tab ${view === key ? 'active' : ''} ${key === 'permanent_flood' ? 'permanent-flood-tab' : ''}`} aria-pressed={view === key} disabled={!source || (key === 'permanent_flood' && !result) || (['permanent_flood', 'jrc'].includes(key) && !separation?.available)} onClick={() => setView(key)}>{label}</button>)}</div>
             <div className="viewer-body">
             {source && view === 'compare' ? <div className="comparison-grid">
               <figure><figcaption>Ground truth</figcaption><div className="image-stage"><img className="comparison-image" src={source.ground_truth} alt={`Ground truth for ${pair.tileId}`} width="512" height="512" /></div></figure>
               <figure><figcaption>DeepLab prediction</figcaption><div className={`image-stage ${!result ? 'empty-stage' : ''}`}>{result ? <img className="comparison-image" src={source.comparison_prediction} alt={`DeepLab prediction for ${pair.tileId}`} width="512" height="512" /> : <p className="empty-copy">Click Segment image to show the prediction.</p>}</div></figure>
             </div> : <div className={`image-stage ${!source ? 'empty-stage' : ''}`}>
               {source ? <>
-                <img className={`main-image ${view === 'jrc' ? 'reference-image' : ''}`} src={overlayView ? source.rgb : view === 'jrc' ? separation.reference_png : source[view]} alt={`${labels[view]} view of ${pair.tileId}`} width="512" height="512" />
-                {overlayView && <img className="overlay-image" src={view === 'water_types' ? separation.overlay_layer : source.overlay_layer} style={{ opacity: opacity / 100 }} alt="" aria-hidden="true" width="512" height="512" />}
+                <img className={`main-image ${['jrc', 'permanent_flood'].includes(view) ? 'reference-image' : ''}`} src={view === 'permanent_flood' ? separation.mask_png : view === 'jrc' ? separation.reference_png : source[view]} alt={`${labels[view]} view of ${pair.tileId}`} width="512" height="512" />
               </> : <p className="empty-copy">{handTest ? 'Upload a satellite triplet to preview.' : 'Upload a satellite pair to preview.'}</p>}
             </div>}
             {busy && <div className="processing-cover"><Spinner /><span>{phase === 'validating' ? 'Preparing preview…' : 'Processing image…'}</span></div>}
             </div>
-            {source && <div className="viewer-caption"><span>{view === 'compare' ? 'White: water · Black: background · Grey: excluded' : view === 'rgb' ? 'Sentinel-2 · RGB' : view === 'radar' ? 'Sentinel-1 · VV radar' : view === 'mask' ? 'White: water · Black: background · Grey: no data' : view === 'jrc' ? 'Blue: JRC permanent-water reference · Black: outside reference · Grey: no data' : view === 'water_types' ? 'Blue: detected permanent water · Orange: candidate floodwater · Grey: no data' : 'Blue: predicted water'}</span>{result && <span>{result.inference_ms.toFixed(0)} ms · {result.device.toUpperCase()}</span>}</div>}
+            {source && <div className="viewer-caption"><span>{view === 'compare' ? 'White: water · Black: background · Grey: excluded' : view === 'rgb' ? 'Sentinel-2 · RGB' : view === 'radar' ? 'Sentinel-1 · VV radar' : view === 'jrc' ? 'Blue: JRC permanent-water reference · Black: outside reference · Grey: no data' : 'Blue: detected permanent water · Red: candidate floodwater · Black: background · Grey: no data'}</span>{result && <span>{result.inference_ms.toFixed(0)} ms · {result.device.toUpperCase()}</span>}</div>}
             {separation && <p className="separation-note" role="status">{separation.available ? 'Candidate floodwater excludes JRC permanent water; seasonal water and prediction errors may remain. Historical reference: Sen1Floods11 / EC JRC/Google.' : `Permanent-water separation unavailable. ${separation.reason}`}</p>}
             {result?.evaluation && <section className="evaluation-panel" aria-label="Full-image comparison against uploaded ground truth"><h3>Full-image comparison against uploaded ground truth</h3><dl className="evaluation-metrics">{[['Water IoU', 'iou'], ['Dice', 'dice'], ['Pixel accuracy', 'pixel_accuracy']].map(([label, key]) => <div key={key}><dt>{label}</dt><dd>{formatMetric(result.evaluation[key])}</dd></div>)}</dl><p>{result.evaluation.evaluated_pixels.toLocaleString('en-US')} evaluated pixels · {result.evaluation.excluded_pixels.toLocaleString('en-US')} excluded</p></section>}
-            {result && overlayView && <div className="opacity-control"><label htmlFor={`${mode}-opacity`}>Overlay opacity</label><input id={`${mode}-opacity`} type="range" min="0" max="100" value={opacity} onChange={e => setOpacity(Number(e.target.value))} /><output htmlFor={`${mode}-opacity`}>{opacity}%</output></div>}
-            {result && <div className="download-actions" aria-label="Download results"><button className="button secondary" onClick={() => saveUrl(result.images.mask, `${result.tile_id}_mask.png`)}>Mask PNG</button><button className="button secondary" disabled={exporting} onClick={() => downloadOverlay()}>{exporting ? 'Preparing…' : 'Overlay PNG'}</button><button className="button secondary" onClick={() => geotiffDownload(result.mask_geotiff_base64, `${result.tile_id}_mask.tif`)}>Mask GeoTIFF</button></div>}
-            {result && separation?.available && <div className="download-actions" aria-label="Download water separation"><button className="button secondary" disabled={exporting} onClick={() => downloadOverlay(true)}>Water types PNG</button><button className="button secondary" onClick={() => geotiffDownload(separation.classes_geotiff_base64, `${result.tile_id}_water_types.tif`)}>Water types GeoTIFF</button><button className="button secondary" onClick={() => geotiffDownload(separation.candidate_flood_geotiff_base64, `${result.tile_id}_candidate_flood.tif`)}>Candidate flood GeoTIFF</button></div>}
+            {result && separation?.available && <div className="download-actions" aria-label="Download water separation"><button className="button secondary" onClick={() => saveUrl(separation.mask_png, `${result.tile_id}_permanent_water_vs_flood.png`)}>Permanent water vs flood PNG</button><button className="button secondary" onClick={() => geotiffDownload(separation.classes_geotiff_base64, `${result.tile_id}_permanent_water_vs_flood.tif`)}>Permanent water vs flood GeoTIFF</button><button className="button secondary" onClick={() => geotiffDownload(separation.candidate_flood_geotiff_base64, `${result.tile_id}_candidate_flood.tif`)}>Candidate flood GeoTIFF</button></div>}
           </section>
       </div>
   </>;

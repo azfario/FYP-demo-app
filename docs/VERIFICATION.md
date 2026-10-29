@@ -1,5 +1,22 @@
 # Verification record
 
+## Solid permanent-water/flood mask, 30 October 2026
+
+Replaced Mask, Overlay and Water types with Permanent water vs flood in both
+workspaces. Its exact RGB palette is blue `(67,94,229)` for detected permanent
+water, red `(229,57,53)` for candidate floodwater, black for background and grey
+`(120,120,120)` for no-data. The PNG export matches the displayed solid mask;
+classified GeoTIFF meanings and original water metrics are unchanged.
+
+53 backend tests, 12 frontend tests and the production build passed. A synthetic
+pixel test verifies all four PNG colours against the corresponding classes.
+The updated browser script passed both workspaces, all retained views, Compare,
+three downloads per workspace, 320/390/768/1280px layouts, keyboard controls,
+JRC-unavailable fallback, upload/reset errors and service recovery. No uncaught
+page errors occurred. Desktop/mobile masks were visually inspected. Verification
+used the local app on port 5173; the Docker record below describes the preceding
+revision and was not repeated for this presentation change.
+
 ## JRC water separation, 29 October 2026
 
 See [WATER_SEPARATION_VERIFICATION.md](WATER_SEPARATION_VERIFICATION.md) for the
