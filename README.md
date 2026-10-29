@@ -33,6 +33,21 @@ docker compose logs backend
 
 Only the frontend port is exposed, bound to `127.0.0.1:8080`. Nginx forwards API requests to the internal FastAPI service. One backend worker loads one model instance; predictions are serialized to bound model memory use.
 
+### Updating a running Docker app
+
+Pushing or pulling Git commits does not update an already running container.
+After pulling the desired branch, rebuild and recreate the app, then refresh its
+browser tab:
+
+```sh
+git pull --ff-only
+docker compose up --build -d --wait
+```
+
+This workspace uses `.env` to serve Docker on `http://localhost:8081`. The Vite
+development app at `http://127.0.0.1:5173` is a separate deployment; changes there
+do not automatically update Docker.
+
 ## Upload a folder
 
 1. Choose **Choose a folder** and select `sample/bolivia 1`, or any other numbered tile folder.

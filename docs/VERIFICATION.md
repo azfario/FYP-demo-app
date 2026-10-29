@@ -1,5 +1,21 @@
 # Verification record
 
+## Current main deployed to localhost:8081, 30 October 2026
+
+The user's Docker frontend was still serving the earlier tabs while the local
+Vite app and GitHub main had the newer presentation. Rebuilt both Docker images
+from main source commit `3da6da3` and recreated this app's existing Compose
+services on `127.0.0.1:8081`. Backend health passed; the production frontend now
+serves `index-BBLBSDw2.js` and `index-DWwzhSAy.css`, matching the local production
+build byte-for-byte. No application code changed for this deployment correction.
+
+The full browser check passed against port 8081: Compare, Optical, Radar,
+Permanent water vs flood and JRC reference; solid blue/red mask and downloads;
+Compare selected after initial and repeated Hand Test segmentation; keyboard,
+mobile layouts, invalid uploads, unavailable JRC and service recovery. All ten
+Hand Test triplets also passed independent score checks through Nginx. Current
+screenshots show this CPU Docker deployment. The deployed app is left running.
+
 ## Solid permanent-water/flood mask, 30 October 2026
 
 Replaced Mask, Overlay and Water types with Permanent water vs flood in both
@@ -14,8 +30,8 @@ The updated browser script passed both workspaces, all retained views, Compare,
 three downloads per workspace, 320/390/768/1280px layouts, keyboard controls,
 JRC-unavailable fallback, upload/reset errors and service recovery. No uncaught
 page errors occurred. Desktop/mobile masks were visually inspected. Verification
-used the local app on port 5173; the Docker record below describes the preceding
-revision and was not repeated for this presentation change.
+initially used the local app on port 5173. The later main-deployment record above
+confirms the updated presentation and Compare default through Docker on port 8081.
 
 ## JRC water separation, 29 October 2026
 
