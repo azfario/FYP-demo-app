@@ -17,6 +17,7 @@ from .inference import ROOT, Predictor
 from .evaluation import comparison_images, evaluate_mask, read_reference
 from .preprocessing import InputError, MAX_FILE_BYTES, read_pair
 from .visualization import geotiff_base64, png_bytes, png_url, previews, result_images
+from .water_separation import load_reference, separation_result
 
 logger = logging.getLogger(__name__)
 
@@ -128,13 +129,16 @@ async def uploaded_pair(request, s1, s2):
 async def preview(request: Request, s1: UploadFile = File(...), s2: UploadFile = File(...)):
     pair = await uploaded_pair(request, s1, s2)
     rgb, radar = await run_in_threadpool(previews, pair)
-    return {"tile_id": pair.tile_id, "width": 512, "height": 512, "rgb": png_url(rgb), "radar": png_url(radar)}
+    _, separation = await run_in_threadpool(load_reference, pair, ROOT)
+    return {"tile_id": pair.tile_id, "width": 512, "height": 512, "rgb": png_url(rgb), "radar": png_url(radar),
+            "water_separation": separation}
 
 
 def predict_result(pair, service, started, reference=None):
     mask, inference_ms = service.predict(pair)
     images = result_images(pair, mask)
     geotiff = geotiff_base64(pair, mask)
+    separation = separation_result(pair, mask, ROOT)
     extra = {}
     if reference is not None:
         images.update(comparison_images(reference, mask))
@@ -142,7 +146,7 @@ def predict_result(pair, service, started, reference=None):
     return {"tile_id": pair.tile_id, "width": 512, "height": 512, "device": str(service.device),
             "threshold": 0.5, "patch_count": 4, "inference_ms": round(inference_ms, 2),
             "processing_ms": round((time.perf_counter() - started) * 1000, 2),
-            "images": images, "mask_geotiff_base64": geotiff, **extra}
+            "images": images, "mask_geotiff_base64": geotiff, "water_separation": separation, **extra}
 
 
 @app.post("/api/predict")
@@ -173,8 +177,9 @@ async def hand_test_preview(request: Request, s1: UploadFile = File(...), s2: Up
                             ground_truth: UploadFile = File(...)):
     pair, reference = await uploaded_triplet(request, s1, s2, ground_truth)
     rgb, radar = await run_in_threadpool(previews, pair)
+    _, separation = await run_in_threadpool(load_reference, pair, ROOT)
     return {"tile_id": pair.tile_id, "width": 512, "height": 512, "rgb": png_url(rgb),
-            "radar": png_url(radar), **comparison_images(reference)}
+            "radar": png_url(radar), "water_separation": separation, **comparison_images(reference)}
 
 
 @app.post("/api/hand-test/predict")

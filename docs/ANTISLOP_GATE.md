@@ -1,5 +1,26 @@
 # Antislop Delivery Gate: PASS
 
+## JRC separation extension, 29 October 2026: PASS
+
+- Hard Gate PASS: 52 backend tests, 12 frontend tests and production build passed;
+  all views, uploads, six downloads per workspace, opacity and retry exercised;
+  no page errors or overflow at 320/390/768/1280px. New text uses existing muted
+  labels on the same dark panels. Source contains no em dash. All reference,
+  model and demonstration claims are tied to checksummed files and actual runs.
+- Purpose-Gate PASS: same satellite background, type, restrained glass and green
+  action hierarchy; blue and orange encode requested water categories with text
+  legends, not decoration. No new icons, animations, gradients or illustrations.
+- Liveliness PASS: established ENERGY 2 / RHYTHM 1 / MOTION 1, real satellite
+  imagery as result focal point, unchanged functional spacing and space motif.
+- Craftsmanship/Quality Locks PASS: edited source directly; new controls perform
+  real actions, disabled states represent unavailable data, and downloaded TIFFs
+  and PNG opacity were independently checked. Existing responsive styling and
+  keyboard focus are retained. No marketing sections or fabricated metrics.
+
+Current evidence: [WATER_SEPARATION_VERIFICATION.md](WATER_SEPARATION_VERIFICATION.md).
+The following detailed rule evidence describes the retained design and prior
+revision; its Docker claims do not describe the JRC extension's local-only run.
+
 Date: 27 October 2026. Mode: during (owner's session choice). Direction: the owner's explicit dark glass, neon green space dashboard, retaining the exact existing background. ENERGY 2 / RHYTHM 1 / MOTION 1.
 
 Scope: Hand Test comparison addition on branch `hand-test-data`. Source Docker builds and recreation of both containers succeeded. All controls were exercised in an isolated Chromium browser against the deployed Nginx/CPU app; all ten triplets were independently scored through its API. See VERIFICATION.md for the current control-by-control evidence.

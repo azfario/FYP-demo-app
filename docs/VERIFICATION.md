@@ -1,5 +1,13 @@
 # Verification record
 
+## JRC water separation, 29 October 2026
+
+See [WATER_SEPARATION_VERIFICATION.md](WATER_SEPARATION_VERIFICATION.md) for the
+current feature's 52 backend tests, 12 frontend tests, production build,
+both-workspace browser checks, real downloads and all-ten-demo API verification.
+This feature was tested using local Uvicorn/Vite because Docker was not running.
+Docker evidence below applies to the earlier revisions identified there.
+
 ## Computational-only sidebar, 27 October 2026
 
 Removed the sidebar's historical accuracy table, model subtitle, duplicate computational subheading and small resolution/timing explanation. It now contains one **Model computational performance** heading and Parameters, Device, Inference and Processing values. Header, comparison caption, image alt text and browser title use **DeepLab** instead of D4. Hand Test comparison scores, upload requirements and result controls remain unchanged. Model identity and historical scores are still retained in scientific metadata and documentation.

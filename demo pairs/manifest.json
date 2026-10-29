@@ -1,0 +1,188 @@
+{
+  "dataset": "Sen1Floods11 v1.1",
+  "source_split": "flood_test_data.csv",
+  "source_split_sha256": "8b598c9438042f3ed8aed4484268387fae1aa5b660882e1c5b4c1218eba63d67",
+  "selection": "Same selected Hand Test demonstrations; not selected by model scores and not a representative benchmark.",
+  "samples": [
+    {
+      "id": 1,
+      "folder": "demo 01",
+      "tile_id": "India_900498",
+      "hand_test_folder": "hand test 1",
+      "files": {
+        "s1": {
+          "filename": "India_900498_S1Hand.tif",
+          "sha256": "83bc6bca280cb51264028515c944928ea2201386bee411d8bb5cabbcb51cc4a6",
+          "bytes": 1668656
+        },
+        "s2": {
+          "filename": "India_900498_S2Hand.tif",
+          "sha256": "ee898621b387a731503a01960397599f209b45c268d4e088689928c704dbe968",
+          "bytes": 2151620
+        }
+      }
+    },
+    {
+      "id": 2,
+      "folder": "demo 02",
+      "tile_id": "India_399883",
+      "hand_test_folder": "hand test 2",
+      "files": {
+        "s1": {
+          "filename": "India_399883_S1Hand.tif",
+          "sha256": "3cdb20bbf53e1500de925233db53ab41b49f02116141d2d17aa1b3700551c482",
+          "bytes": 1662834
+        },
+        "s2": {
+          "filename": "India_399883_S2Hand.tif",
+          "sha256": "3af2d0b68c1615fbf3ccf93a1ceeaee50145810854c9bab14d8f9ed77c584079",
+          "bytes": 2129825
+        }
+      }
+    },
+    {
+      "id": 3,
+      "folder": "demo 03",
+      "tile_id": "India_747992",
+      "hand_test_folder": "hand test 3",
+      "files": {
+        "s1": {
+          "filename": "India_747992_S1Hand.tif",
+          "sha256": "7cce6e8c3b2b0a1f72cae40bef3fbbeac44228969542cbec41dfae7c05386cd1",
+          "bytes": 1665625
+        },
+        "s2": {
+          "filename": "India_747992_S2Hand.tif",
+          "sha256": "4e9cf7dff2a8b6495b18e4abf12cfe587a4b3d28deadccfe4354b60b1f40c9ae",
+          "bytes": 2341250
+        }
+      }
+    },
+    {
+      "id": 4,
+      "folder": "demo 04",
+      "tile_id": "India_591317",
+      "hand_test_folder": "hand test 4",
+      "files": {
+        "s1": {
+          "filename": "India_591317_S1Hand.tif",
+          "sha256": "53374c3e29255f1400339f7b32dc6145032eac613e3c808f840203cd7ea4c139",
+          "bytes": 1661702
+        },
+        "s2": {
+          "filename": "India_591317_S2Hand.tif",
+          "sha256": "399e75dcc6b3bc268f427cb3aa70c47d828eb09eccb08f9ae8866b75c6cb3937",
+          "bytes": 2166164
+        }
+      }
+    },
+    {
+      "id": 5,
+      "folder": "demo 05",
+      "tile_id": "Nigeria_812045",
+      "hand_test_folder": "hand test 5",
+      "files": {
+        "s1": {
+          "filename": "Nigeria_812045_S1Hand.tif",
+          "sha256": "60721c48b1bc862abdb9e6b0ee93d67590fb058f4581e43f615569b22beff4e0",
+          "bytes": 1792307
+        },
+        "s2": {
+          "filename": "Nigeria_812045_S2Hand.tif",
+          "sha256": "14053b65f4f4d453c1cc7d7a4ff7b0a1124880f81404985d798ff616364699b6",
+          "bytes": 2433122
+        }
+      }
+    },
+    {
+      "id": 6,
+      "folder": "demo 06",
+      "tile_id": "Spain_7387658",
+      "hand_test_folder": "hand test 6",
+      "files": {
+        "s1": {
+          "filename": "Spain_7387658_S1Hand.tif",
+          "sha256": "2a69a686bdb5aa7ed0736d8a428a18fdf819f2b2862db75ff3e5f7b902b25207",
+          "bytes": 1509867
+        },
+        "s2": {
+          "filename": "Spain_7387658_S2Hand.tif",
+          "sha256": "80b0abea99212e477d4925d04df7226b98d151218598631282dd6fb6d6da3d8d",
+          "bytes": 2192267
+        }
+      }
+    },
+    {
+      "id": 7,
+      "folder": "demo 07",
+      "tile_id": "Spain_7370579",
+      "hand_test_folder": "hand test 7",
+      "files": {
+        "s1": {
+          "filename": "Spain_7370579_S1Hand.tif",
+          "sha256": "6c24bf791372da5e93450195eac8d676a7ef917884dfb479dafe4a565543b19a",
+          "bytes": 1507705
+        },
+        "s2": {
+          "filename": "Spain_7370579_S2Hand.tif",
+          "sha256": "16e997e6a7159fa11160faf00591da763eb37ac82faf806f7fe733991944a048",
+          "bytes": 2320690
+        }
+      }
+    },
+    {
+      "id": 8,
+      "folder": "demo 08",
+      "tile_id": "Paraguay_1029191",
+      "hand_test_folder": "hand test 8",
+      "files": {
+        "s1": {
+          "filename": "Paraguay_1029191_S1Hand.tif",
+          "sha256": "24ea91212c1b8229e7be1d013d283963232f961d910bd9adcf0df4bab35af5eb",
+          "bytes": 1691340
+        },
+        "s2": {
+          "filename": "Paraguay_1029191_S2Hand.tif",
+          "sha256": "fc6a1bab4c554bb3370396e5412ff446302941dad1226ef6465fb3a1def39892",
+          "bytes": 2189228
+        }
+      }
+    },
+    {
+      "id": 9,
+      "folder": "demo 09",
+      "tile_id": "Paraguay_790830",
+      "hand_test_folder": "hand test 9",
+      "files": {
+        "s1": {
+          "filename": "Paraguay_790830_S1Hand.tif",
+          "sha256": "ded24ef657d3fad062f38a2d4c22f8beb0fb88ad469c8341716e5805cceb0938",
+          "bytes": 1693511
+        },
+        "s2": {
+          "filename": "Paraguay_790830_S2Hand.tif",
+          "sha256": "8bba3ef74cefe2f53d05043a5fd8dac50c1f94642b78ea5e58039706021d6189",
+          "bytes": 2213654
+        }
+      }
+    },
+    {
+      "id": 10,
+      "folder": "demo 10",
+      "tile_id": "Somalia_322855",
+      "hand_test_folder": "hand test 10",
+      "files": {
+        "s1": {
+          "filename": "Somalia_322855_S1Hand.tif",
+          "sha256": "a9c284e8e99bd544383d0a455882b221bb95f7f05be81b98f51442b19570f678",
+          "bytes": 1800396
+        },
+        "s2": {
+          "filename": "Somalia_322855_S2Hand.tif",
+          "sha256": "908f9600f5d9537542656315f3dc1f79f5f6c92ca9fb72d53b2722f1d81e42af",
+          "bytes": 2319134
+        }
+      }
+    }
+  ]
+}

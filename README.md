@@ -4,6 +4,11 @@ A local web workspace for predicting water in paired Sentinel-1 and Sentinel-2 s
 
 The **Hand Test** tab also accepts a matching ground-truth mask and compares it with a fresh prediction, side by side.
 
+Both workspaces automatically separate predicted water using the bundled JRC
+permanent-water reference. **Water types** shows blue detected permanent water
+and orange candidate floodwater. Start with [demo pairs/demo 01](demo%20pairs/demo%2001)
+or any of the [10 paired demonstrations](demo%20pairs/README.md).
+
 ![Space-themed flood segmentation workspace](docs/screenshots/desktop-empty.jpg)
 
 ## Run with Docker
@@ -33,7 +38,7 @@ Only the frontend port is exposed, bound to `127.0.0.1:8080`. Nginx forwards API
 1. Choose **Choose a folder** and select `sample/bolivia 1`, or any other numbered tile folder.
 2. Wait for the optical preview and the message **Ready to segment.**
 3. Choose **Segment image**.
-4. Switch between Optical, Radar, Mask, and Overlay. Adjust overlay opacity and download a PNG or georeferenced mask TIFF.
+4. Water types opens when a matching JRC reference is available. Switch between Optical, Radar, Mask, Overlay, Water types and JRC reference. Adjust overlay opacity and download PNGs or georeferenced TIFFs.
 
 Each folder contains exactly one matching pair, for example:
 
@@ -54,7 +59,7 @@ All **15 folders contain 30 original TIFFs**. `sample/manifest.json` maps the nu
 1. Open **Hand Test** and choose one directory such as `hand test/hand test 1`.
 2. The directory must contain one matching `_S1Hand.tif`, `_S2Hand.tif` and `_LabelHand.tif`.
 3. The ground truth appears beside an empty prediction placeholder. Click **Segment image** to run D4.
-4. Compare both masks and read **Water IoU**, **Dice** and **Pixel accuracy** below them. Optical, Radar, Mask, Overlay, opacity and prediction downloads remain available.
+4. Water types opens after prediction when JRC is available. Select **Compare** for both water masks and read **Water IoU**, **Dice** and **Pixel accuracy** below them. Imagery, water separation, opacity and downloads remain available.
 
 The repository includes exactly **10 selected triplets (30 original TIFFs, approximately 37.4 MiB)** under `hand test/`. Folder mapping, selection reasons, source split and checksums are in its manifest and README. These are visually selected river/floodplain examples, not a representative benchmark of all 90 Hand Test tiles. No Hand Test gallery or automatic sample loading is provided.
 
@@ -87,7 +92,48 @@ The browser sends the two files as multipart fields `s1` and `s2`; a directory p
 - A full 512 × 512 image is processed as four non-overlapping 256 × 256 patches. No resizing or centre-only cropping occurs in the app. Patch boundaries can affect predictions.
 - Pixels without usable paired imagery are marked no-data in the exported mask. GeoTIFF values are `0 = background`, `1 = predicted water`, `255 = no data`; the source coordinate system and transform are preserved.
 - Display-only 2nd/98th-percentile contrast stretching creates optical/radar previews. It does not alter model inputs. Optical display uses B4/B3/B2, radar display uses VV.
-- Water segmentation can indicate flooding. It does not distinguish newly flooded land from permanent water, and this research demonstration is not a warning system.
+- The neural network predicts water. JRC post-processing distinguishes overlap with the historical permanent-water reference from candidate floodwater; it does not prove newly flooded land. This research demonstration is not a warning system.
+
+### JRC permanent-water separation
+
+The app bundles all **446 original JRCWaterHand masks** from Sen1Floods11 v1.1,
+including their source attribution and SHA256 checksums under `references/jrc/`.
+These supplied TIFFs are already binary (`0=outside permanent reference`,
+`1=permanent water`), despite the band description `occurrence`. No new percentage
+threshold is applied. References are matched by tile ID and verified against the
+uploaded grid and bundled checksum, with no automatic reprojection.
+
+For jointly valid pixels, **detected permanent water = predicted water AND JRC**;
+**candidate floodwater = predicted water AND NOT JRC**. JRC reference displays the
+historical map itself, including places the model did not predict as water.
+An all-zero reference is valid. Missing, corrupt or misaligned references disable
+separation while ordinary water prediction remains available. Original model
+weights, water masks and uploaded-reference water scores are unchanged.
+
+Downloads in both workspaces:
+
+| Download | Meaning |
+| --- | --- |
+| Water types PNG | Optical image plus classified overlay at the selected opacity |
+| Water types GeoTIFF | `0=background`, `1=detected permanent water`, `2=candidate floodwater`, `255=no data` |
+| Candidate flood GeoTIFF | `0=not candidate floodwater`, `1=candidate floodwater`, `255=no data` |
+
+GeoTIFFs retain the source grid and record the method, source, reference checksum
+and class meanings. The original Mask PNG, Overlay PNG and Mask GeoTIFF remain
+available separately. Each prediction uses the same fixed water threshold > 0.5.
+
+Historical JRC masks are not verified observations immediately before each event.
+Exact derivation dates and threshold of these supplied binary references have not
+been independently established. Seasonal water, rice fields, changed waterways
+and model/reference errors can remain in candidate floodwater. Existing Water
+IoU/Dice/accuracy still measure all-water segmentation, not flood-only accuracy.
+
+The ten paired demos contain 20 unchanged TIFFs and correspond to the existing ten
+Hand Test triplets. Seven have permanent water in the JRC reference; demo 03, 07
+and 10 demonstrate valid all-zero reference cases. See their manifest and README
+for hashes, source split, tile mapping and attribution. No extra reference upload
+or network access is needed. Demo pairs are local upload material, not additional
+Docker runtime assets; the JRC reference collection is included in the backend image.
 
 ### Historical scores
 
