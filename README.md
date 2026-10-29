@@ -59,7 +59,7 @@ All **15 folders contain 30 original TIFFs**. `sample/manifest.json` maps the nu
 1. Open **Hand Test** and choose one directory such as `hand test/hand test 1`.
 2. The directory must contain one matching `_S1Hand.tif`, `_S2Hand.tif` and `_LabelHand.tif`.
 3. The ground truth appears beside an empty prediction placeholder. Click **Segment image** to run D4.
-4. Permanent water vs flood opens after prediction when JRC is available. Select **Compare** for both original water masks and read **Water IoU**, **Dice** and **Pixel accuracy** below them. Optical, Radar, JRC reference and downloads remain available.
+4. **Compare** stays selected after Segment image or Segment again, showing both original water masks and **Water IoU**, **Dice** and **Pixel accuracy** below them. Permanent water vs flood, Optical, Radar, JRC reference and downloads remain available.
 
 The repository includes exactly **10 selected triplets (30 original TIFFs, approximately 37.4 MiB)** under `hand test/`. Folder mapping, selection reasons, source split and checksums are in its manifest and README. These are visually selected river/floodplain examples, not a representative benchmark of all 90 Hand Test tiles. No Hand Test gallery or automatic sample loading is provided.
 

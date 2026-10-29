@@ -125,7 +125,7 @@ async function run() {
     await visiblePanel(page).getByText('Segmentation complete.', { exact: true }).waitFor();
     await page.unroute('**/api/hand-test/predict');
     assert.equal(await page.locator(':focus').getAttribute('id'), 'hand-test-viewer-title');
-    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Permanent water vs flood', exact: true }).getAttribute('aria-pressed'), 'true');
+    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Compare', exact: true }).getAttribute('aria-pressed'), 'true');
     await visiblePanel(page).getByRole('button', { name: 'Compare', exact: true }).click();
     assert.equal(await visiblePanel(page).locator('.comparison-image').count(), 2);
     assert.equal(await visiblePanel(page).getByText('DeepLab prediction', { exact: true }).isVisible(), true);
@@ -134,6 +134,7 @@ async function run() {
     assert.deepEqual(await visiblePanel(page).locator('.evaluation-metrics dd').allTextContents(), expected);
     mark('Comparison and scores', JSON.stringify(measured.evaluation));
     await predict(page, true);
+    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Compare', exact: true }).getAttribute('aria-pressed'), 'true');
     await viewsAndDownloads(page, 'hand-test');
     await visiblePanel(page).getByRole('button', { name: 'Compare', exact: true }).click();
 

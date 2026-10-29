@@ -123,7 +123,7 @@ function Workspace({ mode, info, serviceError, refreshService, onBusyChange }) {
     try {
       const response = await api.post(`${endpoint}/predict`, formData(pair), { signal: controller.current.signal });
       if (version !== generation.current) return;
-      setResult(response.data); setView(response.data.water_separation?.available ? 'permanent_flood' : defaultView); setPhase('success');
+      setResult(response.data); setView(handTest ? 'compare' : response.data.water_separation?.available ? 'permanent_flood' : defaultView); setPhase('success');
       requestAnimationFrame(() => resultHeading.current?.focus({ preventScroll: true }));
     } catch (err) {
       if (version !== generation.current || axios.isCancel(err)) return;

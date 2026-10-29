@@ -21,8 +21,9 @@ In the app, select **Hand Test**, then choose one numbered folder, not this pare
 
 Labels: `0=background`, `1=water`, `-1/255=ignored`. Scores use only pixels valid in both imagery and labels. Zero remains background even when label nodata metadata says zero. The app requires the original aligned 512 × 512 rasters; it never resizes or reprojects labels. Grey areas in Compare are excluded from scoring. Water includes permanent water; this is not a change-detection product that establishes newly flooded land.
 
-After prediction, **Permanent water vs flood** opens using the automatically matched historical
-JRC map. Blue marks detected permanent water, red marks candidate floodwater,
+After prediction, **Compare** stays selected, including when clicking Segment again.
+Choose **Permanent water vs flood** to see the automatically matched historical
+JRC map applied to the prediction. Blue marks detected permanent water, red marks candidate floodwater,
 black marks background and grey marks no-data. This view is a solid class mask.
 Choose **Compare** to view the original water comparison. Scores still measure
 all-water segmentation. **JRC reference** shows the historical reference itself;
