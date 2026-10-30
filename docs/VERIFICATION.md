@@ -1,5 +1,17 @@
 # Verification record
 
+## HTML cache prevention, 30 October 2026
+
+Confirmed port 8081 serves the current `index-BBLBSDw2.js` bundle, containing
+Permanent water vs flood and excluding the obsolete Water types label. An
+already loaded browser page can retain the old interface even after containers
+are replaced. Added `Cache-Control: no-store` to `/` and `/index.html` while
+preserving the existing hashed-asset caching policy. Rebuilt and force-recreated
+only the Docker frontend; `nginx -t` passed. HTTP checks verified the header for
+both HTML routes and a fresh query-string URL, and verified the current JS labels.
+Native Chrome automation could not establish its active URL reliably, so the
+user's Chrome page was not refreshed automatically.
+
 ## Current main deployed to localhost:8081, 30 October 2026
 
 The user's Docker frontend was still serving the earlier tabs while the local
