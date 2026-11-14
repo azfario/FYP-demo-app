@@ -9,7 +9,7 @@ permanent-water reference. **Permanent water vs flood** shows a solid mask with
 blue detected permanent water and red candidate floodwater. Start with one of
 the ten triplets under `hand test/`.
 
-![Fast-SCNN flood segmentation demo with ground-truth comparison](docs/screenshots/demo.png)
+![Fast-SCNN app showing ground-truth comparison, Water IoU, inference time and GPU memory usage](docs/screenshots/demo.png)
 
 ## Run with Docker
 
