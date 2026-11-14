@@ -46,7 +46,7 @@ export default function App() {
 
   return <>
     <a className="skip-link" href="#workspace">Skip to workspace</a>
-    <header className="site-header"><h1>Flood Segmentation</h1><span className="device-label">{info ? `Fast-SCNN · ${info.device.toUpperCase()}` : serviceError ? 'Service offline' : 'Connecting…'}</span></header>
+    <header className="site-header"><h1>Flood Segmentation<span className="paper-tape tape-start" aria-hidden="true" /><span className="paper-tape tape-end" aria-hidden="true" /></h1><span className="device-label">{info ? `Fast-SCNN · ${info.device.toUpperCase()}` : serviceError ? 'Service offline' : 'Connecting…'}</span></header>
     <main id="workspace" tabIndex={-1}>
       <Workspace info={info} serviceError={serviceError} refreshService={refreshService} />
     </main>
@@ -152,6 +152,8 @@ function Workspace({ info, serviceError, refreshService }) {
         </div>
 
           <section className="hud-panel results-panel" aria-labelledby="viewer-title" aria-busy={busy}>
+            <span className="paper-tape tape-start" aria-hidden="true" />
+            <span className="paper-tape tape-end" aria-hidden="true" />
             <div className="viewer-heading"><h2 id="viewer-title" ref={resultHeading} tabIndex={-1}>Results</h2>{preview && <span className="image-size">{preview.width} × {preview.height} px</span>}</div>
             {pair && <p className="tile-name">{pair.tileId}</p>}
             <div className="view-tabs hand-view-tabs" role="group" aria-label="Image view">{Object.entries(viewLabels).map(([key, label]) => <button key={key} className={`view-tab ${view === key ? 'active' : ''} ${key === 'permanent_flood' ? 'permanent-flood-tab' : ''}`} aria-pressed={view === key} disabled={!source || (key === 'permanent_flood' && !result) || (['permanent_flood', 'jrc'].includes(key) && !separation?.available)} onClick={() => setView(key)}>{label}</button>)}</div>
@@ -168,7 +170,11 @@ function Workspace({ info, serviceError, refreshService }) {
             </div>
             {source && <div className="viewer-caption"><span>{view === 'compare' ? 'White: water · Black: background · Grey: excluded' : view === 'rgb' ? 'Sentinel-2 · RGB' : view === 'radar' ? 'Sentinel-1 · VV radar' : view === 'jrc' ? 'Blue: JRC permanent-water reference · Black: outside reference · Grey: no data' : 'Blue: detected permanent water · Red: candidate floodwater · Black: background · Grey: no data'}</span>{result && <span>{result.inference_ms.toFixed(0)} ms · {result.device.toUpperCase()}</span>}</div>}
             {separation && !separation.available && <p className="separation-note" role="status">Permanent-water separation unavailable. {separation.reason}</p>}
-            {result?.evaluation && <section className="evaluation-panel" aria-label="Full-image comparison against uploaded ground truth"><h3>Full-image comparison against uploaded ground truth</h3><dl className="evaluation-metrics">{[['Water IoU', 'iou'], ['Dice', 'dice'], ['Pixel accuracy', 'pixel_accuracy']].map(([label, key]) => <div key={key}><dt>{label}</dt><dd>{formatMetric(result.evaluation[key])}</dd></div>)}</dl><p>{result.evaluation.evaluated_pixels.toLocaleString('en-US')} evaluated pixels · {result.evaluation.excluded_pixels.toLocaleString('en-US')} excluded</p></section>}
+            {result?.evaluation && <section className="evaluation-panel" aria-label="Prediction performance"><h3>Prediction performance</h3><dl className="evaluation-metrics">
+              <div><dt>Water IoU</dt><dd>{formatMetric(result.evaluation.iou)}</dd></div>
+              <div><dt>Inference time</dt><dd>{result.inference_ms.toFixed(1)} ms</dd></div>
+              <div title="Peak PyTorch GPU memory allocated during this prediction, including model and tensors. Unavailable on CPU."><dt>Memory used (MB)</dt><dd>{result.memory_mb == null ? 'N/A' : result.memory_mb.toFixed(2)}</dd></div>
+            </dl></section>}
             {result && separation?.available && <div className="download-actions" aria-label="Download water separation"><button className="button secondary" onClick={() => saveUrl(separation.mask_png, `${result.tile_id}_permanent_water_vs_flood.png`)}>Permanent water vs flood PNG</button><button className="button secondary" onClick={() => geotiffDownload(separation.classes_geotiff_base64, `${result.tile_id}_permanent_water_vs_flood.tif`)}>Permanent water vs flood GeoTIFF</button><button className="button secondary" onClick={() => geotiffDownload(separation.candidate_flood_geotiff_base64, `${result.tile_id}_candidate_flood.tif`)}>Candidate flood GeoTIFF</button></div>}
           </section>
       </div>

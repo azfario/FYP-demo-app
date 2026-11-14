@@ -182,7 +182,7 @@ def test_empty_water_metrics_serialize_as_null(client, service, hand_files):
     filename, blob, _ = hand_files["ground_truth"]
     background = reference_blob(blob, values=np.zeros((512, 512), dtype=np.int16))
     files = {**hand_files, "ground_truth": (filename, background, "image/tiff")}
-    with patch.object(service, "predict", return_value=(np.zeros((512, 512), dtype=np.uint8), 1.0)):
+    with patch.object(service, "predict", return_value=(np.zeros((512, 512), dtype=np.uint8), 1.0, None)):
         result = client.post("/api/hand-test/predict", files=files)
     assert result.status_code == 200
     assert result.json()["evaluation"]["iou"] is None

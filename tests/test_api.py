@@ -63,6 +63,7 @@ def test_prediction_and_download_formats(client, sample_files):
     result = response.json()
     assert result["patch_count"] == 4
     assert result["width"] == result["height"] == 512
+    assert result["memory_mb"] is None
     assert result["inference_ms"] > 0
     assert result["processing_ms"] >= result["inference_ms"]
     for value in result["images"].values():
@@ -126,7 +127,7 @@ def test_invalid_pixels_stay_finite_and_are_not_background(service, sample_files
         pair = read_pair(a, modified.read(), item["s1"], item["s2"], service.statistics)
     assert np.isfinite(pair.tensor).all()
     assert np.all(pair.tensor[2:, :20, :20] == 0)
-    mask, _ = service.predict(pair)
+    mask, _, _ = service.predict(pair)
     assert np.all(mask[:20, :20] == 255)
 
 

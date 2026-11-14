@@ -135,7 +135,7 @@ async def preview(request: Request, s1: UploadFile = File(...), s2: UploadFile =
 
 
 def predict_result(pair, service, started, reference=None):
-    mask, inference_ms = service.predict(pair)
+    mask, inference_ms, memory_mb = service.predict(pair)
     images = result_images(pair, mask)
     geotiff = geotiff_base64(pair, mask)
     separation = separation_result(pair, mask, ROOT)
@@ -146,6 +146,7 @@ def predict_result(pair, service, started, reference=None):
     return {"tile_id": pair.tile_id, "width": 512, "height": 512, "device": str(service.device),
             "threshold": 0.5, "patch_count": 4, "inference_ms": round(inference_ms, 2),
             "processing_ms": round((time.perf_counter() - started) * 1000, 2),
+            "memory_mb": round(memory_mb, 2) if memory_mb is not None else None,
             "images": images, "mask_geotiff_base64": geotiff, "water_separation": separation, **extra}
 
 

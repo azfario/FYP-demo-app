@@ -48,6 +48,7 @@ class Predictor:
         with self.lock, torch.inference_mode():
             if self.device.type == "cuda":
                 torch.cuda.synchronize()
+                torch.cuda.reset_peak_memory_stats(self.device)
             started = time.perf_counter()
             for row in (0, 256):
                 for col in (0, 256):
@@ -58,8 +59,9 @@ class Predictor:
             if self.device.type == "cuda":
                 torch.cuda.synchronize()
             elapsed = (time.perf_counter() - started) * 1000
+            memory_mb = torch.cuda.max_memory_allocated(self.device) / 1_000_000 if self.device.type == "cuda" else None
         if not np.isfinite(probability).all():
             raise RuntimeError("Fast-SCNN produced nonfinite predictions.")
         mask = (probability > self.info["threshold"]).astype(np.uint8)
         mask[~pair.valid] = 255
-        return mask, elapsed
+        return mask, elapsed, memory_mb

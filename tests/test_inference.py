@@ -28,7 +28,7 @@ def test_all_fifteen_pairs_produce_full_spatially_aligned_masks(service, records
     for item in records:
         folder = ROOT / "sample" / item["folder"]
         pair = read_pair((folder / item["s1"]).read_bytes(), (folder / item["s2"]).read_bytes(), item["s1"], item["s2"], service.statistics)
-        mask, elapsed = service.predict(pair)
+        mask, elapsed, memory = service.predict(pair)
         assert mask.shape == (512, 512)
         assert set(np.unique(mask)).issubset({0, 1, 255})
         assert elapsed > 0
@@ -42,7 +42,7 @@ def test_all_fifteen_pairs_produce_full_spatially_aligned_masks(service, records
 
 
 def test_patch_placement_matches_each_independent_forward(service, pair):
-    mask, _ = service.predict(pair)
+    mask, _, _ = service.predict(pair)
     with torch.inference_mode():
         for row in (0, 256):
             for col in (0, 256):
@@ -66,6 +66,8 @@ def test_cuda_matches_cpu_classification(service, pair):
         pytest.skip("No CUDA device exposed to this runtime")
     gpu = Predictor(ROOT)
     assert gpu.device.type == "cuda"
-    cpu_mask, _ = service.predict(pair)
-    gpu_mask, _ = gpu.predict(pair)
+    cpu_mask, _, cpu_memory = service.predict(pair)
+    gpu_mask, _, gpu_memory = gpu.predict(pair)
+    assert cpu_memory is None
+    assert gpu_memory > 0
     assert np.mean(cpu_mask == gpu_mask) > 0.9999

@@ -66,7 +66,7 @@ async function run() {
     assert.equal(result.width, 512);
     assert.equal(result.height, 512);
     assert.deepEqual(await page.locator('.evaluation-metrics dd').allTextContents(),
-      ['iou', 'dice', 'pixel_accuracy'].map(key => (result.evaluation[key] * 100).toFixed(2) + '%'));
+      [(result.evaluation.iou * 100).toFixed(2) + '%', result.inference_ms.toFixed(1) + ' ms', result.memory_mb == null ? 'N/A' : result.memory_mb.toFixed(2)]);
     assert.ok(result.inference_ms > 0 && result.processing_ms > 0);
     console.log('PASS actual prediction, measured scores, timings and processing lock');
 
@@ -96,6 +96,7 @@ async function run() {
         assert.ok(positions[0] < positions[1] && positions[1] < positions[2]);
       }
       assert.notEqual(await page.locator('.results-panel').evaluate(e => getComputedStyle(e, '::before').clipPath), 'none');
+      assert.equal(await page.locator('.results-panel > .paper-tape').count(), 2);
       if (filename) await page.screenshot({ path: path.join(screenshots, filename), fullPage: true });
       console.log('PASS responsive layout ' + width);
     }
