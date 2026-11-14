@@ -65,6 +65,6 @@ def geotiff_base64(pair, mask):
         with memory.open(**profile) as dst:
             dst.write(mask, 1)
             dst.set_band_description(1, "predicted_water")
-            dst.update_tags(model="D4 seed 2026", threshold="probability > 0.5",
+            dst.update_tags(model="Fast-SCNN A6 seed 42", threshold="probability > 0.5",
                             classes="0=background, 1=predicted water, 255=no data")
         return base64.b64encode(memory.read()).decode()

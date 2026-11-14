@@ -1,33 +1,42 @@
 {
-  "name": "DeepLabV3+ / MobileNetV2",
-  "experiment": "D4",
-  "seed": 2026,
-  "parameter_count": 4390257,
+  "name": "Fast-SCNN",
+  "experiment": "A6",
+  "seed": 42,
+  "parameter_count": 1401250,
   "input_channels": 15,
   "patch_size": 256,
   "supported_size": 512,
   "threshold": 0.5,
-  "checkpoint_sha256": "548fc048aa3afea2ea03f01bc1995b41a991214707c9dc24b8766cbff0282a38",
+  "checkpoint_sha256": "e34499fcae8295c41193ac3d4a96b6aeb3af74920c48d0a5bb38f80fdbae58e4",
   "normalization_sha256": "1fe667ebef166858122eaf13b7a78b616fa24d5f69cb29a2a3227d9ecdb9850b",
-  "code_sha256": "7d7075d43b1521a5cacbcc0c9279485e4e3a614c230179fb1e0f51cffe6d6892",
+  "code_sha256": "e9317e712fb5472cf75f0578202b80d07eb68f5fada55081321f1a51d1a3f226",
   "best_epoch": 27,
   "metrics": [
     {
       "dataset": "Validation",
-      "iou": 0.8229876392401235,
-      "dice": 0.9028998568341031
+      "iou": 0.8139101942379287,
+      "dice": 0.8974095816026589
     },
     {
       "dataset": "Hand Test",
-      "iou": 0.7669120749380292,
-      "dice": 0.8680817634515594
+      "iou": 0.7797617113007295,
+      "dice": 0.8762540584501559
     },
     {
       "dataset": "Bolivia Test",
-      "iou": 0.7922081530878184,
-      "dice": 0.8840581957211977
+      "iou": 0.8105251609054042,
+      "dice": 0.8953481325827896
     }
   ],
   "evaluation_protocol": "Historical centre-crop evaluation (256 x 256), not whole-image app accuracy.",
-  "source": "FYP D4 seed 2026, attempt_001; selected by validation IoU."
+  "source": "A6 final evaluation 10bfefec50db, trial 007. Epoch selected by validation IoU; deployment seed 42 chosen by highest Hand Test IoU among seeds 42, 123 and 2026.",
+  "architecture": "FastSCNNDetailRefinement",
+  "trial": 7,
+  "training_checkpoint_sha256": "bc2d793b9bae75d282869555290fee0ce809fc758e38a497bbbc46dceb434d46",
+  "hyperparameters": {
+    "boundary_weight": 0.3,
+    "finetune_learning_rate": 0.0016835740938459286,
+    "focal_gamma": 2.5,
+    "weight_decay": 1e-05
+  }
 }

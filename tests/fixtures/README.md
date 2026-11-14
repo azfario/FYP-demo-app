@@ -1,3 +1,7 @@
-Reference generated directly from the original D4 seed 2026 notebook snapshot, its dataset class and S2 normalization function, on CPU with torch 2.7.1+cu118.
+# A6 seed 42 reference
 
-Tile: Bolivia_103757. Input hash covers the full preprocessed 15 x 512 x 512 float32 tensor. Logits cover the original central 256 x 256 evaluation crop. No training ran. Checkpoint SHA256: 548fc048aa3afea2ea03f01bc1995b41a991214707c9dc24b8766cbff0282a38.
+Bolivia_103757. The fixture contains the SHA-256 of the entire 15-channel input, centre-crop logits and a 512 x 512 classification assembled from four independent forwards, with excluded pixels set to 255. It uses the snapshot notebook and original trial 007 training checkpoint, independently of the application model and preprocessing modules. Regenerate with Python 3.11 and the backend dependencies:
+
+```sh
+python tests/fixtures/generate_reference.py "../FAST_SCNN improvements/A6 hyperparameter tuning using bayesian"
+```

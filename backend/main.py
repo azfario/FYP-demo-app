@@ -29,18 +29,18 @@ async def lifespan(app):
     try:
         app.state.predictor = await run_in_threadpool(Predictor)
     except Exception:
-        logger.exception("D4 startup failed")
+        logger.exception("Fast-SCNN A6 startup failed")
         app.state.load_error = "Model unavailable. Check the bundled checkpoint and normalization files."
     yield
 
 
-app = FastAPI(title="D4 Flood Segmentation", version="1.0.0", lifespan=lifespan, docs_url=None, redoc_url=None)
+app = FastAPI(title="Fast-SCNN A6 Flood Segmentation", version="1.0.0", lifespan=lifespan, docs_url=None, redoc_url=None)
 app.mount("/api/docs-assets", StaticFiles(directory=ROOT / "backend/static/docs"), name="docs-assets")
 
 
 @app.get("/docs", include_in_schema=False)
 def documentation():
-    return get_swagger_ui_html(openapi_url="/openapi.json", title="D4 API documentation",
+    return get_swagger_ui_html(openapi_url="/openapi.json", title="Fast-SCNN A6 API documentation",
                                swagger_js_url="/api/docs-assets/swagger-ui-bundle.js",
                                swagger_css_url="/api/docs-assets/swagger-ui.css",
                                swagger_favicon_url="/api/docs-assets/favicon-32x32.png",

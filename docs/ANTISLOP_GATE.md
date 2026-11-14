@@ -1,5 +1,36 @@
 # Antislop Delivery Gate: PASS
 
+## Single triplet workspace, 14 November 2026: PASS
+
+The app has one workspace with a required S1/S2/ground-truth folder upload.
+Removed the workspace tab switch and its shared busy-state bookkeeping.
+Kept ENERGY 2 / RHYTHM 1 / MOTION 1 and the approved torn-paper atlas design.
+Twelve frontend tests and the production build passed. Against actual Docker
+on port 8081, verified real prediction, comparison scores, all five views,
+three downloads, duplicate-submission prevention, missing/corrupt-mask errors,
+clear/re-upload, service retry and keyboard access. Screenshots were visually
+inspected at desktop and mobile sizes. At 320/390/768/1280px, controls meet
+44px, images stay square and there is no page overflow. Mobile comparison
+stacks and computation follows results. No backend contracts changed.
+
+## Paper flood atlas, 14 November 2026: PASS
+
+- Hard Gate PASS: 12 frontend tests and production build passed. Both actual
+  upload/prediction workflows, comparison scores, downloads, reset, error recovery
+  and keyboard navigation passed against Docker on port 8081.
+- Purpose-Gate PASS: video-sampled cream, navy and cyan establish the requested
+  printed atlas direction. Background grain and the torn title edge stay outside
+  raster pixels. Cream mats distinguish image bounds. Cyan identifies the action
+  and selected view. Inter retains readable file labels and measured numbers.
+- Liveliness PASS: ENERGY 2 / RHYTHM 1 / MOTION 1. The navy results area is the
+  focal point. Ink rules group upload and computation on a single paper canvas.
+  Motion is limited to status spinners and control feedback.
+- Craftsmanship PASS: desktop and mobile screenshots visually inspected.
+  At 320/390/768/1280px, images remain square, controls meet 44px, long filename
+  stress text wraps and the page has no horizontal overflow. Mobile order is
+  Upload, Results, Model computational performance. Comparison stacks on mobile.
+  Served production JavaScript and CSS match the local build byte for byte.
+
 ## Solid mask presentation, 30 October 2026: PASS
 
 - Hard Gate PASS: 53 backend tests, 12 frontend tests and production build;

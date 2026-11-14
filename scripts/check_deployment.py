@@ -55,7 +55,7 @@ def verify():
         results.append({"tile_id": item["tile_id"], "device": result["device"], **result["evaluation"]})
         print(item["tile_id"], "PASS", {key: round(value, 6) for key, value in expected.items()}, flush=True)
     (ROOT / "test-results/deployment-hand-test.json").write_text(json.dumps(results, indent=2) + "\n")
-    print("PASS: served frontend matches production build; original background/model retained; all ten triplets independently scored.")
+    print("PASS: served frontend matches production build; deployed model metadata verified; all ten triplets independently scored.")
 
 
 if __name__ == "__main__":

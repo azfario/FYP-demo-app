@@ -65,3 +65,21 @@ Built-in imagegen tool, one newly generated opaque asset, 1672 × 941 pixels. Sa
 Final prompt:
 
 > Create a high-resolution wide landscape (16:9) photographic-style website background. Visual direction: one black silhouette of an unbranded Earth-observation satellite with long rectangular solar panels and a dish antenna, against a dense natural star field and a diagonal Milky Way band. Deep navy and black space, subtle warm amber/brown starlight, restrained blue-violet nebula detail, matching the supplied user's satellite-and-space reference in mood. Place the satellite off-centre toward the upper left edge, so it remains visible around a centered web workspace; keep the central/right area less visually busy. The satellite should look like a distant instrument in orbit, not a fictional spaceship. Static realistic image only. No text, labels, logos, UI, borders, extra spacecraft, planets, artificial lens flare or graphic gradients. Deliver a polished raster background suitable for a flood segmentation application. Background opaque.
+
+## Paper flood atlas, 14 November 2026
+
+The approved reference is the user's paper-style-fyp-video.mp4 and vox-style
+print treatment. Sampled palette: cream #F3EDDC, navy #0C1D30, cyan #00B8CD.
+The cream canvas replaces the star field. A navy title strip with an uneven
+lower edge introduces the print motif. Inter stays locally bundled for clear
+file labels, controls and numerical readouts.
+
+Upload and computation share the unboxed left sheet, divided by ink rules.
+Results use navy framing and an eight-pixel cream photo mat (six on narrow
+phones). Grain is an embedded local CSS texture behind the workspace and never
+covers imagery. Cyan marks the main action and active image view. Workspace
+tabs use paper-index geometry. No remote asset requests are required.
+
+ENERGY 2 / RHYTHM 1 / MOTION 1. The layout uses the actual selected satellite
+imagery as its focal point. Mobile moves computation below results. The existing
+scientific image colours, API contracts and prediction logic are preserved.

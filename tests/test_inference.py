@@ -14,8 +14,9 @@ from conftest import ROOT
 
 
 def test_original_notebook_preprocessing_and_center_prediction(service, pair):
-    reference = np.load(Path(__file__).parent / "fixtures/d4_reference.npz")
+    reference = np.load(Path(__file__).parent / "fixtures/a6_seed42_reference.npz")
     assert hashlib.sha256(pair.tensor.tobytes()).hexdigest() == str(reference["input_sha256"])
+    np.testing.assert_array_equal(service.predict(pair)[0], reference["full_mask"])
     with torch.inference_mode():
         logits = service.model(torch.from_numpy(np.ascontiguousarray(pair.tensor[None, :, 128:384, 128:384]))).numpy()
     np.testing.assert_allclose(logits, reference["center_logits"], rtol=1e-4, atol=1e-4)

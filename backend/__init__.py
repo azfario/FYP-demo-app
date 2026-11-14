@@ -1,1 +1,1 @@
-"""Local D4 inference service."""
+"""Local Fast-SCNN A6 inference service."""

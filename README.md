@@ -1,15 +1,15 @@
-# Flood segmentation: D4 demo
+# Flood segmentation: Fast-SCNN demo
 
-A local web workspace for predicting water in paired Sentinel-1 and Sentinel-2 satellite imagery. The application loads the existing FYP D4 DeepLabV3+ / MobileNetV2 checkpoint. It does not train a model.
+A local web workspace for predicting water in paired Sentinel-1 and Sentinel-2 satellite imagery. The application loads the existing tuned Fast-SCNN A6 seed 42 weights. It does not train a model.
 
-The **Hand Test** tab also accepts a matching ground-truth mask and compares it with a fresh prediction, side by side.
+The single Segmentation workspace requires a matching ground-truth mask and compares it with a fresh prediction, side by side.
 
-Both workspaces automatically separate predicted water using the bundled JRC
+The workspace automatically separates predicted water using the bundled JRC
 permanent-water reference. **Permanent water vs flood** shows a solid mask with
-blue detected permanent water and red candidate floodwater. Start with [demo pairs/demo 01](demo%20pairs/demo%2001)
-or any of the [10 paired demonstrations](demo%20pairs/README.md).
+blue detected permanent water and red candidate floodwater. Start with one of
+the ten triplets under `hand test/`.
 
-![Space-themed flood segmentation workspace](docs/screenshots/desktop-empty.jpg)
+![Paper atlas segmentation workspace](docs/screenshots/desktop-empty.jpg)
 
 ## Run with Docker
 
@@ -50,37 +50,38 @@ do not automatically update Docker.
 
 ## Upload a folder
 
-1. Choose **Choose a folder** and select `sample/bolivia 1`, or any other numbered tile folder.
-2. Wait for the optical preview and the message **Ready to segment.**
+1. Choose **Choose a folder** and select `hand test/hand test 1`, or another matching triplet folder.
+2. Wait for the ground-truth preview and the message **Ready to segment.**
 3. Choose **Segment image**.
-4. Permanent water vs flood opens when a matching JRC reference is available. Switch between Optical, Radar, Permanent water vs flood and JRC reference. Download the colour mask PNG or georeferenced TIFFs.
+4. Compare shows ground truth beside the prediction and measured scores. Switch between Compare, Optical, Radar, Permanent water vs flood and JRC reference. Download the colour mask PNG or georeferenced TIFFs.
 
-Each folder contains exactly one matching pair, for example:
+Each uploaded folder contains exactly one matching triplet, for example:
 
 ```text
-sample/bolivia 1/
-  Bolivia_103757_S1Hand.tif
-  Bolivia_103757_S2Hand.tif
+hand test/hand test 1/
+  India_900498_S1Hand.tif
+  India_900498_S2Hand.tif
+  India_900498_LabelHand.tif
 ```
 
-Select a single `bolivia N` folder, not the entire `sample` directory. Samples are provided in the repository; the interface has no sample gallery. Common operating-system metadata files are ignored. Developer sample ZIP endpoints remain available through the API.
+Select a single tile folder. Common operating-system metadata files are ignored. Developer sample ZIP endpoints remain available through the API.
 
-All **15 folders contain 30 original TIFFs**. `sample/manifest.json` maps the numbered folders to the original Bolivia test-list order. Original filenames are preserved. Labels are not included or required for prediction.
+The existing Bolivia pairs remain under `sample/` for the original two-file API. The app requires the ground-truth mask as a third file.
 
 ## Supported inputs
 
 ### Hand Test comparison
 
-1. Open **Hand Test** and choose one directory such as `hand test/hand test 1`.
+1. Choose one directory such as `hand test/hand test 1` in the Segmentation workspace.
 2. The directory must contain one matching `_S1Hand.tif`, `_S2Hand.tif` and `_LabelHand.tif`.
-3. The ground truth appears beside an empty prediction placeholder. Click **Segment image** to run D4.
+3. The ground truth appears beside an empty prediction placeholder. Click **Segment image** to run Fast-SCNN.
 4. **Compare** stays selected after Segment image or Segment again, showing both original water masks and **Water IoU**, **Dice** and **Pixel accuracy** below them. Permanent water vs flood, Optical, Radar, JRC reference and downloads remain available.
 
 The repository includes exactly **10 selected triplets (30 original TIFFs, approximately 37.4 MiB)** under `hand test/`. Folder mapping, selection reasons, source split and checksums are in its manifest and README. These are visually selected river/floodplain examples, not a representative benchmark of all 90 Hand Test tiles. No Hand Test gallery or automatic sample loading is provided.
 
 Comparison scores cover the full 512 × 512 image, using only pixels valid in both imagery and reference. Labels are `0=background`, `1=water`, `-1/255=ignored`; zero remains background even when nodata metadata says zero. Both comparison masks show excluded pixels in grey. Water IoU is `TP/(TP+FP+FN)`, Dice is `2TP/(2TP+FP+FN)`, and pixel accuracy is `(TP+TN)/evaluated pixels`. An undefined denominator displays **N/A**. Accuracy can be dominated by background, so assess IoU/Dice and the masks together.
 
-Ground truth is used only for scoring and display, never as model input. Uploads remain temporary. Tabs retain independent completed results and cannot be switched while validating or predicting. Historical 256 × 256 centre-crop scores stay separate from these uploaded-image scores. Prediction exports retain the original model mask; the grey comparison exclusion display does not alter exported predictions.
+Ground truth is used only for scoring and display, never as model input. Uploads remain temporary. Upload and segmentation controls are disabled during validation or prediction. Historical 256 × 256 centre-crop scores stay separate from these uploaded-image scores. Prediction exports retain the original model mask; the grey comparison exclusion display does not alter exported predictions.
 
 Each Hand Test file may be up to 16 MiB, with 48 MiB total TIFF content plus bounded multipart overhead. The ground truth must be a single-band GeoTIFF with matching tile ID, 512 × 512 dimensions, coordinate system and grid. No resizing or reprojection is performed.
 
@@ -96,10 +97,10 @@ Each Hand Test file may be up to 16 MiB, with 48 MiB total TIFF content plus bou
 
 The browser sends the two files as multipart fields `s1` and `s2`; a directory path is not transmitted. Images are decoded in memory, with upload streams closed after validation. Multipart handling may use temporary spool files that are closed after the request. No uploaded imagery or prediction history is retained by the application.
 
-## D4 model and interpretation
+## Fast-SCNN model and interpretation
 
-- D4, seed **2026**, `attempt_001`, final checkpoint selected at fine-tuning epoch 27 by validation IoU.
-- DeepLabV3+ / MobileNetV2, **4,390,257 parameters**, 15 input channels, output stride 16, ASPP rates `(3, 6, 9)`.
+- A6, seed **42**, Bayesian tuning trial 007. Validation IoU selected epoch 27. The highest Hand Test IoU among seeds 42, 123 and 2026 determined the deployment seed.
+- FastSCNNDetailRefinement, **1,401,250 parameters**, 15 input channels and a quarter-resolution residual detail decoder.
 - The bundled weights load strictly and are verified by SHA256. No ImageNet weights or model files are downloaded at runtime.
 - S1: replace nonfinite raw values with zero, clip to `[-50, 1]`, scale with `(x + 50) / 51`.
 - S2: apply the bundled training-only per-band means and standard deviations, `(x - mean) / (std + 1e-6)`; invalid raster values become normalized zero.
@@ -158,11 +159,11 @@ These are the recorded **central 256 × 256 crop evaluations**, not measurements
 
 | Dataset | IoU | Dice |
 | --- | ---: | ---: |
-| Validation | 82.30% | 90.29% |
-| Hand Test | 76.69% | 86.81% |
-| Bolivia Test | 79.22% | 88.41% |
+| Validation | 81.3910% | 89.7410% |
+| Hand Test | 77.9762% | 87.6254% |
+| Bolivia Test | 81.0525% | 89.5348% |
 
-Source: original D4 seed 2026 checkpoint metadata and test evaluation CSV. Bolivia was already used for held-out testing. Reusing these samples is a demonstration, not a new independent evaluation. Runtime inference timing is measured separately for each request and includes patch transfer and model prediction; total backend processing additionally includes parsing and rendering. Neither includes the browser's network/download time.
+Source: A6 final evaluation run `10bfefec50db`, seed 42. Hand Test results informed the deployment choice. Bolivia was already used for held-out testing. Reusing these samples is a demonstration, not a new independent evaluation. Runtime inference timing is measured separately for each request and includes patch transfer and model prediction; total backend processing additionally includes parsing and rendering. Neither includes the browser's network/download time.
 
 ## Optional NVIDIA GPU
 
@@ -260,17 +261,9 @@ Set `UI_BASE_URL` to change the browser test address. `PLAYWRIGHT_CHROMIUM_EXECU
 
 React / Vite / Tailwind / Axios frontend; FastAPI / PyTorch / Rasterio / NumPy / Pillow / OpenCV backend; Nginx; Docker Compose. No database, accounts, or cloud hosting.
 
-The UI keeps the original satellite-and-star-field background, with dark transparent panels, self-hosted Inter and neon green controls. The sidebar contains only **Model computational performance**: parameter count, device, measured inference latency and server processing time. Its historical accuracy table and explanatory text have been removed. Visible model labels use **DeepLab**; the D4 research identity remains in backend metadata and provenance. Hand Test comparison scores remain below the masks. Timings cover the full image's four patches and exclude network time; no runtime figures are invented before prediction. The background and all runtime assets are bundled locally. See `docs/DESIGN_NOTES.md` for decisions and image-generation provenance, and `docs/VERIFICATION.md` for testing and the antislop Delivery Gate.
+The paper atlas workspace shows Fast-SCNN predictions beside the uploaded ground truth. Model computational performance displays the actual device, parameter count, and timings for each full tile. Inference covers four patches. Processing includes parsing and rendering. Both timings exclude network transfer.
 
-### Actual prediction example
-
-Bolivia_103757, rendered by the CPU Docker backend. Grey areas have no usable paired imagery.
-
-| Optical preview | Predicted water overlay |
-| --- | --- |
-| ![Optical preview](docs/example-rgb.png) | ![D4 overlay](docs/example-overlay.png) |
-
-These are prediction images. Real interface screenshots are available in [desktop results](docs/screenshots/desktop-results.jpg), [tablet results](docs/screenshots/tablet-results.jpg), and [mobile results](docs/screenshots/mobile-results.jpg).
+View the deployed comparison on [desktop](docs/screenshots/hand-test-desktop.jpg), [tablet](docs/screenshots/hand-test-tablet.jpg), or [mobile](docs/screenshots/hand-test-mobile.jpg).
 
 ## Dataset attribution
 

@@ -1,4 +1,4 @@
-// Exercise the running Docker app using a fresh browser context and actual uploads.
+// Verify the deployed single workspace with real uploads and predictions.
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
@@ -6,221 +6,125 @@ const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
 const base = process.env.UI_BASE_URL || 'http://localhost:8081';
-const checks = [];
 const screenshots = path.join(root, 'docs/screenshots');
 const artifacts = path.join(root, 'test-results/ui');
-const mark = (name, detail) => { checks.push({ name, detail }); console.log(`PASS ${name}: ${detail}`); };
-const visiblePanel = page => page.getByRole('tabpanel', { name: /Segmentation|Hand Test/ });
 
 async function upload(page, folder) {
-  const [chooser] = await Promise.all([
-    page.waitForEvent('filechooser'),
-    visiblePanel(page).getByRole('button', { name: /^Choose (a|another) folder$/ }).click(),
-  ]);
-  await chooser.setFiles(folder);
+  const chooser = page.waitForEvent('filechooser');
+  await page.getByRole('button', { name: /^Choose (a|another) folder$/ }).click();
+  await (await chooser).setFiles(folder);
 }
 
 async function ready(page) {
-  await visiblePanel(page).getByText('Ready to segment.', { exact: true }).waitFor();
-}
-
-async function predict(page, hand = false) {
-  const response = page.waitForResponse(response => response.url().endsWith(hand ? '/api/hand-test/predict' : '/api/predict') && response.request().method() === 'POST');
-  await visiblePanel(page).getByRole('button', { name: /Segment (image|again)/, exact: true }).press('Space');
-  const result = await (await response).json();
-  await visiblePanel(page).getByText('Segmentation complete.', { exact: true }).waitFor();
-  assert.equal(result.width, 512); assert.equal(result.height, 512);
-  return result;
-}
-
-async function viewsAndDownloads(page, mode) {
-  const panel = visiblePanel(page);
-  await panel.getByRole('button', { name: 'JRC reference', exact: true }).press('Space');
-  assert.match(await panel.locator('.main-image').getAttribute('alt'), /JRC reference/);
-  await panel.getByRole('button', { name: 'Permanent water vs flood', exact: true }).press('Space');
-  assert.match(await panel.locator('.viewer-caption').innerText(), /Red: candidate floodwater/);
-  assert.equal(await panel.locator('.overlay-image').count(), 0);
-  assert.equal(await panel.getByRole('slider').count(), 0);
-  for (const name of ['Mask', 'Overlay', 'Water types']) {
-    assert.equal(await panel.getByRole('button', { name, exact: true }).count(), 0);
-  }
-  for (const name of ['Permanent water vs flood PNG', 'Permanent water vs flood GeoTIFF', 'Candidate flood GeoTIFF']) {
-    const downloaded = page.waitForEvent('download');
-    await panel.getByRole('button', { name, exact: true }).click();
-    const file = await downloaded;
-    await file.saveAs(path.join(artifacts, `${mode}-${file.suggestedFilename()}`));
-    assert.equal(await file.failure(), null);
-  }
-  mark(`${mode} separation`, 'solid blue/red mask; obsolete tabs and opacity absent; three actual separation downloads');
-  for (const name of ['Optical', 'Radar', 'Permanent water vs flood', 'JRC reference']) {
-    await panel.getByRole('button', { name, exact: true }).press('Space');
-    assert.equal(await panel.getByRole('button', { name, exact: true }).getAttribute('aria-pressed'), 'true');
-    assert.match(await panel.locator('.main-image').getAttribute('alt'), new RegExp(name));
-  }
-  mark(`${mode} controls`, 'all four retained/new views work with keyboard Space');
+  await page.getByText('Ready to segment.', { exact: true }).waitFor();
 }
 
 async function run() {
   await fs.mkdir(artifacts, { recursive: true });
   const browser = await chromium.launch({ headless: true, ...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE } : {}) });
   try {
-    const context = await browser.newContext({ viewport: { width: 1280, height: 1200 }, acceptDownloads: true });
-    const page = await context.newPage();
+    const page = await browser.newPage({ viewport: { width: 1280, height: 1200 }, acceptDownloads: true });
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(base, { waitUntil: 'networkidle' });
-    await visiblePanel(page).getByText('4,390,257', { exact: true }).waitFor();
-    assert.equal(await visiblePanel(page).getByRole('heading', { name: 'Model computational performance', exact: true }).isVisible(), true);
-    assert.equal(await visiblePanel(page).locator('.performance-panel table, .compute-note, .model-name').count(), 0);
-    assert.doesNotMatch(await page.locator('body').innerText(), /\bD4\b/);
-    assert.equal(await page.title(), 'Flood segmentation · DeepLab');
-    assert.equal(await page.getByRole('tab', { name: 'Segmentation', exact: true }).getAttribute('aria-selected'), 'true');
-    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Segment image', exact: true }).isDisabled(), true);
+    await page.getByText('1,401,250', { exact: true }).waitFor();
+    assert.equal(await page.getByRole('tab').count(), 0);
+    assert.equal(await page.locator('.workspace-grid').count(), 1);
+    assert.equal(await page.getByRole('button', { name: 'Segment image', exact: true }).isDisabled(), true);
     await page.keyboard.press('Tab');
     assert.equal(await page.locator(':focus').innerText(), 'Skip to workspace');
     assert.match(await page.locator(':focus').evaluate(e => getComputedStyle(e).outline), /3px/);
     await page.keyboard.press('Enter');
     assert.equal(await page.locator(':focus').getAttribute('id'), 'workspace');
-    await page.getByRole('tab', { name: 'Segmentation', exact: true }).click();
     await page.screenshot({ path: path.join(screenshots, 'desktop-empty.jpg'), fullPage: true });
-    await upload(page, path.join(root, 'sample/bolivia 3')); await ready(page);
-    const original = await predict(page);
-    assert.equal(original.evaluation, undefined);
-    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Permanent water vs flood', exact: true }).getAttribute('aria-pressed'), 'true');
-    await viewsAndDownloads(page, 'segmentation');
-    await page.getByRole('heading', { name: 'Flood Segmentation', exact: true }).click();
-    await page.screenshot({ path: path.join(screenshots, 'desktop-results.jpg'), fullPage: true });
-    for (const [width, filename] of [[768, 'tablet-results.jpg'], [390, 'mobile-results.jpg']]) {
-      await page.setViewportSize({ width, height: 1024 });
-      await page.getByRole('heading', { name: 'Flood Segmentation', exact: true }).click();
-      const size = await page.evaluate(() => ({ client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth }));
-      assert.equal(size.client, size.scroll);
-      await visiblePanel(page).getByRole('button', { name: 'Radar', exact: true }).click();
-      await visiblePanel(page).getByRole('button', { name: 'Permanent water vs flood', exact: true }).click();
-      await page.screenshot({ path: path.join(screenshots, filename), fullPage: true });
-    }
-    await page.setViewportSize({ width: 1280, height: 1200 });
-    mark('Original workflow', 'pair upload, 512px prediction, no evaluation response, downloads and computational metrics only');
 
-    await page.getByRole('tab', { name: 'Segmentation', exact: true }).focus();
-    await page.keyboard.press('ArrowRight');
-    assert.equal(await page.getByRole('tab', { name: 'Hand Test', exact: true }).getAttribute('aria-selected'), 'true');
-    await upload(page, path.join(root, 'hand test/hand test 1')); await ready(page);
-    assert.equal(await visiblePanel(page).locator('.comparison-image').count(), 1);
-    assert.equal(await visiblePanel(page).getByText('Click Segment image to show the prediction.', { exact: true }).isVisible(), true);
-    mark('Hand Test preview', 'all three filenames shown; only ground truth displayed before Segment');
+    await upload(page, path.join(root, 'sample/bolivia 3'));
+    assert.match(await page.getByRole('alert').innerText(), /exactly three TIFFs/);
+    assert.equal(await page.getByRole('button', { name: 'Segment image', exact: true }).isDisabled(), true);
+    await upload(page, path.join(root, 'hand test/hand test 1'));
+    await ready(page);
+    assert.equal(await page.locator('.filename').count(), 3);
+    assert.equal(await page.locator('.comparison-image').count(), 1);
+    assert.equal(await page.getByText('Click Segment image to show the prediction.', { exact: true }).isVisible(), true);
+    console.log('PASS single workspace, missing-mask rejection, triplet preview and keyboard entry');
 
     let release;
     const gate = new Promise(resolve => { release = resolve; });
     await page.route('**/api/hand-test/predict', async route => { await gate; await route.continue(); });
-    const pendingResponse = page.waitForResponse(response => response.url().endsWith('/api/hand-test/predict'));
-    pendingResponse.catch(() => {});
-    await visiblePanel(page).getByRole('button', { name: 'Segment image', exact: true }).click();
-    await page.waitForFunction(() => document.getElementById('tab-hand-test').disabled);
-    assert.equal(await page.getByRole('tab', { name: 'Hand Test', exact: true }).isDisabled(), true);
-    assert.equal(await page.getByRole('tab', { name: 'Segmentation', exact: true }).isDisabled(), true);
-    assert.equal(await visiblePanel(page).locator('.results-panel').getAttribute('aria-busy'), 'true');
+    const response = page.waitForResponse(r => r.url().endsWith('/api/hand-test/predict'));
+    await page.getByRole('button', { name: 'Segment image', exact: true }).press('Space');
+    await page.getByRole('button', { name: 'Segmenting…', exact: true }).waitFor();
+    assert.equal(await page.getByRole('button', { name: 'Segmenting…', exact: true }).isDisabled(), true);
+    assert.equal(await page.getByRole('button', { name: 'Choose another folder', exact: true }).isDisabled(), true);
     release();
-    const measured = await (await pendingResponse).json();
-    await visiblePanel(page).getByText('Segmentation complete.', { exact: true }).waitFor();
+    const result = await (await response).json();
+    await page.getByText('Segmentation complete.', { exact: true }).waitFor();
     await page.unroute('**/api/hand-test/predict');
-    assert.equal(await page.locator(':focus').getAttribute('id'), 'hand-test-viewer-title');
-    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Compare', exact: true }).getAttribute('aria-pressed'), 'true');
-    await visiblePanel(page).getByRole('button', { name: 'Compare', exact: true }).click();
-    assert.equal(await visiblePanel(page).locator('.comparison-image').count(), 2);
-    assert.equal(await visiblePanel(page).getByText('DeepLab prediction', { exact: true }).isVisible(), true);
-    assert.equal(await visiblePanel(page).locator('.performance-panel table, .compute-note, .model-name').count(), 0);
-    const expected = ['iou', 'dice', 'pixel_accuracy'].map(key => `${(measured.evaluation[key] * 100).toFixed(2)}%`);
-    assert.deepEqual(await visiblePanel(page).locator('.evaluation-metrics dd').allTextContents(), expected);
-    mark('Comparison and scores', JSON.stringify(measured.evaluation));
-    await predict(page, true);
-    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Compare', exact: true }).getAttribute('aria-pressed'), 'true');
-    await viewsAndDownloads(page, 'hand-test');
-    await visiblePanel(page).getByRole('button', { name: 'Compare', exact: true }).click();
+    assert.equal(await page.locator(':focus').getAttribute('id'), 'viewer-title');
+    assert.equal(await page.getByRole('button', { name: 'Compare', exact: true }).getAttribute('aria-pressed'), 'true');
+    assert.equal(await page.locator('.comparison-image').count(), 2);
+    assert.equal(result.width, 512);
+    assert.equal(result.height, 512);
+    assert.deepEqual(await page.locator('.evaluation-metrics dd').allTextContents(),
+      ['iou', 'dice', 'pixel_accuracy'].map(key => (result.evaluation[key] * 100).toFixed(2) + '%'));
+    assert.ok(result.inference_ms > 0 && result.processing_ms > 0);
+    console.log('PASS actual prediction, measured scores, timings and processing lock');
 
-    await page.getByRole('tab', { name: 'Hand Test', exact: true }).press('ArrowLeft');
-    assert.equal(await visiblePanel(page).getByText('Bolivia_195474', { exact: true }).isVisible(), true);
-    assert.equal(await visiblePanel(page).locator('.evaluation-panel').count(), 0);
-    await page.getByRole('tab', { name: 'Segmentation', exact: true }).press('End');
-    assert.equal(await visiblePanel(page).locator('.comparison-image').count(), 2);
-    mark('Tab state', 'independent completed results retained; arrow/Home/End navigation; switching blocked while processing');
+    for (const name of ['Optical', 'Radar', 'Permanent water vs flood', 'JRC reference', 'Compare']) {
+      await page.getByRole('button', { name, exact: true }).press('Space');
+      assert.equal(await page.getByRole('button', { name, exact: true }).getAttribute('aria-pressed'), 'true');
+      if (name !== 'Compare') assert.match(await page.locator('.main-image').getAttribute('alt'), new RegExp(name));
+    }
+    for (const name of ['Permanent water vs flood PNG', 'Permanent water vs flood GeoTIFF', 'Candidate flood GeoTIFF']) {
+      const download = page.waitForEvent('download');
+      await page.getByRole('button', { name, exact: true }).click();
+      const file = await download;
+      await file.saveAs(path.join(artifacts, file.suggestedFilename()));
+      assert.equal(await file.failure(), null);
+    }
+    console.log('PASS all five views and three actual downloads');
 
-    for (const [width, height, filename] of [[1280, 1280, 'hand-test-desktop.jpg'], [768, 1280, 'hand-test-tablet.jpg'], [390, 844, 'hand-test-mobile.jpg'], [320, 768, null]]) {
-      await page.setViewportSize({ width, height });
-      await page.getByRole('heading', { name: 'Flood Segmentation', exact: true }).click();
-      const dimensions = await page.evaluate(() => ({ client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth }));
-      assert.equal(dimensions.client, dimensions.scroll);
-      const layout = await visiblePanel(page).locator('.comparison-grid').evaluate(e => getComputedStyle(e).gridTemplateColumns.split(' ').length);
-      assert.equal(layout, width <= 700 ? 1 : 2);
-      const targets = await page.locator('button:visible:not(:disabled)').evaluateAll(elements => elements.map(e => e.getBoundingClientRect().height));
-      assert.ok(targets.every(height => height >= 44));
+    for (const [width, filename] of [[1280, 'hand-test-desktop.jpg'], [768, 'hand-test-tablet.jpg'], [390, 'hand-test-mobile.jpg'], [320, null]]) {
+      await page.setViewportSize({ width, height: 1000 });
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth === document.documentElement.clientWidth), true);
+      const columns = await page.locator('.comparison-grid').evaluate(e => getComputedStyle(e).gridTemplateColumns.split(' ').length);
+      assert.equal(columns, width <= 700 ? 1 : 2);
+      assert.ok((await page.locator('button:visible').evaluateAll(es => es.map(e => e.getBoundingClientRect().height))).every(h => h >= 44));
+      assert.ok((await page.locator('.image-stage').evaluateAll(es => es.map(e => Math.abs(e.getBoundingClientRect().width - e.getBoundingClientRect().height)))).every(d => d < 1));
+      if (width <= 700) {
+        const positions = await page.evaluate(() => ['.upload-panel', '.results-panel', '.performance-panel'].map(s => document.querySelector(s).getBoundingClientRect().top));
+        assert.ok(positions[0] < positions[1] && positions[1] < positions[2]);
+      }
+      assert.notEqual(await page.locator('.results-panel').evaluate(e => getComputedStyle(e, '::before').clipPath), 'none');
       if (filename) await page.screenshot({ path: path.join(screenshots, filename), fullPage: true });
-      mark(`Responsive ${width}`, `no overflow; ${layout} comparison columns; 44px minimum buttons`);
+      console.log('PASS responsive layout ' + width);
     }
 
-    await upload(page, path.join(root, 'hand test/hand test 2')); await ready(page);
-    assert.equal(await visiblePanel(page).locator('.evaluation-panel').count(), 0);
-    assert.equal(await visiblePanel(page).locator('.comparison-image').count(), 1);
-    await visiblePanel(page).getByRole('button', { name: 'Clear selected images' }).click();
-    assert.equal(await visiblePanel(page).locator('img').count(), 0);
-    assert.equal(await visiblePanel(page).getByText('Awaiting run', { exact: true }).count(), 2);
-    await upload(page, path.join(root, 'sample/bolivia 3'));
-    assert.match(await visiblePanel(page).getByRole('alert').innerText(), /exactly three TIFFs/);
-    const corruptFolder = path.join(artifacts, 'corrupt'); await fs.mkdir(corruptFolder, { recursive: true });
-    for (const name of ['India_900498_S1Hand.tif', 'India_900498_S2Hand.tif']) await fs.copyFile(path.join(root, 'hand test/hand test 1', name), path.join(corruptFolder, name));
-    await fs.writeFile(path.join(corruptFolder, 'India_900498_LabelHand.tif'), 'not a tiff');
-    await upload(page, corruptFolder);
-    await visiblePanel(page).getByRole('alert').waitFor();
-    assert.match(await visiblePanel(page).getByRole('alert').innerText(), /Cannot decode ground truth/);
-    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Segment image', exact: true }).isDisabled(), true);
-    await visiblePanel(page).getByRole('button', { name: 'Clear selected images' }).click();
-    mark('Reset and errors', 're-upload removes stale scores, Clear resets timings, missing-label and corrupt-label errors recover');
-
-    await page.getByRole('tab', { name: 'Segmentation', exact: true }).click();
-    const demoPreviewResponse = page.waitForResponse(response => response.url().endsWith('/api/preview'));
-    await upload(page, path.join(root, 'demo pairs/demo 01')); await ready(page);
-    const demoPreview = await (await demoPreviewResponse).json();
-    const demo = await predict(page);
-    assert.ok(demo.water_separation.counts.detected_permanent_water > 0);
-    assert.ok(demo.water_separation.counts.candidate_floodwater > 0);
-    for (const [width, filename] of [[1280, 'water-types-desktop.jpg'], [390, 'water-types-mobile.jpg'], [320, null]]) {
-      await page.setViewportSize({ width, height: 1200 });
-      const size = await page.evaluate(() => ({ client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth }));
-      assert.equal(size.client, size.scroll);
-      if (filename) await page.screenshot({ path: path.join(screenshots, filename), fullPage: true });
-    }
-    await upload(page, path.join(root, 'demo pairs/demo 03')); await ready(page);
-    const noPermanent = await predict(page);
-    assert.equal(noPermanent.water_separation.counts.detected_permanent_water, 0);
-    mark('Demonstration pairs', 'demo 01 shows both detected classes; demo 03 supports an all-zero JRC reference; 320/390/1280px have no overflow');
-    await page.route('**/api/preview', async route => {
-      await route.fulfill({ json: { ...demoPreview, water_separation: { available: false, reason: 'No bundled JRC reference for this tile.' } } });
-    });
-    await page.route('**/api/predict', async route => {
-      await route.fulfill({ json: { ...demo, water_separation: { available: false, reason: 'No bundled JRC reference for this tile.' } } });
-    });
-    await upload(page, path.join(root, 'demo pairs/demo 01')); await ready(page);
-    await predict(page);
-    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Permanent water vs flood', exact: true }).isDisabled(), true);
-    assert.equal(await visiblePanel(page).getByRole('button', { name: 'JRC reference', exact: true }).isDisabled(), true);
-    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Optical', exact: true }).getAttribute('aria-pressed'), 'true');
-    assert.match(await visiblePanel(page).locator('.separation-note').innerText(), /separation unavailable/);
-    assert.equal(await visiblePanel(page).getByRole('button', { name: 'Permanent water vs flood PNG', exact: true }).count(), 0);
-    await page.unroute('**/api/preview'); await page.unroute('**/api/predict');
-    await visiblePanel(page).getByRole('button', { name: 'Clear selected images' }).click();
-    assert.equal(await visiblePanel(page).locator('.separation-note').count(), 0);
-    mark('Unavailable JRC', 'mocked unavailable-reference responses retain Optical/Radar; separation controls disabled; Clear removes stale status');
+    await upload(page, path.join(root, 'hand test/hand test 2'));
+    await ready(page);
+    assert.equal(await page.locator('.evaluation-panel').count(), 0);
+    assert.equal(await page.locator('.comparison-image').count(), 1);
+    await page.getByRole('button', { name: 'Clear selected images' }).click();
+    assert.equal(await page.locator('img').count(), 0);
+    assert.equal(await page.getByText('Awaiting run', { exact: true }).count(), 2);
+    const corrupt = path.join(artifacts, 'corrupt');
+    await fs.mkdir(corrupt, { recursive: true });
+    for (const name of ['India_900498_S1Hand.tif', 'India_900498_S2Hand.tif']) await fs.copyFile(path.join(root, 'hand test/hand test 1', name), path.join(corrupt, name));
+    await fs.writeFile(path.join(corrupt, 'India_900498_LabelHand.tif'), 'not a tiff');
+    await upload(page, corrupt);
+    await page.getByRole('alert').waitFor();
+    assert.match(await page.getByRole('alert').innerText(), /Cannot decode ground truth/);
+    assert.equal(await page.getByRole('button', { name: 'Segment image', exact: true }).isDisabled(), true);
+    console.log('PASS clear, re-upload, stale-score removal and corrupt-mask error');
 
     await page.route('**/api/model-info', route => route.abort());
     await page.reload({ waitUntil: 'networkidle' });
-    await visiblePanel(page).getByRole('button', { name: 'Retry connection', exact: true }).waitFor();
-    assert.equal(await visiblePanel(page).getByText('Unavailable', { exact: true }).count(), 2);
+    await page.getByRole('button', { name: 'Retry connection', exact: true }).waitFor();
     await page.unroute('**/api/model-info');
-    await visiblePanel(page).getByRole('button', { name: 'Retry connection', exact: true }).click();
-    await visiblePanel(page).getByText('4,390,257', { exact: true }).waitFor();
+    await page.getByRole('button', { name: 'Retry connection', exact: true }).click();
+    await page.getByText('1,401,250', { exact: true }).waitFor();
     assert.deepEqual(errors, []);
-    mark('Service recovery', 'offline facts unavailable; Retry restores actual model; no uncaught page errors');
-    await fs.writeFile(path.join(artifacts, 'report.json'), JSON.stringify(checks, null, 2));
+    console.log('PASS service retry and no uncaught page errors');
   } finally { await browser.close(); }
 }
 

@@ -1,4 +1,4 @@
-"""Validate paired Sen1Floods11 rasters and reproduce D4 preprocessing."""
+"""Validate paired Sen1Floods11 rasters and reproduce Fast-SCNN A6 preprocessing."""
 from dataclasses import dataclass
 import re
 

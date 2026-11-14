@@ -78,7 +78,7 @@ def export_raster(pair, values, description, classes, provenance):
             dst.set_band_description(1, description)
             dst.update_tags(classes=classes, source=SOURCE, reference_sha256=provenance['sha256'],
                             reference_filename=provenance['filename'], method='predicted water intersected with binary JRC reference',
-                            threshold='probability > 0.5', model='D4 seed 2026', limitation=LIMITATION)
+                            threshold='probability > 0.5', model='Fast-SCNN A6 seed 42', limitation=LIMITATION)
         return base64.b64encode(memory.read()).decode()
 
 

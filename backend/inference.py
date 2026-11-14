@@ -1,4 +1,4 @@
-"""Load the fixed D4 checkpoint once and predict a tile in four patches."""
+"""Load the fixed Fast-SCNN checkpoint once and predict a tile in four patches."""
 import hashlib
 import json
 import os
@@ -11,7 +11,7 @@ os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
 import numpy as np
 import torch
 
-from .model import DeepLabV3Plus
+from .model import FastSCNNDetailRefinement
 
 
 ROOT = Path(os.environ.get("APP_ROOT", Path(__file__).resolve().parents[1]))
@@ -24,10 +24,10 @@ class Predictor:
         stats_path = self.root / "models/s2_normalization_stats.json"
         self.statistics = json.loads(stats_path.read_text())
         if hashlib.sha256(stats_path.read_bytes()).hexdigest() != self.info["normalization_sha256"]:
-            raise RuntimeError("D4 normalization file checksum does not match the selected checkpoint.")
-        checkpoint = self.root / "models/best_finetuned.pth"
+            raise RuntimeError("Fast-SCNN normalization file checksum does not match the selected checkpoint.")
+        checkpoint = self.root / "models/fastscnn_a6_seed42.pth"
         if hashlib.sha256(checkpoint.read_bytes()).hexdigest() != self.info["checkpoint_sha256"]:
-            raise RuntimeError("D4 checkpoint checksum mismatch.")
+            raise RuntimeError("Fast-SCNN checkpoint checksum mismatch.")
         torch.set_num_threads(int(os.environ.get("TORCH_THREADS", "6")))
         torch.backends.cudnn.benchmark = False
         torch.backends.cudnn.deterministic = True
@@ -35,11 +35,11 @@ class Predictor:
         torch.backends.cudnn.allow_tf32 = False
         torch.use_deterministic_algorithms(True)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        payload = torch.load(checkpoint, map_location="cpu", weights_only=True)
-        kwargs = dict(payload["model_kwargs"])
-        kwargs["pretrained_backbone"] = False
-        self.model = DeepLabV3Plus(**kwargs)
-        self.model.load_state_dict(payload["model_state"], strict=True)
+        state = torch.load(checkpoint, map_location="cpu", weights_only=True)
+        self.model = FastSCNNDetailRefinement(in_channels=15, num_classes=1)
+        self.model.load_state_dict(state, strict=True)
+        if sum(p.numel() for p in self.model.parameters()) != self.info["parameter_count"]:
+            raise RuntimeError("Fast-SCNN parameter count does not match the bundled metadata.")
         self.model.to(self.device).eval()
         self.lock = threading.Lock()
 
@@ -59,7 +59,7 @@ class Predictor:
                 torch.cuda.synchronize()
             elapsed = (time.perf_counter() - started) * 1000
         if not np.isfinite(probability).all():
-            raise RuntimeError("D4 produced nonfinite predictions.")
+            raise RuntimeError("Fast-SCNN produced nonfinite predictions.")
         mask = (probability > self.info["threshold"]).astype(np.uint8)
         mask[~pair.valid] = 255
         return mask, elapsed
