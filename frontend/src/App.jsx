@@ -126,6 +126,7 @@ function Workspace({ info, serviceError, refreshService }) {
       <div className="workspace-grid">
         <div className="sidebar">
           <aside className="hud-panel upload-panel" aria-labelledby="upload-title">
+            <span className="receipt-pin" aria-hidden="true" />
             <h2 id="upload-title">Upload images</h2>
             <p className="instruction">Select a folder containing matching Sentinel-1, Sentinel-2 and ground-truth GeoTIFFs.</p>
             {serviceError && <div className="error-notice" role="alert"><p>{serviceError}</p><button className="button secondary" onClick={refreshService}>Retry connection</button></div>}
