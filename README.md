@@ -9,7 +9,7 @@ permanent-water reference. **Permanent water vs flood** shows a solid mask with
 blue detected permanent water and red candidate floodwater. Start with one of
 the ten triplets under `hand test/`.
 
-![Fast-SCNN app showing ground-truth comparison, Water IoU, inference time and GPU memory usage](docs/screenshots/demo.png)
+![Fast-SCNN dashboard with a pinned upload panel and side-by-side ground truth and predicted water masks for India_900498](docs/screenshots/demo.png)
 
 ## Run with Docker
 
