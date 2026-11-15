@@ -9,7 +9,7 @@ permanent-water reference. **Permanent water vs flood** shows a solid mask with
 blue detected permanent water and red candidate floodwater. Start with one of
 the ten triplets under `hand test/`.
 
-![Fast-SCNN dashboard with a pinned upload panel and side-by-side ground truth and predicted water masks for India_900498](docs/screenshots/demo.png)
+![Fast-SCNN dashboard with a pinned upload panel and side-by-side ground truth and predicted water masks for India_900498](docs/screenshots/demo-70ce4c179e3c.png)
 
 ## Run with Docker
 
@@ -84,8 +84,6 @@ Comparison scores cover the full 512 × 512 image, using only pixels valid in bo
 Ground truth is used only for scoring and display, never as model input. Uploads remain temporary. Upload and segmentation controls are disabled during validation or prediction. Historical 256 × 256 centre-crop scores stay separate from these uploaded-image scores. Prediction exports retain the original model mask; the grey comparison exclusion display does not alter exported predictions.
 
 Each Hand Test file may be up to 16 MiB, with 48 MiB total TIFF content plus bounded multipart overhead. The ground truth must be a single-band GeoTIFF with matching tile ID, 512 × 512 dimensions, coordinate system and grid. No resizing or reprojection is performed.
-
-![Actual ground-truth comparison](docs/screenshots/hand-test-desktop.jpg)
 
 ### Satellite input requirements
 

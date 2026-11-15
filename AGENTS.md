@@ -1,3 +1,3 @@
 # Pushes to main
 
-When the user asks to push changes to `main`, include a fresh app screenshot in the README in the same push. Capture the running version being pushed, using a completed prediction from `hand test/hand test 1` in the Compare view. Save it to `docs/screenshots/demo.png` and verify the README displays it.
+When the user asks to push changes to `main`, capture the running version with a completed prediction from `hand test/hand test 1` in the Compare view. Save the screenshot as `docs/screenshots/demo-<first 12 hex digits of the PNG SHA-256>.png`. Replace the README's single app image with that file in the same push and verify the link. Keep additional device previews as text links.
